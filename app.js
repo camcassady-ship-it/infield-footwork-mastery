@@ -2,7 +2,6 @@
 let guide,demoClips={},active=1,picks=[];
 try{const saved=JSON.parse(localStorage.getItem('footwork-picks-v2')||'[]');if(Array.isArray(saved))picks=[...new Set(saved.filter(n=>Number.isInteger(n)&&n>=1&&n<=36))].slice(0,3)}catch{}
 const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const shortTitles=['Through & sweep','Routine & lateral','Adjust & crossover','Infield-in shuffles','Slow roller & drop','Charge & jump throw','Chopper & field-with','Hinge & backhand','Boot, right & rake','Routine & do or die','Chopper & no-step','Boot & sit back'];
 const SCALE=14,START=[67,218],HOME_DELTA=[49,-183],HOME_LEN=Math.hypot(HOME_DELTA[0],HOME_DELTA[1]);
 const FWD=[HOME_DELTA[0]/HOME_LEN,HOME_DELTA[1]/HOME_LEN],LEFT=[-FWD[1],FWD[0]];
 const flip=([x,y])=>[x,290-y],FIRST=flip([212,131]);
@@ -98,17 +97,45 @@ function sequenceGraphic(plays) {
   return `<svg viewBox="${DIAGRAM_BOX}" role="img" aria-label="Three routes overlaid on one infield">${infield()}${routes}</svg>
     <div class="route-legend" role="group" aria-label="Show or hide each route">${legend}</div>`;
 }
-function playBody(p) {
-  return `<div class="play-body"><div class="diagram-examples"><figure class="field-diagram"><div class="diagram-stage">${diagram(p)}</div><figcaption>SS = start &nbsp; · &nbsp; F = field &nbsp; · &nbsp; Dashed line = throw</figcaption></figure>${exampleButtons(p)}</div><div><div class="cues-title">MOVEMENT CUES</div><ol class="cue-list">${movementCues(p).map(s=>`<li>${esc(s.replace(/\.$/,''))}</li>`).join('')}</ol></div></div>`;
+const whenToUse = {
+  1: 'Hard-hit ball right at you.',
+  10: 'Hard-hit ball right at you.',
+  22: 'Harder-hit ball to your backhand.',
+  23: 'Softer ball to your backhand.',
+  25: 'Hard-hit ball that comes off the bat harder than usual.',
+  27: 'Medium-soft ball to your backhand, often up the middle at second base.',
+  34: 'Hard-hit ball that comes off the bat harder than usual.'
+};
+let slot = 0;
+function shortCues(play) {
+  const skip = /^(hop|hop step|prep|prep step|follow)$/i;
+  const core = movementCues(play).filter(cue => !skip.test(cue.trim()));
+  return (core.length ? core : movementCues(play)).slice(0, 3);
+}
+function demoBlock(play) {
+  const clips = demoClips[play.id] || [];
+  if (!clips.length) return `<div class="demo-stage demo-empty"><p>Demo clip coming soon</p></div>`;
+  const clip = clips[0];
+  return `<div class="demo-stage"><button type="button" class="demo-poster" data-example-play="${play.id}" data-example-index="0" aria-expanded="false"><img src="assets/clips/${esc(clip.poster)}" alt=""><span>Watch the footwork</span></button></div>`;
+}
+function playBody(p, showLegend) {
+  const when = whenToUse[p.id] ? `<p class="when-line"><strong>When to use it.</strong> ${esc(whenToUse[p.id])}</p>` : '';
+  const legend = showLegend ? `<p class="diagram-legend">Dot = where you start · F = where you field it · Dashed line = your throw to first.</p><p class="geometry-note">Left and right are from your view, facing home.</p>` : '';
+  return `<div class="play-stack">${when}${demoBlock(p)}${legend}<figure class="field-diagram"><div class="diagram-stage">${diagram(p)}</div></figure><div class="cue-block"><div class="cues-title">Copy these steps</div><ol class="cue-list">${shortCues(p).map(s=>`<li>${esc(s.replace(/\.$/,''))}</li>`).join('')}</ol></div></div>`;
+}
+function scrollToCurrent() {
+  const mobile = matchMedia('(max-width: 760px)').matches;
+  const target = mobile ? document.querySelector('#plays .play.is-current') : $('#sequence-content');
+  target?.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start'});
 }
 function render(){closeExample(false);const seq=guide.sequences[active-1];
-const plays=guide.plays.slice((active-1)*3,active*3);$('#sequence-heading').innerHTML=`<div class="sequence-kicker">SEQUENCE ${String(active).padStart(2,'0')} <span>PLAYS ${active*3-2}–${active*3}</span></div><h2>${esc(seq.title)}</h2><p>${esc(seq.description)}</p>`;
-$('#sequence-heading').insertAdjacentHTML('beforeend', `<nav class="play-jumps" aria-label="Jump to a play">${plays.map(play=>`<a href="#play-${play.id}">${play.id} · ${esc(play.name)}</a>`).join('')}</nav>`);
+const plays=guide.plays.slice((active-1)*3,active*3);
+$('#sequence-heading').innerHTML=`<p class="sequence-kicker">Step ${active} of 12</p><h2>${esc(seq.title)}</h2>`;
 $('#sequence-overview').innerHTML=sequenceGraphic(plays);
-$('#plays').innerHTML=plays.map(p=>`<article class="play" id="play-${p.id}" tabindex="-1"><div class="play-top"><div><div class="play-label">PLAY ${String(p.id).padStart(2,'0')}</div><h3>${esc(p.name)}</h3></div><button class="pick-button" data-pick="${p.id}" aria-pressed="${picks.includes(p.id)}" aria-label="${picks.includes(p.id)?'Remove':'Add'} play ${p.id} ${esc(p.name)} ${picks.includes(p.id)?'from':'to'} today">${picks.includes(p.id)?'✓ Added':'+ Add to today'}</button></div>${playBody(p)}</article>`).join('');
-$('#sequence-select').value=String(active);$('#previous').disabled=active===1;$('#next').disabled=active===12;$('#page-count').textContent=`${String(active).padStart(2,'0')} / 12`;
+$('#plays').innerHTML=plays.map((p,i)=>`<article class="play${i===slot?' is-current':''}" id="play-${p.id}" tabindex="-1"><div class="play-top"><div><div class="play-label">Play ${i+1} of 3</div><h3>${esc(p.name)}</h3></div><button class="pick-button" data-pick="${p.id}" aria-pressed="${picks.includes(p.id)}" aria-label="${picks.includes(p.id)?'Remove':'Add'} play ${p.id} ${esc(p.name)} ${picks.includes(p.id)?'from':'to'} today">${picks.includes(p.id)?'✓ Added':'+ Add to today'}</button></div>${playBody(p,i===0)}</article>`).join('');
+$('#prev-play').disabled=slot===0;$('#next-play').disabled=slot===2;$('#next-sequence').disabled=active===12;
 document.querySelectorAll('.seq-button').forEach(b=>b.setAttribute('aria-current',String(Number(b.dataset.seq)===active)));updatePicks();}
-function select(n,scroll=true){if(!Number.isInteger(n)||n<1||n>12)return;active=n;history.replaceState(null,'',`#sequence-${n}`);render();if(scroll)$('#sequence-content').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});}
+function select(n,scroll=true){if(!Number.isInteger(n)||n<1||n>12)return;active=n;history.replaceState(null,'',`#sequence-${n}`);render();if(scroll)scrollToCurrent();}
 let toastTimer;function notify(msg){$('#status').textContent=msg;$('#status').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#status').classList.remove('show'),3200)}
 function togglePick(id){if(picks.includes(id)){picks=picks.filter(n=>n!==id);notify(`Play ${id} removed from today.`)}else{if(picks.length>=3){notify('Three plays selected. Remove one to add another.');return}picks.push(id);notify(`Play ${id} added. ${picks.length} of 3 selected.`)}try{localStorage.setItem('footwork-picks-v2',JSON.stringify(picks))}catch{}updatePicks()}
 function updatePicks(){closeExample(false);$('#pick-count').textContent=`${picks.length}/3`;document.querySelectorAll('[data-pick]').forEach(b=>{const id=Number(b.dataset.pick),chosen=picks.includes(id);b.setAttribute('aria-pressed',String(chosen));b.textContent=chosen?'✓ Added':'+ Add to today';b.setAttribute('aria-label',`${chosen?'Remove':'Add'} play ${id} ${guide.plays[id-1].name} ${chosen?'from':'to'} today`)});const selectedPlays = [...picks].sort((a, b) => a - b).map(id => guide.plays[id - 1]);
@@ -126,12 +153,13 @@ $('#picked-list').innerHTML=selectedPlays.map(play => {
   </li>`;
 }).join('')+(picks.length<3?`<li class="empty-pick">${3-picks.length} ${3-picks.length===1?'spot':'spots'} open. Add plays from any sequence.</li>`:'');}
 function openPlay(id) {
+  slot = (id - 1) % 3;
   const sequence = Math.ceil(id / 3);
-  if (active !== sequence || !$('#play-' + id)) select(sequence, false);
+  if (active !== sequence || !$('#play-' + id)) select(sequence, true);
+  else { render(); scrollToCurrent(); }
   history.replaceState(null, '', '#play-' + id);
   const play = $('#play-' + id);
-  play.focus({preventScroll: true});
-  play.scrollIntoView({block: 'start'});
+  if (play) play.focus({preventScroll: true});
 }
 function navigateFromHash(scroll = true) {
   const id = Number(location.hash.match(/^#play-(\d+)$/)?.[1]);
@@ -143,7 +171,7 @@ function navigateFromHash(scroll = true) {
   if (sequence >= 1 && sequence <= 12) select(sequence, scroll);
   else if (!scroll) select(1, false);
 }
-Promise.all(['data.json','clips.json'].map(url=>fetch(url).then(r=>{if(!r.ok)throw Error('Unable to load guide');return r.json()}))).then(([d,c])=>{guide=d;demoClips=c;$('#sequence-nav').innerHTML=d.sequences.map(s=>`<button class="seq-button" data-seq="${s.id}" aria-label="Sequence ${s.id}: ${esc(shortTitles[s.id-1])}"><span class="seq-num">${String(s.id).padStart(2,'0')}</span><span>${esc(shortTitles[s.id-1])}</span></button>`).join('');$('#sequence-select').innerHTML=d.sequences.map(s=>`<option value="${s.id}">${String(s.id).padStart(2,'0')} · ${esc(shortTitles[s.id-1])}</option>`).join('');$('#sequence-select').addEventListener('change',e=>select(Number(e.target.value)));navigateFromHash(false);
+Promise.all(['data.json','clips.json'].map(url=>fetch(url).then(r=>{if(!r.ok)throw Error('Unable to load guide');return r.json()}))).then(([d,c])=>{guide=d;demoClips=c;$('#sequence-nav').innerHTML=d.sequences.map(s=>`<button class="seq-button" data-seq="${s.id}" aria-label="Step ${s.id} of 12: ${esc(s.title)}"><span class="seq-step">Step ${s.id} of 12</span><span class="seq-name">${esc(s.title)}</span></button>`).join('');navigateFromHash(false);
 function updateRouteVisibility(event) {
   const toggle = event.target.closest('[data-route]');
   if (!toggle) return;
@@ -152,11 +180,5 @@ function updateRouteVisibility(event) {
 }
 $('#sequence-overview').addEventListener('change', updateRouteVisibility);
 $('#practice-overview').addEventListener('change', updateRouteVisibility);
-$('#sequence-nav').addEventListener('click',e=>{const b=e.target.closest('[data-seq]');if(b)select(Number(b.dataset.seq))});$('#plays').addEventListener('click',e=>{const b=e.target.closest('[data-pick]');if(b)togglePick(Number(b.dataset.pick))});$('#picked-list').addEventListener('click',e=>{const b=e.target.closest('[data-remove]');if(b){togglePick(Number(b.dataset.remove));($('#picked-list [data-remove]') || $('#practice-close')).focus({preventScroll:true})}});$('#previous').onclick=()=>select(active-1);$('#next').onclick=()=>select(active+1);$('#practice-open').onclick=()=>$('#practice-dialog').showModal();$('#practice-close').onclick=()=>$('#practice-dialog').close();$('#practice-dialog').addEventListener('click',e=>{if(e.target===$('#practice-dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close()}});window.addEventListener('hashchange', () => navigateFromHash());
-document.addEventListener('click', event => {
-  const link = event.target.closest('.play-jumps a');
-  if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-  event.preventDefault();
-  openPlay(Number(link.hash.slice(6)));
-});
+$('#sequence-nav').addEventListener('click',e=>{const b=e.target.closest('[data-seq]');if(b){slot=0;select(Number(b.dataset.seq))}});$('#plays').addEventListener('click',e=>{const b=e.target.closest('[data-pick]');if(b)togglePick(Number(b.dataset.pick))});$('#picked-list').addEventListener('click',e=>{const b=e.target.closest('[data-remove]');if(b){togglePick(Number(b.dataset.remove));($('#picked-list [data-remove]') || $('#practice-close')).focus({preventScroll:true})}});$('#prev-play').onclick=()=>{if(slot===0)return;slot--;render();history.replaceState(null,'',`#play-${(active-1)*3+slot+1}`);scrollToCurrent()};$('#next-play').onclick=()=>{if(slot>=2)return;slot++;render();history.replaceState(null,'',`#play-${(active-1)*3+slot+1}`);scrollToCurrent()};$('#next-sequence').onclick=()=>{if(active>=12)return;slot=0;select(active+1)};$('#practice-open').onclick=()=>$('#practice-dialog').showModal();$('#practice-close').onclick=()=>$('#practice-dialog').close();$('#practice-dialog').addEventListener('click',e=>{if(e.target===$('#practice-dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close()}});window.addEventListener('hashchange', () => navigateFromHash());
 }).catch(()=>{$('#sequence-heading').innerHTML='<h2>The guide could not load</h2><p>Please refresh the page to try again.</p>'});

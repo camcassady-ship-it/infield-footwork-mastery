@@ -65,3 +65,58 @@
 .example-message:empty{display:none}
 .example-overlay button:focus-visible,.example-overlay video:focus-visible{outline:3px solid #ff9257;outline-offset:-3px}
 @media(max-width:760px){.diagram-examples .field-diagram{margin-bottom:0}.demo-soon,.example-buttons{margin-bottom:24px}.example-footer{padding:7px 8px}.example-footer p{font-size:10px}.example-tools button{font-size:10px}}
+
+.intro{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;padding:28px 5% 18px}
+.intro-lead{max-width:640px}
+.start-line{font-size:18px;line-height:1.45;margin:14px 0 8px}
+.credit{font-size:13px;color:var(--muted);margin:0}
+.print-link{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 16px;border:2px solid var(--ink);font-size:14px;font-weight:700;text-decoration:none;flex-shrink:0}
+.print-link:hover{background:var(--field)}
+.topbar .practice-button{min-height:48px}
+#sequence-nav.step-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;max-width:1440px;margin:0 auto;padding:4px 5% 28px;flex-direction:unset;overflow:visible}
+.step-grid .seq-button{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;width:100%;min-height:76px;padding:14px 16px;border:1px solid var(--line);background:#fff;color:var(--ink);text-align:left;font-size:16px}
+.step-grid .seq-step{font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--orange)}
+.step-grid .seq-name{font-size:16px;font-weight:650;line-height:1.25;color:var(--ink)}
+.step-grid .seq-button[aria-current=true]{background:var(--ink);border-color:var(--ink)}
+.step-grid .seq-button[aria-current=true] .seq-step{color:#f5ad86}
+.step-grid .seq-button[aria-current=true] .seq-name{color:#fff}
+main{max-width:900px;margin:0 auto;padding:8px 5% 48px}
+.sequence-kicker{font-size:13px}
+.when-line{margin:0 0 14px;font-size:16px;line-height:1.4}
+.when-line strong{display:block;font-size:12px;letter-spacing:.04em;color:var(--orange);margin-bottom:2px}
+.play-stack{display:flex;flex-direction:column;gap:0}
+.demo-stage{position:relative;background:#141613;aspect-ratio:20/9;min-height:220px;margin:0 0 14px}
+.demo-empty{display:flex;align-items:center;justify-content:center;aspect-ratio:auto;min-height:96px;color:#faf8f3;font-size:16px}
+.demo-empty p{margin:0}
+.demo-poster{position:absolute;inset:0;width:100%;height:100%;border:0;padding:0;background:#141613;color:#fff}
+.demo-poster img{width:100%;height:100%;object-fit:cover;display:block}
+.demo-poster span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--orange);color:#fff;font-size:18px;font-weight:700;min-height:52px;padding:12px 18px;display:inline-flex;align-items:center}
+.diagram-legend{font-size:14px;line-height:1.4;margin:0 0 6px}
+.geometry-note{font-size:13px;margin:0 0 12px}
+.field-diagram{margin-bottom:16px}
+.cue-block{margin-top:4px}
+.cues-title{font-size:12px;letter-spacing:.04em}
+.cue-list li{font-size:17px}
+.play-nav{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:8px}
+.play-nav button{min-height:52px;border:2px solid var(--ink);background:#fff;font-size:15px;font-weight:700;padding:10px}
+.play-nav button:hover{background:var(--field)}
+.play-nav button:disabled{opacity:.35;cursor:default}
+#next-play,#next-sequence{background:var(--ink);color:#fff}
+#next-play:hover,#next-sequence:hover{background:#39332e}
+#next-play:disabled,#next-sequence:disabled{background:#c8c6be;border-color:#c8c6be;color:#fff}
+.sequence-overview{margin-top:22px}
+.sequence-overview summary{font-size:14px}
+.pick-button{min-height:48px;font-size:14px;padding:10px 14px}
+@media(max-width:760px){
+  .intro{display:block;padding:18px 16px 8px}
+  .start-line{font-size:17px}
+  .print-link{margin-top:14px}
+  #sequence-nav.step-grid{grid-template-columns:1fr;padding:8px 16px 18px;flex-direction:unset}
+  .step-grid .seq-button{min-height:68px}
+  main{padding:4px 16px 36px}
+  #plays .play{display:none}
+  #plays .play.is-current{display:block}
+  .play-nav{grid-template-columns:1fr}
+  .demo-stage{min-height:190px}
+  .play{scroll-margin-top:86px}
+}
