@@ -1,6 +1,22 @@
 {
   "1": [
     {
+      "file": "field-through-if-back-1.mp4",
+      "poster": "field-through-if-back-1.jpg",
+      "player": "Anthony Volpe",
+      "caption": "Work through the hard ground ball and keep momentum toward the throw."
+    },
+    {
+      "file": "field-through-if-back-2.mp4",
+      "poster": "field-through-if-back-2.jpg",
+      "player": "Francisco Lindor",
+      "caption": "Work through the hard ground ball and keep momentum toward the throw."
+    }
+  ],
+  "2": [],
+  "3": [],
+  "4": [
+    {
       "file": "routine-1.mp4",
       "poster": "routine-1.jpg",
       "player": "Manny Machado",
@@ -13,7 +29,7 @@
       "caption": "Get behind the ball and gather under control."
     }
   ],
-  "2": [
+  "5": [
     {
       "file": "lateral-left-get-in-front-1.mp4",
       "poster": "lateral-left-get-in-front-1.jpg",
@@ -27,7 +43,7 @@
       "caption": "Move left and get your body in front of the ball."
     }
   ],
-  "3": [
+  "6": [
     {
       "file": "lateral-right-get-in-front-1.mp4",
       "poster": "lateral-right-get-in-front-1.jpg",
@@ -35,27 +51,22 @@
       "caption": "Move right and get behind the ball before the exchange."
     }
   ],
-  "4": [],
-  "5": [],
-  "6": [],
-  "7": [
-    {
-      "file": "field-through-if-back-1.mp4",
-      "poster": "field-through-if-back-1.jpg",
-      "player": "Anthony Volpe",
-      "caption": "Work through the hard ground ball and keep momentum toward the throw."
-    },
-    {
-      "file": "field-through-if-back-2.mp4",
-      "poster": "field-through-if-back-2.jpg",
-      "player": "Francisco Lindor",
-      "caption": "Work through the hard ground ball and keep momentum toward the throw."
-    }
-  ],
+  "7": [],
   "8": [],
   "9": [],
-  "10": [],
-  "11": [
+  "10": [
+    {
+      "file": "field-through-if-in-1.mp4",
+      "poster": "field-through-if-in-1.jpg",
+      "player": "Taylor Walls",
+      "caption": "Field through the ball and make the quick throw home."
+    }
+  ],
+  "11": [],
+  "12": [],
+  "13": [],
+  "14": [],
+  "15": [
     {
       "file": "drop-step-crossover-backhand-1.mp4",
       "poster": "drop-step-crossover-backhand-1.jpg",
@@ -69,8 +80,7 @@
       "caption": "Open for depth and cross over to reach the backhand."
     }
   ],
-  "12": [],
-  "13": [
+  "16": [
     {
       "file": "routine-come-and-get-it-1-handed-1.mp4",
       "poster": "routine-come-and-get-it-1-handed-1.jpg",
@@ -78,7 +88,7 @@
       "caption": "Come forward and field with the glove hand."
     }
   ],
-  "14": [
+  "17": [
     {
       "file": "drop-step-backhand-lengthen-hop-1.mp4",
       "poster": "drop-step-backhand-lengthen-hop-1.jpg",
@@ -86,7 +96,7 @@
       "caption": "Gain depth on the backhand side to create a better hop."
     }
   ],
-  "15": [
+  "18": [
     {
       "file": "lateral-backhand-on-the-run-1.mp4",
       "poster": "lateral-backhand-on-the-run-1.jpg",
@@ -100,8 +110,15 @@
       "caption": "Keep moving laterally through the backhand and release."
     }
   ],
-  "16": [],
-  "17": [
+  "19": [
+    {
+      "file": "chopper-come-and-get-it-2-handed-1.mp4",
+      "poster": "chopper-come-and-get-it-2-handed-1.jpg",
+      "player": "Manny Machado",
+      "caption": "Attack the chopper and gather with two hands."
+    }
+  ],
+  "20": [
     {
       "file": "lateral-forehand-on-the-run-1.mp4",
       "poster": "lateral-forehand-on-the-run-1.jpg",
@@ -115,16 +132,22 @@
       "caption": "Keep running through the forehand pickup."
     }
   ],
-  "18": [],
-  "19": [
+  "21": [],
+  "22": [
     {
       "file": "hinge-step-back-backhand-gather-1.mp4",
       "poster": "hinge-step-back-backhand-gather-1.jpg",
       "player": "Angel Genao",
       "caption": "Hinge back, field the backhand, then gather to throw."
+    },
+    {
+      "file": "hinge-step-back-backhand-gather-2.mp4",
+      "poster": "hinge-step-back-backhand-gather-2.jpg",
+      "player": "Corey Seager",
+      "caption": "Hinge back, field the backhand, then gather to throw."
     }
   ],
-  "20": [
+  "23": [
     {
       "file": "backhand-come-and-get-it-1.mp4",
       "poster": "backhand-come-and-get-it-1.jpg",
@@ -138,8 +161,25 @@
       "caption": "Charge the soft ball and pick it on the backhand."
     }
   ],
-  "21": [],
-  "22": [
+  "24": [],
+  "25": [],
+  "26": [
+    {
+      "file": "ball-right-routine-cut-the-distance-1.mp4",
+      "poster": "ball-right-routine-cut-the-distance-1.jpg",
+      "player": "Matt Olson",
+      "caption": "Close forward and right before fielding."
+    }
+  ],
+  "27": [
+    {
+      "file": "rake-through-backhand-1.mp4",
+      "poster": "rake-through-backhand-1.jpg",
+      "player": "Romy Gonzalez",
+      "caption": "Move the glove through the backhand pickup."
+    }
+  ],
+  "28": [
     {
       "file": "routine-cut-the-distance-1.mp4",
       "poster": "routine-cut-the-distance-1.jpg",
@@ -153,7 +193,7 @@
       "caption": "Close the distance before you field and exchange."
     }
   ],
-  "23": [
+  "29": [
     {
       "file": "do-or-die-come-and-get-it-1-handed-1.mp4",
       "poster": "do-or-die-come-and-get-it-1-handed-1.jpg",
@@ -167,7 +207,7 @@
       "caption": "Charge hard and make the one-handed pickup."
     }
   ],
-  "24": [
+  "30": [
     {
       "file": "do-or-die-come-and-get-it-barehanded-1.mp4",
       "poster": "do-or-die-come-and-get-it-barehanded-1.jpg",
@@ -181,8 +221,8 @@
       "caption": "Charge, barehand, and get rid of the ball quickly."
     }
   ],
-  "25": [],
-  "26": [
+  "31": [],
+  "32": [
     {
       "file": "ball-left-cut-the-distance-1.mp4",
       "poster": "ball-left-cut-the-distance-1.jpg",
@@ -190,7 +230,7 @@
       "caption": "Close forward and left to shorten the play."
     }
   ],
-  "27": [
+  "33": [
     {
       "file": "drop-step-crossover-backhand-no-step-throw-1.mp4",
       "poster": "drop-step-crossover-backhand-no-step-throw-1.jpg",
@@ -204,7 +244,7 @@
       "caption": "Open, cross over, backhand, and throw without another setup step."
     }
   ],
-  "28": [
+  "34": [
     {
       "file": "field-through-boot-barehand-and-throw-1.mp4",
       "poster": "field-through-boot-barehand-and-throw-1.jpg",
@@ -218,71 +258,6 @@
       "caption": "Stay with the boot and recover the ball barehanded."
     }
   ],
-  "29": [],
-  "30": [],
-  "31": [
-    {
-      "file": "routine-cut-the-distance-1.mp4",
-      "poster": "routine-cut-the-distance-1.jpg",
-      "player": "Colson Montgomery",
-      "caption": "Close the distance before you field and exchange."
-    },
-    {
-      "file": "routine-cut-the-distance-2.mp4",
-      "poster": "routine-cut-the-distance-2.jpg",
-      "player": "Taylor Walls",
-      "caption": "Close the distance before you field and exchange."
-    }
-  ],
-  "32": [
-    {
-      "file": "do-or-die-come-and-get-it-1-handed-1.mp4",
-      "poster": "do-or-die-come-and-get-it-1-handed-1.jpg",
-      "player": "Joey Ortiz",
-      "caption": "Charge hard and make the one-handed pickup."
-    },
-    {
-      "file": "do-or-die-come-and-get-it-1-handed-2.mp4",
-      "poster": "do-or-die-come-and-get-it-1-handed-2.jpg",
-      "player": "Manny Machado",
-      "caption": "Charge hard and make the one-handed pickup."
-    }
-  ],
-  "33": [
-    {
-      "file": "do-or-die-come-and-get-it-barehanded-1.mp4",
-      "poster": "do-or-die-come-and-get-it-barehanded-1.jpg",
-      "player": "Bobby Witt Jr.",
-      "caption": "Charge, barehand, and get rid of the ball quickly."
-    },
-    {
-      "file": "do-or-die-come-and-get-it-barehanded-2.mp4",
-      "poster": "do-or-die-come-and-get-it-barehanded-2.jpg",
-      "player": "Mookie Betts",
-      "caption": "Charge, barehand, and get rid of the ball quickly."
-    }
-  ],
-  "34": [],
-  "35": [
-    {
-      "file": "ball-left-cut-the-distance-1.mp4",
-      "poster": "ball-left-cut-the-distance-1.jpg",
-      "player": "Brayan Rocchio",
-      "caption": "Close forward and left to shorten the play."
-    }
-  ],
-  "36": [
-    {
-      "file": "drop-step-crossover-backhand-no-step-throw-1.mp4",
-      "poster": "drop-step-crossover-backhand-no-step-throw-1.jpg",
-      "player": "Masyn Winn",
-      "caption": "Open, cross over, backhand, and throw without another setup step."
-    },
-    {
-      "file": "drop-step-crossover-backhand-no-step-throw-2.mp4",
-      "poster": "drop-step-crossover-backhand-no-step-throw-2.jpg",
-      "player": "Manny Machado",
-      "caption": "Open, cross over, backhand, and throw without another setup step."
-    }
-  ]
+  "35": [],
+  "36": []
 }

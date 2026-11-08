@@ -1,11 +1,11 @@
 'use strict';
 let guide,mlbClips={},active=1,picks=[];
-try{const saved=JSON.parse(localStorage.getItem('footwork-picks')||'[]');if(Array.isArray(saved))picks=[...new Set(saved.filter(n=>Number.isInteger(n)&&n>=1&&n<=36))].slice(0,3)}catch{}
+try{const saved=JSON.parse(localStorage.getItem('footwork-picks-v2')||'[]');if(Array.isArray(saved))picks=[...new Set(saved.filter(n=>Number.isInteger(n)&&n>=1&&n<=36))].slice(0,3)}catch{}
 const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const shortTitles=['Routine & lateral','Adjust & drop step','Field through & shuffle','Slow roller & crossover','Charge & backhand','Contact & replace','Hinge & charge','Routine & do or die','Chopper & no-step','Recovery & exchange','Routine & do or die*','Chopper & no-step*'];
+const shortTitles=['Through & sweep','Routine & lateral','Adjust & crossover','Infield-in shuffles','Slow roller & drop','Charge & jump throw','Chopper & field-with','Hinge & backhand','Boot, right & rake','Routine & do or die','Chopper & no-step','Boot & sit back'];
 function arrow(cx,cy,a,n,color){let out='';for(let j=0;j<n;j++){const d=(j-(n-1)/2)*6.3,px=cx+d*Math.cos(a),py=cy+d*Math.sin(a),size=4.3,tx=px+size*.55*Math.cos(a),ty=py+size*.55*Math.sin(a),bx=px-size*.65*Math.cos(a),by=py-size*.65*Math.sin(a),dx=-Math.sin(a)*size*.65,dy=Math.cos(a)*size*.65;out+=`<polygon points="${tx},${ty} ${bx+dx},${by+dy} ${bx-dx},${by-dy}" fill="${color}"/>`}return out}
 function line(a,b,n,color){return `<path d="M${a} L${b}" fill="none" stroke="${color}" stroke-width="1.3"/>`+arrow((a[0]+b[0])/2,(a[1]+b[1])/2,Math.atan2(b[1]-a[1],b[0]-a[0]),n,color)}
-const runningReleases = new Set([15,17,20,24,30,33]);
+const runningReleases = new Set([18,20,23,30,36]);
 function movementCues(play) {
   return play.cues.split(/\.(?:"(?=\s|$))?\s+/).filter(Boolean)
     .map(cue => cue.replace(/\.$/, '').replace(/^"([^"]+)$/, '$1'));
@@ -19,7 +19,7 @@ svg+=`<g fill="#6a7462" font-family="Arial,sans-serif" font-size="7.5"><text x="
   return svg + `<circle cx="67" cy="72" r="3.4" fill="#22261f"/><text x="59" y="62" fill="#22261f" font-family="Arial,sans-serif" font-size="8" font-weight="bold">SS</text>`;
 }
 function approachPaces(play) {
-  if ([26, 35].includes(play.id)) return [2, 1];
+  if (play.id === 26 || play.id === 32) return [2, 1];
   return guide.paces[play.mode];
 }
 
@@ -31,7 +31,7 @@ const running = runningReleases.has(id);
 const target = running ? field.map((value, axis) => 2*value-lastApproach[axis]) : firstSvg;
 const direction = target.map((value, axis) => value-field[axis]);
 const length = Math.hypot(...direction);
-const dist = running ? 48 : [21,27,36].includes(id) ? 0 : 10;
+const dist = running ? 48 : id === 33 ? 0 : 10;
 const release = field.map((value, axis) => value + direction[axis]/length*dist);
 const dx = firstSvg[0]-release[0], dy = firstSvg[1]-release[1], ln = Math.hypot(dx,dy);
 let svg = '';
@@ -63,7 +63,7 @@ $('#sequence-select').value=String(active);$('#previous').disabled=active===1;$(
 document.querySelectorAll('.seq-button').forEach(b=>b.setAttribute('aria-current',String(Number(b.dataset.seq)===active)));updatePicks();}
 function select(n,scroll=true){if(!Number.isInteger(n)||n<1||n>12)return;active=n;history.replaceState(null,'',`#sequence-${n}`);render();if(scroll)$('#sequence-content').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});}
 let toastTimer;function notify(msg){$('#status').textContent=msg;$('#status').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#status').classList.remove('show'),3200)}
-function togglePick(id){if(picks.includes(id)){picks=picks.filter(n=>n!==id);notify(`Play ${id} removed from today.`)}else{if(picks.length>=3){notify('Three plays selected. Remove one to add another.');return}picks.push(id);notify(`Play ${id} added. ${picks.length} of 3 selected.`)}try{localStorage.setItem('footwork-picks',JSON.stringify(picks))}catch{}updatePicks()}
+function togglePick(id){if(picks.includes(id)){picks=picks.filter(n=>n!==id);notify(`Play ${id} removed from today.`)}else{if(picks.length>=3){notify('Three plays selected. Remove one to add another.');return}picks.push(id);notify(`Play ${id} added. ${picks.length} of 3 selected.`)}try{localStorage.setItem('footwork-picks-v2',JSON.stringify(picks))}catch{}updatePicks()}
 function updatePicks(){closeExample(false);$('#pick-count').textContent=`${picks.length}/3`;document.querySelectorAll('[data-pick]').forEach(b=>{const id=Number(b.dataset.pick),chosen=picks.includes(id);b.setAttribute('aria-pressed',String(chosen));b.textContent=chosen?'✓ Added':'+ Add to today';b.setAttribute('aria-label',`${chosen?'Remove':'Add'} play ${id} ${guide.plays[id-1].name} ${chosen?'from':'to'} today`)});const selectedPlays = [...picks].sort((a, b) => a - b).map(id => guide.plays[id - 1]);
 const comparison = $('#practice-comparison');
 comparison.hidden = selectedPlays.length !== 3;
