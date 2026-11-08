@@ -46,8 +46,9 @@
   .intro-copy{margin-top:12px}
 }
 
-/* MLB visuals sit in the original SVG box; the route diagram never moves. */
+/* Demo video sits in the original SVG box; the route diagram never moves. */
 .diagram-stage{position:relative;isolation:isolate}
+.demo-soon{margin:4px 0 18px;font-size:11px;line-height:1.4;color:var(--muted)}
 .example-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 18px}
 .example-button{flex:1 1 125px;min-height:48px;padding:9px 12px;border:1px solid var(--line);background:transparent;color:var(--orange);text-align:left;font-size:11px;font-weight:700;line-height:1.4}
 .example-button span{display:block;color:var(--muted);font-size:10px;font-weight:400}
@@ -63,4 +64,4 @@
 .example-message{display:block;font-size:11px;margin-top:4px}
 .example-message:empty{display:none}
 .example-overlay button:focus-visible,.example-overlay video:focus-visible{outline:3px solid #ff9257;outline-offset:-3px}
-@media(max-width:760px){.diagram-examples .field-diagram{margin-bottom:0}.example-buttons{margin-bottom:24px}.example-footer{padding:7px 8px}.example-footer p{font-size:10px}.example-tools button{font-size:10px}}
+@media(max-width:760px){.diagram-examples .field-diagram{margin-bottom:0}.demo-soon,.example-buttons{margin-bottom:24px}.example-footer{padding:7px 8px}.example-footer p{font-size:10px}.example-tools button{font-size:10px}}

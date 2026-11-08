@@ -1,5 +1,5 @@
 'use strict';
-let guide,mlbClips={},active=1,picks=[];
+let guide,demoClips={},active=1,picks=[];
 try{const saved=JSON.parse(localStorage.getItem('footwork-picks-v2')||'[]');if(Array.isArray(saved))picks=[...new Set(saved.filter(n=>Number.isInteger(n)&&n>=1&&n<=36))].slice(0,3)}catch{}
 const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const shortTitles=['Through & sweep','Routine & lateral','Adjust & crossover','Infield-in shuffles','Slow roller & drop','Charge & jump throw','Chopper & field-with','Hinge & backhand','Boot, right & rake','Routine & do or die','Chopper & no-step','Boot & sit back'];
@@ -96,7 +96,7 @@ function navigateFromHash(scroll = true) {
   if (sequence >= 1 && sequence <= 12) select(sequence, scroll);
   else if (!scroll) select(1, false);
 }
-Promise.all(['data.json','clips.json'].map(url=>fetch(url).then(r=>{if(!r.ok)throw Error('Unable to load guide');return r.json()}))).then(([d,c])=>{guide=d;mlbClips=c;$('#sequence-nav').innerHTML=d.sequences.map(s=>`<button class="seq-button" data-seq="${s.id}" aria-label="Sequence ${s.id}: ${esc(shortTitles[s.id-1])}"><span class="seq-num">${String(s.id).padStart(2,'0')}</span><span>${esc(shortTitles[s.id-1])}</span></button>`).join('');$('#sequence-select').innerHTML=d.sequences.map(s=>`<option value="${s.id}">${String(s.id).padStart(2,'0')} · ${esc(shortTitles[s.id-1])}</option>`).join('');$('#sequence-select').addEventListener('change',e=>select(Number(e.target.value)));navigateFromHash(false);
+Promise.all(['data.json','clips.json'].map(url=>fetch(url).then(r=>{if(!r.ok)throw Error('Unable to load guide');return r.json()}))).then(([d,c])=>{guide=d;demoClips=c;$('#sequence-nav').innerHTML=d.sequences.map(s=>`<button class="seq-button" data-seq="${s.id}" aria-label="Sequence ${s.id}: ${esc(shortTitles[s.id-1])}"><span class="seq-num">${String(s.id).padStart(2,'0')}</span><span>${esc(shortTitles[s.id-1])}</span></button>`).join('');$('#sequence-select').innerHTML=d.sequences.map(s=>`<option value="${s.id}">${String(s.id).padStart(2,'0')} · ${esc(shortTitles[s.id-1])}</option>`).join('');$('#sequence-select').addEventListener('change',e=>select(Number(e.target.value)));navigateFromHash(false);
 function updateRouteVisibility(event) {
   const toggle = event.target.closest('[data-route]');
   if (!toggle) return;
