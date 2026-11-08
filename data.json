@@ -2,317 +2,317 @@
   "plays": [
     {
       "id": 1,
-      "name": "Routine hop",
-      "mode": "routine",
-      "cues": "Gather right. Field. Step through. Shuffle. Throw and follow.",
-      "note": "\"Step prep / step step / right creep / left field\" needs confirmation."
+      "name": "Field Through (IF back)",
+      "mode": "through",
+      "cues": "Hop step. Fielding position. Field through. Shuffle. Throw and follow.",
+      "note": "No coach audio. Brief field-through cues from the slide-deck name."
     },
     {
       "id": 2,
-      "name": "Lateral left, get in front",
-      "mode": "left",
-      "cues": "Prep. Crossover. Shuffle into position. Field. Shuffle. Throw and follow.",
-      "note": "Get in front before the fielding action."
+      "name": "Drop-step Left, Get In Front",
+      "mode": "dropFrontL",
+      "cues": "Hop step. Drop step left. Get in front. Field. Throw and follow.",
+      "note": "No coach audio. Route mirrors Drop Step Right, Get in Front. Cues do not invent a step order."
     },
     {
       "id": 3,
-      "name": "Lateral right, get in front",
-      "mode": "right",
-      "cues": "Prep. Crossover. Shuffle. Field. Step through. Shuffle. Throw and follow.",
-      "note": "The throwing transition includes a step through."
+      "name": "Sweeping Backhand, Set Feet",
+      "mode": "runR",
+      "cues": "Hop step. Sweeping backhand. Set feet. Throw and follow.",
+      "note": "No coach audio. Lateral backhand route, then a throw back to first after the feet are set."
     },
     {
       "id": 4,
-      "name": "Routine, cut distance",
+      "name": "Routine",
       "mode": "routine",
-      "cues": "Adjust. Prep. Left foot, step right. Gather. Step back. Fielding position. Shuffle and throw.",
-      "note": "The transcript includes a step back during the gather."
+      "cues": "Hop step. Prep step. Step right. Creep. Gather. Right-left field. Step through. Shuffle. Throw. Follow.",
+      "note": "Spoken breakdown from the coach video."
     },
     {
       "id": 5,
-      "name": "Drop step forehand",
-      "mode": "dropL",
-      "cues": "Prep. Drop step. Crossover. Shuffle. Forehand. Step through. Shuffle and throw.",
-      "note": "The transcript repeats the drop-step wording before the full cue chain."
+      "name": "Lateral Left, Get in Front",
+      "mode": "left",
+      "cues": "Hop step. Prep step. Crossover. Shuffle. Field. L shuffle. Throw. Follow.",
+      "note": "Spoken breakdown from the coach video."
     },
     {
       "id": 6,
-      "name": "Drop step backhand",
-      "mode": "dropR",
-      "cues": "Prep. Drop step. Crossover. Shuffle. Backhand field. Shuffle and throw.",
-      "note": "Forehand and backhand share the drop-step approach."
+      "name": "Lateral Right, Get in Front",
+      "mode": "right",
+      "cues": "Hop step. Prep step. Crossover. Shuffle. Field. Step through. Shuffle. Throw. Follow.",
+      "note": "Spoken breakdown from the coach video."
     },
     {
       "id": 7,
-      "name": "Field through",
-      "mode": "through",
-      "cues": "Hop step. Fielding position. Lean left. Shuffle. Throw and follow.",
-      "note": "Forward path is an interpretation of the play name."
+      "name": "Routine Cut the Distance, Adjust",
+      "mode": "routine",
+      "cues": "Hop step. Prep step. Left foot. Step right. Gather. Step back. Fielding position. L shuffle. Throw. Follow.",
+      "note": "Spoken breakdown from the coach video."
     },
     {
       "id": 8,
-      "name": "Drop step left forehand",
+      "name": "Drop-step, Crossover Shuffle Forehand",
       "mode": "dropL",
-      "cues": "Prep. Drop step left. Shuffle. Forehand. Shuffle. Throw and follow.",
-      "note": "Repeated \"shuffle\" cues remain in the source."
+      "cues": "Hop. Prep. Drop step. Crossover. Shuffle. Step through. Shuffle. Throw. Follow.",
+      "note": "Spoken breakdown from the coach video."
     },
     {
       "id": 9,
-      "name": "Drop step right backhand",
+      "name": "Drop-step, Crossover Shuffle Backhand",
       "mode": "dropR",
-      "cues": "Prep. Drop step right. Shuffle. Backhand. Shuffle. Throw and follow.",
-      "note": "Same approach family as Play 8, opposite side."
+      "cues": "Hop. Prep. Drop step. Crossover. Shuffle. Field. Shuffle. Throw. Follow.",
+      "note": "Spoken breakdown from the coach video."
     },
     {
       "id": 10,
-      "name": "One-hand slow roller left",
-      "mode": "chargeL",
-      "cues": "Prep. Right foot. Step through. Gather right-left. Field. Right-left. Throw and follow.",
-      "note": "Leftward charging path follows the play name."
+      "name": "Field Through (IF in)",
+      "mode": "through",
+      "cues": "Hop step. Fielding position. Field. L shuffle. Throw. Follow.",
+      "note": "Spoken breakdown from the coach video."
     },
     {
       "id": 11,
-      "name": "Drop step crossover backhand",
-      "mode": "dropR",
-      "cues": "Prep. Drop step. Crossover. Backhand field. Shuffle. Throw and follow.",
-      "note": "Crossover distinguishes this call from a shuffle-only approach."
+      "name": "Drop-step Left, Shuffle Forehand (IF in)",
+      "mode": "dropL",
+      "cues": "Hop. Prep. Drop. Shuffle. L shuffle. Throw. Follow.",
+      "note": "Spoken breakdown from the coach video."
     },
     {
       "id": 12,
-      "name": "Drop step right, get in front",
-      "mode": "dropFront",
-      "cues": "Prep. Drop step right. Crossover. Get in front. Field. Step through. Shuffle and throw.",
-      "note": "The bent route illustrates getting in front, not an exact angle."
+      "name": "Drop-step Right, Shuffle Backhand (IF in)",
+      "mode": "dropR",
+      "cues": "Hop. Prep. Drop. Shuffle. Shuffle. Throw. Follow.",
+      "note": "Spoken breakdown from the coach video. The two shuffle cues are both in the call."
     },
     {
       "id": 13,
-      "name": "Routine, come get it, one-hand",
-      "mode": "charge",
-      "cues": "Prep. Step right. Creep. Shuffle. Reach. Left shuffle. Throw and follow.",
-      "note": "The meaning of \"left shuffle\" needs confirmation."
+      "name": "2-Handed Slow Roller Left",
+      "mode": "chargeL",
+      "cues": "Hop. Prep. Right foot step through. Gather. Right-left field. Right-left throw. Follow.",
+      "note": "Spoken breakdown from the coach video. The earlier site name said one-hand."
     },
     {
       "id": 14,
-      "name": "Drop step backhand, lengthen",
-      "mode": "deepR",
-      "cues": "Prep. Deep drop. Knee drop. Replace. Throw and fall.",
-      "note": "Confirm \"knee drop\" and \"throw and fall\" before teaching exact mechanics."
+      "name": "Drop Step Right, Get in Front",
+      "mode": "dropFront",
+      "cues": "Hop. Prep. Drop step. Crossover. Field. Step through. Shuffle throw. Follow.",
+      "note": "Spoken breakdown from the coach video."
     },
     {
       "id": 15,
-      "name": "Lateral backhand on the run",
-      "mode": "runR",
-      "cues": "Prep. Crossover. Run. Field off right step. Left jump. Throw.",
-      "note": "\"Jump throw\" appears before the full cue chain."
+      "name": "Drop Step Crossover Backhand",
+      "mode": "dropR",
+      "cues": "Hop. Prep. Drop step. Crossover field. Shuffle throw. Follow.",
+      "note": "Spoken breakdown from the coach video."
     },
     {
       "id": 16,
-      "name": "One-hand chopper",
+      "name": "Routine Come and Get it, 1-Handed",
       "mode": "charge",
-      "cues": "Prep. Left foot. Step right. Catch off left. Throw off right. Follow.",
-      "note": "Contact-foot cues connect the catch to the throw."
+      "cues": "Hop. Prep. Step right. Creep. Shuffle reach. L-shuffle throw. Follow.",
+      "note": "Spoken breakdown from the coach video."
     },
     {
       "id": 17,
-      "name": "Lateral forehand on the run",
-      "mode": "runL",
-      "cues": "Prep. Crossover. Run. Field off left. Left shuffle. Throw and follow.",
-      "note": "\"Set feet\" appears in the play introduction."
+      "name": "Drop Step Backhand, Lengthen Hop",
+      "mode": "deepR",
+      "cues": "Hop. Prep. Deep drop. Knee drop. Replace. Throw and follow.",
+      "note": "Spoken breakdown. The earlier cue said throw and fall."
     },
     {
       "id": 18,
-      "name": "Hop field, deep drop, replace feet",
-      "mode": "deep",
-      "cues": "Prep. Deep drop. Replace feet. Left shuffle. Throw and follow.",
-      "note": "No left/right drop direction appears in the supplied cues."
+      "name": "Lateral Backhand on the Run, Jump Throw",
+      "mode": "runR",
+      "cues": "Hop. Prep. Crossover run. Field off right. Step with left. Jump throw.",
+      "note": "Spoken breakdown from the coach video."
     },
     {
       "id": 19,
-      "name": "Hinge step right backhand",
-      "mode": "hinge",
-      "cues": "Prep. Hinge step right. Backhand field. Gather. Shuffle. Throw and follow.",
-      "note": "Hinge path is schematic. The source gives no hinge angle."
+      "name": "Chopper Come and Get it, 2-Handed (Above Knee)",
+      "mode": "charge",
+      "cues": "Hop. Prep. Left foot step right. Catch off left. Throw off right. Follow.",
+      "note": "Spoken breakdown from the coach video. The earlier site name said one-hand."
     },
     {
       "id": 20,
-      "name": "Backhand, come get it, throw on run",
-      "mode": "chargeR",
-      "cues": "Prep. Left foot step through. Field off right. Left. Right. Throw.",
-      "note": "Carry the listed foot sequence into the throwing transition."
+      "name": "Lateral Forehand on the Run, Set Feet",
+      "mode": "runL",
+      "cues": "Hop. Prep. Crossover run. Field off left. L-shuffle throw. Follow.",
+      "note": "Spoken breakdown from the coach video."
     },
     {
       "id": 21,
-      "name": "Ball right, one-hand",
-      "mode": "chargeR",
-      "cues": "Set feet. Prep. Left foot. Step right. Field off right.",
-      "note": "The reliable cue chain stops at fielding. Throwing footwork is unresolved."
+      "name": "Field-With",
+      "mode": "deep",
+      "cues": "Hop. Prep. Deep drop. Replace the feet. L-shuffle throw. Follow.",
+      "note": "Spoken breakdown from the coach video."
     },
     {
       "id": 22,
-      "name": "Routine, cut distance",
-      "mode": "routine",
-      "cues": "Prep. Left foot. Step right. Gather right-left. Field. Left shuffle. Throw and follow.",
-      "note": "Controlled gather and shuffle in the supplied call."
+      "name": "Hinge Step Back, Backhand Gather",
+      "mode": "hinge",
+      "cues": "Hop. Prep. Hinge step. Field. Gather. Shuffle throw. Follow.",
+      "note": "Spoken breakdown from the coach video."
     },
     {
       "id": 23,
-      "name": "Do or die, one-hand",
-      "mode": "charge",
-      "cues": "Prep. Left foot. Step right. Field off right-left-right. Throw and follow.",
-      "note": "\"Field off right-left-right\" needs confirmation as a precise contact sequence."
+      "name": "Backhand Come and Get it, Throw on the Run",
+      "mode": "chargeR",
+      "cues": "Hop. Prep. Left foot step through. Field off right. Left-right throw.",
+      "note": "Spoken breakdown from the coach video."
     },
     {
       "id": 24,
-      "name": "Do or die, barehand",
-      "mode": "vcut",
-      "cues": "Prep. Run straight. V-cut. \"Heel off left.\" Throw off right. Follow.",
-      "note": "Confirm \"heel off left\". The V-cut angle is illustrative."
+      "name": "Ball Right Come and Get it, 1-Handed, Set Feet",
+      "mode": "chargeR",
+      "cues": "Hop. Prep. Left foot step right. Field off right. Shuffle throw. Follow.",
+      "note": "Spoken breakdown. The title card said 2-handed; the coach called it 1-handed and set feet."
     },
     {
       "id": 25,
-      "name": "Chopper, come get it, one-hand",
+      "name": "Routine Cut the Distance, Boot Barehand, Arm Fake",
       "mode": "charge",
-      "cues": "Prep. Left foot. Step right. Field off left. Step right. Throw and follow.",
-      "note": "Raw transcript ends this action with \"toefall\", an uncertain term."
+      "cues": "Charge. Field at the body. Ball boots out. Barehand. Arm fake.",
+      "note": "No coach audio. Cues follow the drill: charge, field at the body, the ball boots out, barehand, arm fake."
     },
     {
       "id": 26,
-      "name": "Ball left, routine cut distance",
-      "mode": "chargeL",
-      "cues": "Prep. Right foot. Step left-right-left. Field. Left shuffle. Throw and follow.",
-      "note": "The ball-left call adds a directional approach to the routine gather."
+      "name": "Ball Right, Routine Cut the Distance",
+      "mode": "chargeR",
+      "cues": "Hop. Prep. Cut the distance to your right. Field. Shuffle. Throw and follow.",
+      "note": "No coach audio. Forward-right approach at the same pace as Ball Left, Routine Cut the Distance."
     },
     {
       "id": 27,
-      "name": "Drop step crossover backhand, no-step throw",
-      "mode": "dropR",
-      "cues": "Prep. Drop step. Crossover. Field. Load and throw.",
-      "note": "\"No-step throw\" appears in the title. Do not add an extra shuffle."
+      "name": "Rake Through Backhand",
+      "mode": "rakeR",
+      "cues": "Rake through the backhand. Throw and follow.",
+      "note": "No coach audio. Medium-soft ball to the backhand, often a second baseman on a ball up the middle."
     },
     {
       "id": 28,
-      "name": "Field through boot, barehand",
-      "mode": "recovery",
-      "cues": "Hop step. Fielding position. Boot ball. Right-left field. Shuffle. Throw and follow.",
-      "note": "Confirm \"boot\" and the intended recovery drill. Path shows one possible interpretation."
+      "name": "Routine Cut the Distance",
+      "mode": "routine",
+      "cues": "Prep. Left foot. Step right. Gather right-left. Field. Left shuffle. Throw and follow.",
+      "note": "Cues kept from the previous site play 22."
     },
     {
       "id": 29,
-      "name": "Chopper, stay back, quick exchange",
-      "mode": "stay",
-      "cues": "Hop. Step. Gather. Catch off left. Shuffle. Throw and follow.",
-      "note": "Raw wording is \"stood back\". \"Stay back\" follows the supplied call sheet."
+      "name": "Do or Die, Come and Get it 1-Handed",
+      "mode": "charge",
+      "cues": "Prep. Left foot. Step right. Field off right-left-right. Throw and follow.",
+      "note": "Cues kept from the previous site play 23."
     },
     {
       "id": 30,
-      "name": "Lateral backhand on run, set feet",
-      "mode": "runR",
-      "cues": "Prep. Crossover. Field off left. Replace. Throw and follow.",
-      "note": "Replace the feet before the listed throw."
+      "name": "Do or Die, Come and Get it Barehanded",
+      "mode": "vcut",
+      "cues": "Prep. Run straight. V-cut. \"Heel off left.\" Throw off right. Follow.",
+      "note": "Cues kept from the previous site play 24. Confirm \"heel off left\"."
     },
     {
       "id": 31,
-      "name": "Routine, cut distance",
-      "mode": "routine",
-      "cues": "Prep. Left foot. Step right. Gather right-left. Field. Left shuffle. Throw and follow.",
-      "note": "Repeats Play 22 in the supplied list."
+      "name": "Chopper Come and Get it, 1-Handed (Below Knee)",
+      "mode": "charge",
+      "cues": "Prep. Left foot. Step right. Field off left. Step right. Throw and follow.",
+      "note": "Cues kept from the previous site play 25."
     },
     {
       "id": 32,
-      "name": "Do or die, one-hand",
-      "mode": "charge",
-      "cues": "Prep. Left foot. Step right. Field off right-left-right. Throw and follow.",
-      "note": "Repeats Play 23. Exact contact sequence remains uncertain."
+      "name": "Ball Left, Routine Cut the Distance",
+      "mode": "chargeL",
+      "cues": "Prep. Right foot. Step left-right-left. Field. Left shuffle. Throw and follow.",
+      "note": "Cues kept from the previous site play 26."
     },
     {
       "id": 33,
-      "name": "Do or die, barehand",
-      "mode": "vcut",
-      "cues": "Prep. Run straight. V-cut. \"Heel off left.\" Throw off right. Follow.",
-      "note": "Repeats Play 24. \"Heel off left\" remains uncertain."
+      "name": "Drop Step Crossover Backhand, No Step Throw",
+      "mode": "dropR",
+      "cues": "Prep. Drop step. Crossover. Field. Load and throw.",
+      "note": "Cues kept from the previous site play 27. No extra step after the field."
     },
     {
       "id": 34,
-      "name": "Chopper, come get it, one-hand",
-      "mode": "charge",
-      "cues": "Prep. Left foot. Step right. Field off left. Step right. \"Toe-fall.\" Throw and follow.",
-      "note": "Near-duplicate of Play 25. \"Toe-fall\" remains uncertain."
+      "name": "Field Through, Boot Barehand and Throw",
+      "mode": "recovery",
+      "cues": "Hop step. Fielding position. Boot ball. Right-left field. Shuffle. Throw and follow.",
+      "note": "Cues kept from the previous site play 28."
     },
     {
       "id": 35,
-      "name": "Ball left, routine cut distance",
-      "mode": "chargeL",
-      "cues": "Prep. Right foot. Step left-right-left. Field. Left shuffle. Throw and follow.",
-      "note": "Repeats Play 26 in the supplied list."
+      "name": "Chopper Sit Back, Quick Exchange",
+      "mode": "stay",
+      "cues": "Hop. Step. Gather. Catch off left. Shuffle. Throw and follow.",
+      "note": "Cues kept from the previous site play 29. The call is sit back."
     },
     {
       "id": 36,
-      "name": "Drop step crossover backhand, load and throw",
-      "mode": "dropR",
-      "cues": "Prep. Drop step. Crossover. Field. Load. Throw.",
-      "note": "Near-duplicate of Play 27. Title omits \"no-step throw\"."
+      "name": "Lateral Backhand on the Run, Set Feet",
+      "mode": "runR",
+      "cues": "Prep. Crossover. Field off left. Replace. Throw and follow.",
+      "note": "Cues kept from the previous site play 30."
     }
   ],
   "sequences": [
     {
       "id": 1,
+      "title": "Field through and the sweeping backhand",
+      "description": "From a deeper start, work through the ball, drop-step left to get in front, then sweep the backhand and set your feet."
+    },
+    {
+      "id": 2,
       "title": "Routine and lateral positioning",
       "description": "Field a routine hop, then get in front of balls to your left and right."
     },
     {
-      "id": 2,
-      "title": "Adjustment and drop-step routes",
-      "description": "Adjust your distance on the routine ball. Use a drop step and crossover on the forehand and backhand."
-    },
-    {
       "id": 3,
-      "title": "Field-through and shuffle routes",
-      "description": "Work through the routine ball. On either side, drop step and shuffle to the ball."
+      "title": "Adjust and crossover shuffles",
+      "description": "Close ground and adjust on the routine ball. Drop-step and crossover into the forehand and the backhand."
     },
     {
       "id": 4,
-      "title": "Slow roller and crossover routes",
-      "description": "Charge the slow roller. Use a drop step and crossover for the other two plays."
+      "title": "Infield-in field-through and shuffles",
+      "description": "From an infield-in start, field through the ball, then drop-step and shuffle to either side."
     },
     {
       "id": 5,
-      "title": "Charging and moving backhands",
-      "description": "Charge the one-hand play, extend for the backhand, then practice the jump throw."
+      "title": "Slow roller and crossover routes",
+      "description": "Charge the two-handed slow roller to your left. Drop-step to get in front, then crossover into the backhand."
     },
     {
       "id": 6,
-      "title": "Contact feet and foot replacement",
-      "description": "Check which foot you field off and how you set your feet to throw."
+      "title": "Come-and-get-it and the jump throw",
+      "description": "Charge the one-handed routine ball, lengthen the hop on the backhand, then jump-throw on the run."
     },
     {
       "id": 7,
-      "title": "Hinge and charging backhands",
-      "description": "Compare the hinge-and-gather with two charging plays. Play 21 ends at the catch because its throwing cues are unclear."
+      "title": "Chopper, forehand run, and field-with",
+      "description": "Two-hand the chopper above the knee, set your feet on the forehand run, then field with the ball on a deep drop."
     },
     {
       "id": 8,
+      "title": "Hinge, charging backhand, and ball right",
+      "description": "Hinge into the backhand and gather. Charge the softer backhand and throw on the run, then one-hand the ball to your right and set your feet."
+    },
+    {
+      "id": 9,
+      "title": "Boot recovery, ball right, and rake-through",
+      "description": "Charge a routine ball, recover the boot barehanded, and arm-fake. Cut the distance on a ball to your right, then rake through a medium-soft backhand."
+    },
+    {
+      "id": 10,
       "title": "Routine gather and urgent charging",
       "description": "Gather on the routine ball. On the do-or-die plays, charge and field with one hand or barehand."
     },
     {
-      "id": 9,
-      "title": "Chopper, ball-left and no-step backhand",
-      "description": "Charge the chopper, close on the ball to your left, and load straight into the throw on the backhand."
-    },
-    {
-      "id": 10,
-      "title": "Recovery and throwing transitions",
-      "description": "Practice the recovery, quick exchange, and foot replacement before the throw."
-    },
-    {
       "id": 11,
-      "title": "Routine and do-or-die repeat",
-      "description": "This group repeats Sequence 8 in the source list."
+      "title": "Chopper, ball-left, and no-step backhand",
+      "description": "Charge the one-handed chopper below the knee, close on the ball to your left, and throw without an extra step on the backhand."
     },
     {
       "id": 12,
-      "title": "Chopper and no-step repeat",
-      "description": "This group largely repeats Sequence 9, with changes to the wording."
+      "title": "Boot, sit-back, and set feet",
+      "description": "Recover a boot and throw. Sit back on the chopper for a quick exchange, then set your feet on the lateral backhand."
     }
   ],
   "routes": {
@@ -571,6 +571,38 @@
         0,
         11
       ]
+    ],
+    "dropFrontL": [
+      [
+        0,
+        0
+      ],
+      [
+        15,
+        -16
+      ],
+      [
+        37,
+        -9
+      ],
+      [
+        30,
+        13
+      ]
+    ],
+    "rakeR": [
+      [
+        0,
+        0
+      ],
+      [
+        -16,
+        16
+      ],
+      [
+        -30,
+        34
+      ]
     ]
   },
   "paces": {
@@ -646,6 +678,15 @@
     "stay": [
       1,
       1
+    ],
+    "dropFrontL": [
+      2,
+      2,
+      1
+    ],
+    "rakeR": [
+      2,
+      2
     ]
   }
 }
