@@ -3,145 +3,103 @@ let guide,demoClips={},active=1,picks=[];
 try{const saved=JSON.parse(localStorage.getItem('footwork-picks-v2')||'[]');if(Array.isArray(saved))picks=[...new Set(saved.filter(n=>Number.isInteger(n)&&n>=1&&n<=36))].slice(0,3)}catch{}
 const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const shortTitles=['Through & sweep','Routine & lateral','Adjust & crossover','Infield-in shuffles','Slow roller & drop','Charge & jump throw','Chopper & field-with','Hinge & backhand','Boot, right & rake','Routine & do or die','Chopper & no-step','Boot & sit back'];
-const DIAG={s:34};
-const FIELD_WORD={centered:'centered',forehand:'forehand',backhand:'backhand','1-handed':'one hand',barehand:'barehand',boot:'boot'};
-const FINISH_WORD={set:'set feet',replace:'replace feet',stepThrough:'step through',run:'throw on the run',jump:'jump throw',nostep:'no-step throw',fake:'arm fake'};
+const SCALE=14,START=[67,218],HOME_DELTA=[49,-183],HOME_LEN=Math.hypot(HOME_DELTA[0],HOME_DELTA[1]);
+const FWD=[HOME_DELTA[0]/HOME_LEN,HOME_DELTA[1]/HOME_LEN],LEFT=[-FWD[1],FWD[0]];
+const flip=([x,y])=>[x,290-y],FIRST=flip([212,131]);
 const num=n=>Math.round(n*10)/10;
+function arrow(cx,cy,a,n,color){let out='';for(let j=0;j<n;j++){const d=(j-(n-1)/2)*6.3,px=cx+d*Math.cos(a),py=cy+d*Math.sin(a),size=4.3,tx=px+size*.55*Math.cos(a),ty=py+size*.55*Math.sin(a),bx=px-size*.65*Math.cos(a),by=py-size*.65*Math.sin(a),dx=-Math.sin(a)*size*.65,dy=Math.cos(a)*size*.65;out+=`<polygon points="${num(tx)},${num(ty)} ${num(bx+dx)},${num(by+dy)} ${num(bx-dx)},${num(by-dy)}" fill="${color}"/>`}return out}
+function line(a,b,n,color){const len=Math.hypot(b[0]-a[0],b[1]-a[1]);const path=`<path d="M${num(a[0])},${num(a[1])} L${num(b[0])},${num(b[1])}" fill="none" stroke="${color}" stroke-width="1.3"/>`;if(len<13)return path;return path+arrow((a[0]+b[0])/2,(a[1]+b[1])/2,Math.atan2(b[1]-a[1],b[0]-a[0]),n,color)}
 function movementCues(play) {
   return play.cues.split(/\.(?:"(?=\s|$))?\s+/).filter(Boolean)
     .map(cue => cue.replace(/\.$/, '').replace(/^"([^"]+)$/, '$1'));
 }
-function loc(x, y) { return [x * DIAG.s, y * DIAG.s]; }
-function playPoints(play) {
-  const pts = [[0, 0], ...play.path.steps.map(step => loc(step.x, step.y)), loc(play.path.field.x, play.path.field.y)];
-  if (play.path.recover) pts.push(loc(play.path.recover.x, play.path.recover.y));
-  const last = pts[pts.length - 1];
-  pts.push(towardFirst(last, 42));
-  pts.push([loc(play.path.field.x, play.path.field.y)[0], loc(play.path.field.x, play.path.field.y)[1] + 40]);
-  return pts;
+function mapLocal(x, y) {
+  return flip([START[0] + (x * LEFT[0] + y * FWD[0]) * SCALE, START[1] + (x * LEFT[1] + y * FWD[1]) * SCALE]);
 }
-function viewFor(plays) {
-  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-  for (const play of plays) for (const [x, y] of playPoints(play)) {
-    minX = Math.min(minX, x); minY = Math.min(minY, y); maxX = Math.max(maxX, x); maxY = Math.max(maxY, y);
+function infield() {
+  const home=[116,35], first=[212,131], bases=[home,first,[116,227],[20,131]];
+  let svg=`<path d="M${flip(home)} L${flip(first)} L${flip(bases[2])} L${flip(bases[3])} Z" fill="none" stroke="#bcc6b4" stroke-width=".8"/><path d="M${flip([0,151])} L${flip(home)} L${flip([234,153])}" fill="none" stroke="#bcc6b4" stroke-width=".8"/>`;
+  bases.forEach(([x,y])=>{const p=flip([x,y]);svg+=`<path d="M${p[0]},${p[1]-3} l3,3 -3,3 -3,-3 Z" fill="#f7f5ef" stroke="#bcc6b4" stroke-width=".8"/>`});
+  svg+=`<g fill="#6a7462" font-family="Arial,sans-serif" font-size="7.5"><text x="104" y="274">HOME</text><text x="218" y="162">1B</text><text x="110" y="79">2B</text><text x="7" y="175">3B</text></g>`;
+  return svg + `<circle cx="67" cy="72" r="3.4" fill="#22261f"/><text x="59" y="62" fill="#22261f" font-family="Arial,sans-serif" font-size="8" font-weight="bold">SS</text>`;
+}
+function centerline(steps) {
+  const pts = [[0, 0]];
+  for (let i = 0; i < steps.length - 1; i++) pts.push([(steps[i].x + steps[i + 1].x) / 2, (steps[i].y + steps[i + 1].y) / 2]);
+  pts.push([steps.at(-1).x, steps.at(-1).y]);
+  const cleaned = [pts[0]];
+  for (const point of pts.slice(1)) {
+    const prev = cleaned.at(-1);
+    if (Math.hypot(point[0] - prev[0], point[1] - prev[1]) > 0.22) cleaned.push(point);
   }
-  minX -= 58; maxX += 58; minY -= 42; maxY += 36;
-  if (maxX - minX < 210) { const d = (210 - (maxX - minX)) / 2; minX -= d; maxX += d; }
-  if (maxY - minY < 180) { const d = (180 - (maxY - minY)) / 2; minY -= d; maxY += d; }
-  return {x: minX, y: minY, w: maxX - minX, h: maxY - minY};
+  return cleaned.length > 1 ? cleaned : pts;
 }
-function smooth(points) {
-  if (points.length < 2) return '';
-  let d = `M${num(points[0][0])},${num(points[0][1])}`;
-  for (let i = 0; i < points.length - 1; i++) {
-    const p0 = points[Math.max(0, i - 1)], p1 = points[i], p2 = points[i + 1], p3 = points[Math.min(points.length - 1, i + 2)];
-    const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6];
-    const c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
-    d += ` C${num(c1[0])},${num(c1[1])} ${num(c2[0])},${num(c2[1])} ${num(p2[0])},${num(p2[1])}`;
-  }
-  return d;
+function segmentPace(play, index, count) {
+  const finish = play.path.finish, t = count <= 1 ? 1 : index / (count - 1);
+  if (finish === 'run' || finish === 'jump') return t > 0.62 ? 3 : 2;
+  if (play.id === 35 || finish === 'replace') return 1;
+  return t > 0.72 ? 1 : 2;
 }
-function towardFirst(from, len) {
-  const dir = [0.85, 0.53], n = Math.hypot(dir[0], dir[1]);
-  return [from[0] + dir[0] / n * len, from[1] + dir[1] / n * len];
+function bootKink(points, field) {
+  let best = 0, bestD = Infinity;
+  points.forEach((point, i) => {
+    const d = Math.hypot(point[0] - field[0], point[1] - field[1]);
+    if (d < bestD) { bestD = d; best = i; }
+  });
+  if (best >= points.length - 1) return points;
+  const a = points[best], b = points[best + 1];
+  const dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1;
+  const kink = [(a[0] + b[0]) / 2 - dy / len * 0.28, (a[1] + b[1]) / 2 + dx / len * 0.28];
+  const out = points.slice();
+  out.splice(best + 1, 0, kink);
+  return out;
 }
-function arrowHead(from, to, color) {
-  const a = Math.atan2(to[1] - from[1], to[0] - from[0]), s = 5.2;
-  const b = [to[0] - Math.cos(a) * s, to[1] - Math.sin(a) * s];
-  const p = [b[0] + Math.cos(a + 2.4) * s, b[1] + Math.sin(a + 2.4) * s];
-  const q = [b[0] + Math.cos(a - 2.4) * s, b[1] + Math.sin(a - 2.4) * s];
-  return `<polygon points="${num(to[0])},${num(to[1])} ${num(p[0])},${num(p[1])} ${num(q[0])},${num(q[1])}" fill="${color}"/>`;
-}
-function yard(box) {
-  return `<rect x="${num(box.x)}" y="${num(box.y)}" width="${num(box.w)}" height="${num(box.h)}" fill="#e7efe0"/>
-    <text x="${num(box.x + box.w / 2)}" y="${num(box.y + 14)}" text-anchor="middle" fill="#6a7462" font-family="Arial,sans-serif" font-size="9">OUTFIELD</text>
-    <text x="${num(box.x + box.w / 2)}" y="${num(box.y + box.h - 8)}" text-anchor="middle" fill="#6a7462" font-family="Arial,sans-serif" font-size="9">HOME</text>
-    <text x="${num(box.x + box.w - 8)}" y="${num(box.y + 14)}" text-anchor="end" fill="#6a7462" font-family="Arial,sans-serif" font-size="9">2B · LEFT</text>
-    <text x="${num(box.x + 8)}" y="${num(box.y + 14)}" fill="#6a7462" font-family="Arial,sans-serif" font-size="9">RIGHT · 3B</text>
-    <circle cx="0" cy="0" r="3.4" fill="#22261f"/><text x="0" y="-9" text-anchor="middle" fill="#22261f" font-family="Arial,sans-serif" font-size="9" font-weight="700">SS</text>`;
-}
-function fieldMark(play, color) {
-  const path = play.path, f = loc(path.field.x, path.field.y);
-    const word = {centered:'2H', forehand:'FH', backhand:'BH', '1-handed':'1H', barehand:'bare', boot:'boot'}[path.field.type];
-  let svg = `<circle cx="${num(f[0])}" cy="${num(f[1])}" r="8.5" fill="#fff" stroke="${color}" stroke-width="1.8"/>
-    <text x="${num(f[0])}" y="${num(f[1] + 3)}" text-anchor="middle" fill="${color}" font-family="Arial,sans-serif" font-size="8" font-weight="700">F</text>
-    <text x="${num(f[0] - 12)}" y="${num(f[1] - 6)}" text-anchor="end" fill="#5c6754" font-family="Arial,sans-serif" font-size="8" font-weight="700">${word}</text>`;
-  if (path.recover) {
-    const r = loc(path.recover.x, path.recover.y);
-    svg += `<path d="M${num(f[0])},${num(f[1])} L${num(r[0])},${num(r[1])}" fill="none" stroke="#3c6b32" stroke-width="1.1" stroke-dasharray="2 2"/>
-      <circle cx="${num(r[0])}" cy="${num(r[1])}" r="8" fill="#fff" stroke="#3c6b32" stroke-width="1.4"/>
-      <text x="${num(r[0] + 11)}" y="${num(r[1] + 3)}" text-anchor="start" fill="#24501c" font-family="Arial,sans-serif" font-size="8" font-weight="700">bare</text>`;
-  }
-  return svg;
-}
-function ballPath(play) {
-  const f = loc(play.path.field.x, play.path.field.y);
-  const ball = [f[0], f[1] + 34];
-  return `<path d="M${num(ball[0])},${num(ball[1])} L${num(f[0])},${num(f[1])}" fill="none" stroke="#3c6b32" stroke-width="1.3" stroke-dasharray="1.6 2.2"/>
-    <circle cx="${num(ball[0])}" cy="${num(ball[1])}" r="3.6" fill="#f7f4ea" stroke="#3c6b32" stroke-width="1.2"/>`;
-}
-function finishMark(play, color) {
-  const path = play.path, steps = path.steps;
-  const last = path.recover ? loc(path.recover.x, path.recover.y) : loc(steps.at(-1).x, steps.at(-1).y);
-  const prev = loc(steps.at(-2)?.x ?? steps.at(-1).x, steps.at(-2)?.y ?? steps.at(-1).y - 0.4);
-  if (path.finish === 'fake') {
-    const end = towardFirst(last, 28);
-    return `<path d="M${num(last[0])},${num(last[1])} L${num(end[0])},${num(end[1])}" fill="none" stroke="#5c6754" stroke-width="1.4" stroke-dasharray="2 2.2"/>
-      <text x="${num(end[0] + 3)}" y="${num(end[1] + 3)}" fill="#5c6754" font-family="Arial,sans-serif" font-size="8" font-weight="700">FAKE</text>`;
-  }
-  let svg = '', from = last;
-  if (path.finish === 'jump') {
-    const land = towardFirst(last, 20);
-    const cx = (last[0] + land[0]) / 2, cy = Math.min(last[1], land[1]) - 18;
-    svg += `<path d="M${num(last[0])},${num(last[1])} Q${num(cx)},${num(cy)} ${num(land[0])},${num(land[1])}" fill="none" stroke="${color}" stroke-width="1.5"/>
-      <text x="${num(cx)}" y="${num(cy - 3)}" text-anchor="middle" fill="${color}" font-family="Arial,sans-serif" font-size="8">jump</text>`;
-    from = land;
-  } else if (path.finish === 'run') {
+function playRoute(play, color = '#bb471f') {
+  const field = mapLocal(play.path.field.x, play.path.field.y);
+  let local = centerline(play.path.steps);
+  if (play.path.recover) local = bootKink(local, [play.path.field.x, play.path.field.y]);
+  const pts = local.map(([x, y]) => mapLocal(x, y));
+  let svg = '';
+  for (let j = 0; j < pts.length - 1; j++) svg += line(pts[j], pts[j + 1], segmentPace(play, j, pts.length - 1), color);
+  const last = pts.at(-1), prev = pts.at(-2) || last;
+  const finish = play.path.finish;
+  let release = last;
+  if (finish === 'run' || finish === 'jump') {
     const dx = last[0] - prev[0], dy = last[1] - prev[1], len = Math.hypot(dx, dy) || 1;
-    const tip = [last[0] + dx / len * 24, last[1] + dy / len * 24];
-    svg += `<path d="M${num(last[0])},${num(last[1])} L${num(tip[0])},${num(tip[1])}" fill="none" stroke="${color}" stroke-width="1.6"/>${arrowHead(last, tip, color)}`;
-    from = tip;
+    release = [last[0] + dx / len * (finish === 'jump' ? 34 : 26), last[1] + dy / len * (finish === 'jump' ? 34 : 26)];
+    svg += line(last, release, 3, color);
+  } else if (finish === 'nostep') {
+    release = field;
+  } else if (finish === 'fake') {
+    const dx = FIRST[0] - last[0], dy = FIRST[1] - last[1], len = Math.hypot(dx, dy) || 1;
+    const end = [last[0] + dx / len * 22, last[1] + dy / len * 22];
+    svg += `<path d="M${num(last[0])},${num(last[1])} L${num(end[0])},${num(end[1])}" fill="none" stroke="${color}" stroke-width="1.1" stroke-dasharray="3 3" opacity=".45"/>`;
+  } else {
+    const dx = FIRST[0] - last[0], dy = FIRST[1] - last[1], len = Math.hypot(dx, dy) || 1;
+    release = [last[0] + dx / len * 10, last[1] + dy / len * 10];
+    svg += line(last, release, 1, color);
   }
-  const end = towardFirst(from, path.finish === 'nostep' ? 36 : 28);
-  svg += `<path d="M${num(from[0])},${num(from[1])} L${num(end[0])},${num(end[1])}" fill="none" stroke="${color}" stroke-width="1.15" stroke-dasharray="3 2.4"/>`;
-  if (path.finish === 'nostep') svg += `<text x="${num(from[0] - 4)}" y="${num(from[1] - 12)}" text-anchor="end" fill="${color}" font-family="Arial,sans-serif" font-size="8">no step</text>`;
+  if (finish !== 'fake') {
+    const dx = FIRST[0] - release[0], dy = FIRST[1] - release[1], ln = Math.hypot(dx, dy) || 1;
+    svg += `<path d="M${num(release[0] + dx / ln * 5)},${num(release[1] + dy / ln * 5)} L${num(FIRST[0] - dx / ln * 5)},${num(FIRST[1] - dy / ln * 5)}" fill="none" stroke="${color}" stroke-width=".8" stroke-dasharray="3 3"/>`;
+  }
+  svg += `<circle cx="${num(field[0])}" cy="${num(field[1])}" r="4.8" fill="#ecefe6" stroke="${color}" stroke-width="1.7"/><text x="${num(field[0] - 14)}" y="${num(field[1] + 14)}" fill="${color}" font-family="Arial,sans-serif" font-size="9" font-weight="bold">F</text>`;
   return svg;
 }
-function footprints(steps) {
-  return steps.map((step, i) => {
-    const [x, y] = loc(step.x, step.y);
-    const nxt = steps[i + 1] || step, prv = steps[i - 1] || {x: step.x, y: step.y - 0.45};
-    const ang = Math.atan2(nxt.y - prv.y, nxt.x - prv.x) * 180 / Math.PI - 90;
-    const fill = step.foot === 'L' ? '#1d5f98' : '#c2511a';
-    const side = step.foot === 'L' ? 'left' : 'right';
-    return `<g transform="translate(${num(x)},${num(y)})"><title>Step ${i + 1}: ${side} foot, ${step.kind}</title>
-      <g transform="rotate(${num(ang)})"><ellipse cx="0" cy="1" rx="7" ry="9.2" fill="${fill}"/></g>
-      <text x="0" y="3.5" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="9" font-weight="700">${i + 1}</text></g>`;
-  }).join('');
-}
-function playRoute(play, color = '#b34315', detailed = true) {
-  const pts = play.path.steps.map(step => loc(step.x, step.y));
-  if (play.path.recover) pts.push(loc(play.path.recover.x, play.path.recover.y));
-  let svg = `<path d="${smooth(pts)}" fill="none" stroke="${detailed ? '#5d6756' : color}" stroke-width="${detailed ? 1.7 : 2.6}" stroke-linecap="round"/>`;
-  if (detailed) svg += ballPath(play) + footprints(play.path.steps);
-  svg += fieldMark(play, color) + finishMark(play, color);
-  return svg;
-}
+const DIAGRAM_BOX = '-36 0 292 292';
 function diagram(play) {
-  const field = FIELD_WORD[play.path.field.type], finish = FINISH_WORD[play.path.finish], box = viewFor([play]);
-  return `<svg viewBox="${num(box.x)} ${num(box.y)} ${num(box.w)} ${num(box.h)}" role="img" aria-label="${esc(play.name)}. Numbered left and right footprints. Field ${field}. ${finish}.">${yard(box)}${playRoute(play)}</svg>`;
+  return `<svg viewBox="${DIAGRAM_BOX}" role="img" aria-label="${esc(play.name)}: shortstop to first base. ${esc(play.cues)}">${infield()}${playRoute(play)}</svg>`;
 }
 function sequenceGraphic(plays) {
   const colors = ['#a63c17', '#145d94', '#546720'];
-  const box = viewFor(plays);
-  const routes = plays.map((play, i) => `<g data-route-line="${play.id}">${playRoute(play, colors[i], false)}</g>`).join('');
+  const routes = plays.map((play, i) => `<g data-route-line="${play.id}">${playRoute(play, colors[i])}</g>`).join('');
   const legend = plays.map((play, i) =>
     `<label><input type="checkbox" data-route="${play.id}" checked><span class="route-swatch" style="background:${colors[i]}" aria-hidden="true"></span>Play ${play.id} · ${esc(play.name)}</label>`).join('');
-  return `<svg viewBox="${num(box.x)} ${num(box.y)} ${num(box.w)} ${num(box.h)}" role="img" aria-label="Three routes overlaid on one infield">${yard(box)}${routes}</svg>
+  return `<svg viewBox="${DIAGRAM_BOX}" role="img" aria-label="Three routes overlaid on one infield">${infield()}${routes}</svg>
     <div class="route-legend" role="group" aria-label="Show or hide each route">${legend}</div>`;
 }
 function playBody(p) {
-  return `<div class="play-body"><div class="diagram-examples"><figure class="field-diagram"><div class="diagram-stage">${diagram(p)}</div><figcaption>L / R = feet in order &nbsp; · &nbsp; F = field &nbsp; · &nbsp; Dotted = ball &nbsp; · &nbsp; Dashed = throw</figcaption></figure>${exampleButtons(p)}</div><div><div class="cues-title">MOVEMENT CUES</div><ol class="cue-list">${movementCues(p).map(s=>`<li>${esc(s.replace(/\.$/,''))}</li>`).join('')}</ol></div></div>`;
+  return `<div class="play-body"><div class="diagram-examples"><figure class="field-diagram"><div class="diagram-stage">${diagram(p)}</div><figcaption>SS = start &nbsp; · &nbsp; F = field &nbsp; · &nbsp; Dashed line = throw</figcaption></figure>${exampleButtons(p)}</div><div><div class="cues-title">MOVEMENT CUES</div><ol class="cue-list">${movementCues(p).map(s=>`<li>${esc(s.replace(/\.$/,''))}</li>`).join('')}</ol></div></div>`;
 }
 function render(){closeExample(false);const seq=guide.sequences[active-1];
 const plays=guide.plays.slice((active-1)*3,active*3);$('#sequence-heading').innerHTML=`<div class="sequence-kicker">SEQUENCE ${String(active).padStart(2,'0')} <span>PLAYS ${active*3-2}–${active*3}</span></div><h2>${esc(seq.title)}</h2><p>${esc(seq.description)}</p>`;

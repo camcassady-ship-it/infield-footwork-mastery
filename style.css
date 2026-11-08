@@ -65,7 +65,3 @@
 .example-message:empty{display:none}
 .example-overlay button:focus-visible,.example-overlay video:focus-visible{outline:3px solid #ff9257;outline-offset:-3px}
 @media(max-width:760px){.diagram-examples .field-diagram{margin-bottom:0}.demo-soon,.example-buttons{margin-bottom:24px}.example-footer{padding:7px 8px}.example-footer p{font-size:10px}.example-tools button{font-size:10px}}
-.foot-key{display:inline-block;width:11px;height:15px;border-radius:6px 6px 4px 4px}
-.foot-key.left{background:#1d5f98}
-.foot-key.right{background:#c2511a}
-.fake-key{letter-spacing:.4px}
