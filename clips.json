@@ -1,263 +1,200 @@
 {
-  "1": [
-    {
-      "file": "field-through-if-back-1.mp4",
-      "poster": "field-through-if-back-1.jpg",
-      "player": "Anthony Volpe",
-      "caption": "Work through the hard ground ball and keep momentum toward the throw."
-    },
-    {
-      "file": "field-through-if-back-2.mp4",
-      "poster": "field-through-if-back-2.jpg",
-      "player": "Francisco Lindor",
-      "caption": "Work through the hard ground ball and keep momentum toward the throw."
-    }
-  ],
-  "2": [],
-  "3": [],
   "4": [
     {
-      "file": "routine-1.mp4",
-      "poster": "routine-1.jpg",
-      "player": "Manny Machado",
-      "caption": "Get behind the ball and gather under control."
-    },
-    {
-      "file": "routine-2.mp4",
-      "poster": "routine-2.jpg",
-      "player": "Manny Machado",
-      "caption": "Get behind the ball and gather under control."
+      "file": "routine-trosky.mp4",
+      "poster": "routine-trosky.jpg"
     }
   ],
   "5": [
     {
-      "file": "lateral-left-get-in-front-1.mp4",
-      "poster": "lateral-left-get-in-front-1.jpg",
-      "player": "Andrés Giménez",
-      "caption": "Move left and get your body in front of the ball."
-    },
-    {
-      "file": "lateral-left-get-in-front-2.mp4",
-      "poster": "lateral-left-get-in-front-2.jpg",
-      "player": "Manny Machado",
-      "caption": "Move left and get your body in front of the ball."
+      "file": "lateral-left-get-in-front-trosky.mp4",
+      "poster": "lateral-left-get-in-front-trosky.jpg"
     }
   ],
   "6": [
     {
-      "file": "lateral-right-get-in-front-1.mp4",
-      "poster": "lateral-right-get-in-front-1.jpg",
-      "player": "Matt Olson",
-      "caption": "Move right and get behind the ball before the exchange."
+      "file": "lateral-right-get-in-front-trosky.mp4",
+      "poster": "lateral-right-get-in-front-trosky.jpg"
     }
   ],
-  "7": [],
-  "8": [],
-  "9": [],
+  "7": [
+    {
+      "file": "routine-cut-the-distance-adjust-trosky.mp4",
+      "poster": "routine-cut-the-distance-adjust-trosky.jpg"
+    }
+  ],
+  "8": [
+    {
+      "file": "drop-step-crossover-shuffle-forehand-trosky.mp4",
+      "poster": "drop-step-crossover-shuffle-forehand-trosky.jpg"
+    }
+  ],
+  "9": [
+    {
+      "file": "drop-step-crossover-shuffle-backhand-trosky.mp4",
+      "poster": "drop-step-crossover-shuffle-backhand-trosky.jpg"
+    }
+  ],
   "10": [
     {
-      "file": "field-through-if-in-1.mp4",
-      "poster": "field-through-if-in-1.jpg",
-      "player": "Taylor Walls",
-      "caption": "Field through the ball and make the quick throw home."
+      "file": "field-through-if-in-trosky.mp4",
+      "poster": "field-through-if-in-trosky.jpg"
     }
   ],
-  "11": [],
-  "12": [],
-  "13": [],
-  "14": [],
+  "11": [
+    {
+      "file": "drop-step-left-shuffle-forehand-if-in-trosky.mp4",
+      "poster": "drop-step-left-shuffle-forehand-if-in-trosky.jpg"
+    }
+  ],
+  "12": [
+    {
+      "file": "drop-step-right-shuffle-backhand-if-in-trosky.mp4",
+      "poster": "drop-step-right-shuffle-backhand-if-in-trosky.jpg"
+    }
+  ],
+  "13": [
+    {
+      "file": "2-handed-slow-roller-left-trosky.mp4",
+      "poster": "2-handed-slow-roller-left-trosky.jpg"
+    }
+  ],
+  "14": [
+    {
+      "file": "drop-step-right-get-in-front-trosky.mp4",
+      "poster": "drop-step-right-get-in-front-trosky.jpg"
+    }
+  ],
   "15": [
     {
-      "file": "drop-step-crossover-backhand-1.mp4",
-      "poster": "drop-step-crossover-backhand-1.jpg",
-      "player": "Gunnar Henderson",
-      "caption": "Open for depth and cross over to reach the backhand."
-    },
-    {
-      "file": "drop-step-crossover-backhand-2.mp4",
-      "poster": "drop-step-crossover-backhand-2.jpg",
-      "player": "Nico Hoerner",
-      "caption": "Open for depth and cross over to reach the backhand."
+      "file": "drop-step-crossover-backhand-trosky.mp4",
+      "poster": "drop-step-crossover-backhand-trosky.jpg"
     }
   ],
   "16": [
     {
-      "file": "routine-come-and-get-it-1-handed-1.mp4",
-      "poster": "routine-come-and-get-it-1-handed-1.jpg",
-      "player": "Joey Ortiz",
-      "caption": "Come forward and field with the glove hand."
+      "file": "routine-come-and-get-it-1-handed-trosky.mp4",
+      "poster": "routine-come-and-get-it-1-handed-trosky.jpg"
     }
   ],
   "17": [
     {
-      "file": "drop-step-backhand-lengthen-hop-1.mp4",
-      "poster": "drop-step-backhand-lengthen-hop-1.jpg",
-      "player": "Manny Machado",
-      "caption": "Gain depth on the backhand side to create a better hop."
+      "file": "drop-step-backhand-lengthen-hop-trosky.mp4",
+      "poster": "drop-step-backhand-lengthen-hop-trosky.jpg"
     }
   ],
   "18": [
     {
-      "file": "lateral-backhand-on-the-run-1.mp4",
-      "poster": "lateral-backhand-on-the-run-1.jpg",
-      "player": "Masyn Winn",
-      "caption": "Keep moving laterally through the backhand and release."
-    },
-    {
-      "file": "lateral-backhand-on-the-run-2.mp4",
-      "poster": "lateral-backhand-on-the-run-2.jpg",
-      "player": "Matt Olson",
-      "caption": "Keep moving laterally through the backhand and release."
+      "file": "lateral-backhand-on-the-run-jump-throw-trosky.mp4",
+      "poster": "lateral-backhand-on-the-run-jump-throw-trosky.jpg"
     }
   ],
   "19": [
     {
-      "file": "chopper-come-and-get-it-2-handed-1.mp4",
-      "poster": "chopper-come-and-get-it-2-handed-1.jpg",
-      "player": "Manny Machado",
-      "caption": "Attack the chopper and gather with two hands."
+      "file": "chopper-come-and-get-it-2-handed-above-knee-trosky.mp4",
+      "poster": "chopper-come-and-get-it-2-handed-above-knee-trosky.jpg"
     }
   ],
   "20": [
     {
-      "file": "lateral-forehand-on-the-run-1.mp4",
-      "poster": "lateral-forehand-on-the-run-1.jpg",
-      "player": "Andrés Giménez",
-      "caption": "Keep running through the forehand pickup."
-    },
-    {
-      "file": "lateral-forehand-on-the-run-2.mp4",
-      "poster": "lateral-forehand-on-the-run-2.jpg",
-      "player": "Andrés Giménez",
-      "caption": "Keep running through the forehand pickup."
+      "file": "lateral-forehand-on-the-run-set-feet-trosky.mp4",
+      "poster": "lateral-forehand-on-the-run-set-feet-trosky.jpg"
     }
   ],
-  "21": [],
+  "21": [
+    {
+      "file": "field-with-trosky.mp4",
+      "poster": "field-with-trosky.jpg"
+    }
+  ],
   "22": [
     {
-      "file": "hinge-step-back-backhand-gather-1.mp4",
-      "poster": "hinge-step-back-backhand-gather-1.jpg",
-      "player": "Angel Genao",
-      "caption": "Hinge back, field the backhand, then gather to throw."
-    },
-    {
-      "file": "hinge-step-back-backhand-gather-2.mp4",
-      "poster": "hinge-step-back-backhand-gather-2.jpg",
-      "player": "Corey Seager",
-      "caption": "Hinge back, field the backhand, then gather to throw."
+      "file": "hinge-step-back-backhand-gather-trosky.mp4",
+      "poster": "hinge-step-back-backhand-gather-trosky.jpg"
     }
   ],
   "23": [
     {
-      "file": "backhand-come-and-get-it-1.mp4",
-      "poster": "backhand-come-and-get-it-1.jpg",
-      "player": "Mauricio Dubón",
-      "caption": "Charge the soft ball and pick it on the backhand."
-    },
-    {
-      "file": "backhand-come-and-get-it-2.mp4",
-      "poster": "backhand-come-and-get-it-2.jpg",
-      "player": "Ozzie Albies",
-      "caption": "Charge the soft ball and pick it on the backhand."
+      "file": "backhand-come-and-get-it-throw-on-the-run-trosky.mp4",
+      "poster": "backhand-come-and-get-it-throw-on-the-run-trosky.jpg"
     }
   ],
-  "24": [],
-  "25": [],
+  "24": [
+    {
+      "file": "ball-right-come-and-get-it-1-handed-set-feet-trosky.mp4",
+      "poster": "ball-right-come-and-get-it-1-handed-set-feet-trosky.jpg"
+    }
+  ],
+  "25": [
+    {
+      "file": "routine-cut-the-distance-boot-barehand-arm-fake-trosky.mp4",
+      "poster": "routine-cut-the-distance-boot-barehand-arm-fake-trosky.jpg"
+    }
+  ],
   "26": [
     {
-      "file": "ball-right-routine-cut-the-distance-1.mp4",
-      "poster": "ball-right-routine-cut-the-distance-1.jpg",
-      "player": "Matt Olson",
-      "caption": "Close forward and right before fielding."
+      "file": "ball-right-routine-cut-the-distance-trosky.mp4",
+      "poster": "ball-right-routine-cut-the-distance-trosky.jpg"
     }
   ],
   "27": [
     {
-      "file": "rake-through-backhand-1.mp4",
-      "poster": "rake-through-backhand-1.jpg",
-      "player": "Romy Gonzalez",
-      "caption": "Move the glove through the backhand pickup."
+      "file": "rake-through-backhand-trosky.mp4",
+      "poster": "rake-through-backhand-trosky.jpg"
     }
   ],
   "28": [
     {
-      "file": "routine-cut-the-distance-1.mp4",
-      "poster": "routine-cut-the-distance-1.jpg",
-      "player": "Colson Montgomery",
-      "caption": "Close the distance before you field and exchange."
-    },
-    {
-      "file": "routine-cut-the-distance-2.mp4",
-      "poster": "routine-cut-the-distance-2.jpg",
-      "player": "Taylor Walls",
-      "caption": "Close the distance before you field and exchange."
+      "file": "routine-cut-the-distance-trosky.mp4",
+      "poster": "routine-cut-the-distance-trosky.jpg"
     }
   ],
   "29": [
     {
-      "file": "do-or-die-come-and-get-it-1-handed-1.mp4",
-      "poster": "do-or-die-come-and-get-it-1-handed-1.jpg",
-      "player": "Joey Ortiz",
-      "caption": "Charge hard and make the one-handed pickup."
-    },
-    {
-      "file": "do-or-die-come-and-get-it-1-handed-2.mp4",
-      "poster": "do-or-die-come-and-get-it-1-handed-2.jpg",
-      "player": "Manny Machado",
-      "caption": "Charge hard and make the one-handed pickup."
+      "file": "do-or-die-come-and-get-it-1-handed-trosky.mp4",
+      "poster": "do-or-die-come-and-get-it-1-handed-trosky.jpg"
     }
   ],
   "30": [
     {
-      "file": "do-or-die-come-and-get-it-barehanded-1.mp4",
-      "poster": "do-or-die-come-and-get-it-barehanded-1.jpg",
-      "player": "Bobby Witt Jr.",
-      "caption": "Charge, barehand, and get rid of the ball quickly."
-    },
-    {
-      "file": "do-or-die-come-and-get-it-barehanded-2.mp4",
-      "poster": "do-or-die-come-and-get-it-barehanded-2.jpg",
-      "player": "Mookie Betts",
-      "caption": "Charge, barehand, and get rid of the ball quickly."
+      "file": "do-or-die-come-and-get-it-barehanded-trosky.mp4",
+      "poster": "do-or-die-come-and-get-it-barehanded-trosky.jpg"
     }
   ],
-  "31": [],
+  "31": [
+    {
+      "file": "chopper-come-and-get-it-1-handed-below-knee-trosky.mp4",
+      "poster": "chopper-come-and-get-it-1-handed-below-knee-trosky.jpg"
+    }
+  ],
   "32": [
     {
-      "file": "ball-left-cut-the-distance-1.mp4",
-      "poster": "ball-left-cut-the-distance-1.jpg",
-      "player": "Brayan Rocchio",
-      "caption": "Close forward and left to shorten the play."
+      "file": "ball-left-routine-cut-the-distance-trosky.mp4",
+      "poster": "ball-left-routine-cut-the-distance-trosky.jpg"
     }
   ],
   "33": [
     {
-      "file": "drop-step-crossover-backhand-no-step-throw-1.mp4",
-      "poster": "drop-step-crossover-backhand-no-step-throw-1.jpg",
-      "player": "Masyn Winn",
-      "caption": "Open, cross over, backhand, and throw without another setup step."
-    },
-    {
-      "file": "drop-step-crossover-backhand-no-step-throw-2.mp4",
-      "poster": "drop-step-crossover-backhand-no-step-throw-2.jpg",
-      "player": "Manny Machado",
-      "caption": "Open, cross over, backhand, and throw without another setup step."
+      "file": "drop-step-crossover-backhand-no-step-throw-trosky.mp4",
+      "poster": "drop-step-crossover-backhand-no-step-throw-trosky.jpg"
     }
   ],
   "34": [
     {
-      "file": "field-through-boot-barehand-and-throw-1.mp4",
-      "poster": "field-through-boot-barehand-and-throw-1.jpg",
-      "player": "Elly De La Cruz",
-      "caption": "Stay with the boot and recover the ball barehanded."
-    },
-    {
-      "file": "field-through-boot-barehand-and-throw-2.mp4",
-      "poster": "field-through-boot-barehand-and-throw-2.jpg",
-      "player": "Elly De La Cruz",
-      "caption": "Stay with the boot and recover the ball barehanded."
+      "file": "field-through-boot-barehand-and-throw-trosky.mp4",
+      "poster": "field-through-boot-barehand-and-throw-trosky.jpg"
     }
   ],
-  "35": [],
-  "36": []
+  "35": [
+    {
+      "file": "chopper-sit-back-quick-exchange-trosky.mp4",
+      "poster": "chopper-sit-back-quick-exchange-trosky.jpg"
+    }
+  ],
+  "36": [
+    {
+      "file": "lateral-backhand-on-the-run-set-feet-trosky.mp4",
+      "poster": "lateral-backhand-on-the-run-set-feet-trosky.jpg"
+    }
+  ]
 }
