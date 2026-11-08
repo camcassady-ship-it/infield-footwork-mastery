@@ -1,0 +1,651 @@
+{
+  "plays": [
+    {
+      "id": 1,
+      "name": "Routine hop",
+      "mode": "routine",
+      "cues": "Gather right. Field. Step through. Shuffle. Throw and follow.",
+      "note": "\"Step prep / step step / right creep / left field\" needs confirmation."
+    },
+    {
+      "id": 2,
+      "name": "Lateral left, get in front",
+      "mode": "left",
+      "cues": "Prep. Crossover. Shuffle into position. Field. Shuffle. Throw and follow.",
+      "note": "Get in front before the fielding action."
+    },
+    {
+      "id": 3,
+      "name": "Lateral right, get in front",
+      "mode": "right",
+      "cues": "Prep. Crossover. Shuffle. Field. Step through. Shuffle. Throw and follow.",
+      "note": "The throwing transition includes a step through."
+    },
+    {
+      "id": 4,
+      "name": "Routine, cut distance",
+      "mode": "routine",
+      "cues": "Adjust. Prep. Left foot, step right. Gather. Step back. Fielding position. Shuffle and throw.",
+      "note": "The transcript includes a step back during the gather."
+    },
+    {
+      "id": 5,
+      "name": "Drop step forehand",
+      "mode": "dropL",
+      "cues": "Prep. Drop step. Crossover. Shuffle. Forehand. Step through. Shuffle and throw.",
+      "note": "The transcript repeats the drop-step wording before the full cue chain."
+    },
+    {
+      "id": 6,
+      "name": "Drop step backhand",
+      "mode": "dropR",
+      "cues": "Prep. Drop step. Crossover. Shuffle. Backhand field. Shuffle and throw.",
+      "note": "Forehand and backhand share the drop-step approach."
+    },
+    {
+      "id": 7,
+      "name": "Field through",
+      "mode": "through",
+      "cues": "Hop step. Fielding position. Lean left. Shuffle. Throw and follow.",
+      "note": "Forward path is an interpretation of the play name."
+    },
+    {
+      "id": 8,
+      "name": "Drop step left forehand",
+      "mode": "dropL",
+      "cues": "Prep. Drop step left. Shuffle. Forehand. Shuffle. Throw and follow.",
+      "note": "Repeated \"shuffle\" cues remain in the source."
+    },
+    {
+      "id": 9,
+      "name": "Drop step right backhand",
+      "mode": "dropR",
+      "cues": "Prep. Drop step right. Shuffle. Backhand. Shuffle. Throw and follow.",
+      "note": "Same approach family as Play 8, opposite side."
+    },
+    {
+      "id": 10,
+      "name": "One-hand slow roller left",
+      "mode": "chargeL",
+      "cues": "Prep. Right foot. Step through. Gather right-left. Field. Right-left. Throw and follow.",
+      "note": "Leftward charging path follows the play name."
+    },
+    {
+      "id": 11,
+      "name": "Drop step crossover backhand",
+      "mode": "dropR",
+      "cues": "Prep. Drop step. Crossover. Backhand field. Shuffle. Throw and follow.",
+      "note": "Crossover distinguishes this call from a shuffle-only approach."
+    },
+    {
+      "id": 12,
+      "name": "Drop step right, get in front",
+      "mode": "dropFront",
+      "cues": "Prep. Drop step right. Crossover. Get in front. Field. Step through. Shuffle and throw.",
+      "note": "The bent route illustrates getting in front, not an exact angle."
+    },
+    {
+      "id": 13,
+      "name": "Routine, come get it, one-hand",
+      "mode": "charge",
+      "cues": "Prep. Step right. Creep. Shuffle. Reach. Left shuffle. Throw and follow.",
+      "note": "The meaning of \"left shuffle\" needs confirmation."
+    },
+    {
+      "id": 14,
+      "name": "Drop step backhand, lengthen",
+      "mode": "deepR",
+      "cues": "Prep. Deep drop. Knee drop. Replace. Throw and fall.",
+      "note": "Confirm \"knee drop\" and \"throw and fall\" before teaching exact mechanics."
+    },
+    {
+      "id": 15,
+      "name": "Lateral backhand on the run",
+      "mode": "runR",
+      "cues": "Prep. Crossover. Run. Field off right step. Left jump. Throw.",
+      "note": "\"Jump throw\" appears before the full cue chain."
+    },
+    {
+      "id": 16,
+      "name": "One-hand chopper",
+      "mode": "charge",
+      "cues": "Prep. Left foot. Step right. Catch off left. Throw off right. Follow.",
+      "note": "Contact-foot cues connect the catch to the throw."
+    },
+    {
+      "id": 17,
+      "name": "Lateral forehand on the run",
+      "mode": "runL",
+      "cues": "Prep. Crossover. Run. Field off left. Left shuffle. Throw and follow.",
+      "note": "\"Set feet\" appears in the play introduction."
+    },
+    {
+      "id": 18,
+      "name": "Hop field, deep drop, replace feet",
+      "mode": "deep",
+      "cues": "Prep. Deep drop. Replace feet. Left shuffle. Throw and follow.",
+      "note": "No left/right drop direction appears in the supplied cues."
+    },
+    {
+      "id": 19,
+      "name": "Hinge step right backhand",
+      "mode": "hinge",
+      "cues": "Prep. Hinge step right. Backhand field. Gather. Shuffle. Throw and follow.",
+      "note": "Hinge path is schematic. The source gives no hinge angle."
+    },
+    {
+      "id": 20,
+      "name": "Backhand, come get it, throw on run",
+      "mode": "chargeR",
+      "cues": "Prep. Left foot step through. Field off right. Left. Right. Throw.",
+      "note": "Carry the listed foot sequence into the throwing transition."
+    },
+    {
+      "id": 21,
+      "name": "Ball right, one-hand",
+      "mode": "chargeR",
+      "cues": "Set feet. Prep. Left foot. Step right. Field off right.",
+      "note": "The reliable cue chain stops at fielding. Throwing footwork is unresolved."
+    },
+    {
+      "id": 22,
+      "name": "Routine, cut distance",
+      "mode": "routine",
+      "cues": "Prep. Left foot. Step right. Gather right-left. Field. Left shuffle. Throw and follow.",
+      "note": "Controlled gather and shuffle in the supplied call."
+    },
+    {
+      "id": 23,
+      "name": "Do or die, one-hand",
+      "mode": "charge",
+      "cues": "Prep. Left foot. Step right. Field off right-left-right. Throw and follow.",
+      "note": "\"Field off right-left-right\" needs confirmation as a precise contact sequence."
+    },
+    {
+      "id": 24,
+      "name": "Do or die, barehand",
+      "mode": "vcut",
+      "cues": "Prep. Run straight. V-cut. \"Heel off left.\" Throw off right. Follow.",
+      "note": "Confirm \"heel off left\". The V-cut angle is illustrative."
+    },
+    {
+      "id": 25,
+      "name": "Chopper, come get it, one-hand",
+      "mode": "charge",
+      "cues": "Prep. Left foot. Step right. Field off left. Step right. Throw and follow.",
+      "note": "Raw transcript ends this action with \"toefall\", an uncertain term."
+    },
+    {
+      "id": 26,
+      "name": "Ball left, routine cut distance",
+      "mode": "chargeL",
+      "cues": "Prep. Right foot. Step left-right-left. Field. Left shuffle. Throw and follow.",
+      "note": "The ball-left call adds a directional approach to the routine gather."
+    },
+    {
+      "id": 27,
+      "name": "Drop step crossover backhand, no-step throw",
+      "mode": "dropR",
+      "cues": "Prep. Drop step. Crossover. Field. Load and throw.",
+      "note": "\"No-step throw\" appears in the title. Do not add an extra shuffle."
+    },
+    {
+      "id": 28,
+      "name": "Field through boot, barehand",
+      "mode": "recovery",
+      "cues": "Hop step. Fielding position. Boot ball. Right-left field. Shuffle. Throw and follow.",
+      "note": "Confirm \"boot\" and the intended recovery drill. Path shows one possible interpretation."
+    },
+    {
+      "id": 29,
+      "name": "Chopper, stay back, quick exchange",
+      "mode": "stay",
+      "cues": "Hop. Step. Gather. Catch off left. Shuffle. Throw and follow.",
+      "note": "Raw wording is \"stood back\". \"Stay back\" follows the supplied call sheet."
+    },
+    {
+      "id": 30,
+      "name": "Lateral backhand on run, set feet",
+      "mode": "runR",
+      "cues": "Prep. Crossover. Field off left. Replace. Throw and follow.",
+      "note": "Replace the feet before the listed throw."
+    },
+    {
+      "id": 31,
+      "name": "Routine, cut distance",
+      "mode": "routine",
+      "cues": "Prep. Left foot. Step right. Gather right-left. Field. Left shuffle. Throw and follow.",
+      "note": "Repeats Play 22 in the supplied list."
+    },
+    {
+      "id": 32,
+      "name": "Do or die, one-hand",
+      "mode": "charge",
+      "cues": "Prep. Left foot. Step right. Field off right-left-right. Throw and follow.",
+      "note": "Repeats Play 23. Exact contact sequence remains uncertain."
+    },
+    {
+      "id": 33,
+      "name": "Do or die, barehand",
+      "mode": "vcut",
+      "cues": "Prep. Run straight. V-cut. \"Heel off left.\" Throw off right. Follow.",
+      "note": "Repeats Play 24. \"Heel off left\" remains uncertain."
+    },
+    {
+      "id": 34,
+      "name": "Chopper, come get it, one-hand",
+      "mode": "charge",
+      "cues": "Prep. Left foot. Step right. Field off left. Step right. \"Toe-fall.\" Throw and follow.",
+      "note": "Near-duplicate of Play 25. \"Toe-fall\" remains uncertain."
+    },
+    {
+      "id": 35,
+      "name": "Ball left, routine cut distance",
+      "mode": "chargeL",
+      "cues": "Prep. Right foot. Step left-right-left. Field. Left shuffle. Throw and follow.",
+      "note": "Repeats Play 26 in the supplied list."
+    },
+    {
+      "id": 36,
+      "name": "Drop step crossover backhand, load and throw",
+      "mode": "dropR",
+      "cues": "Prep. Drop step. Crossover. Field. Load. Throw.",
+      "note": "Near-duplicate of Play 27. Title omits \"no-step throw\"."
+    }
+  ],
+  "sequences": [
+    {
+      "id": 1,
+      "title": "Routine and lateral positioning",
+      "description": "Field a routine hop, then get in front of balls to your left and right."
+    },
+    {
+      "id": 2,
+      "title": "Adjustment and drop-step routes",
+      "description": "Adjust your distance on the routine ball. Use a drop step and crossover on the forehand and backhand."
+    },
+    {
+      "id": 3,
+      "title": "Field-through and shuffle routes",
+      "description": "Work through the routine ball. On either side, drop step and shuffle to the ball."
+    },
+    {
+      "id": 4,
+      "title": "Slow roller and crossover routes",
+      "description": "Charge the slow roller. Use a drop step and crossover for the other two plays."
+    },
+    {
+      "id": 5,
+      "title": "Charging and moving backhands",
+      "description": "Charge the one-hand play, extend for the backhand, then practice the jump throw."
+    },
+    {
+      "id": 6,
+      "title": "Contact feet and foot replacement",
+      "description": "Check which foot you field off and how you set your feet to throw."
+    },
+    {
+      "id": 7,
+      "title": "Hinge and charging backhands",
+      "description": "Compare the hinge-and-gather with two charging plays. Play 21 ends at the catch because its throwing cues are unclear."
+    },
+    {
+      "id": 8,
+      "title": "Routine gather and urgent charging",
+      "description": "Gather on the routine ball. On the do-or-die plays, charge and field with one hand or barehand."
+    },
+    {
+      "id": 9,
+      "title": "Chopper, ball-left and no-step backhand",
+      "description": "Charge the chopper, close on the ball to your left, and load straight into the throw on the backhand."
+    },
+    {
+      "id": 10,
+      "title": "Recovery and throwing transitions",
+      "description": "Practice the recovery, quick exchange, and foot replacement before the throw."
+    },
+    {
+      "id": 11,
+      "title": "Routine and do-or-die repeat",
+      "description": "This group repeats Sequence 8 in the source list."
+    },
+    {
+      "id": 12,
+      "title": "Chopper and no-step repeat",
+      "description": "This group largely repeats Sequence 9, with changes to the wording."
+    }
+  ],
+  "routes": {
+    "routine": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        14
+      ],
+      [
+        0,
+        28
+      ]
+    ],
+    "through": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        16
+      ],
+      [
+        0,
+        35
+      ]
+    ],
+    "left": [
+      [
+        0,
+        0
+      ],
+      [
+        23,
+        8
+      ],
+      [
+        37,
+        20
+      ]
+    ],
+    "right": [
+      [
+        0,
+        0
+      ],
+      [
+        -23,
+        8
+      ],
+      [
+        -37,
+        20
+      ]
+    ],
+    "dropL": [
+      [
+        0,
+        0
+      ],
+      [
+        14,
+        -14
+      ],
+      [
+        34,
+        -23
+      ]
+    ],
+    "dropR": [
+      [
+        0,
+        0
+      ],
+      [
+        -14,
+        -14
+      ],
+      [
+        -34,
+        -23
+      ]
+    ],
+    "dropFront": [
+      [
+        0,
+        0
+      ],
+      [
+        -15,
+        -16
+      ],
+      [
+        -37,
+        -9
+      ],
+      [
+        -30,
+        13
+      ]
+    ],
+    "deepR": [
+      [
+        0,
+        0
+      ],
+      [
+        -14,
+        -21
+      ],
+      [
+        -33,
+        -35
+      ]
+    ],
+    "deep": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        -19
+      ],
+      [
+        0,
+        -36
+      ]
+    ],
+    "charge": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        35
+      ],
+      [
+        0,
+        70
+      ]
+    ],
+    "chargeL": [
+      [
+        0,
+        0
+      ],
+      [
+        15,
+        32
+      ],
+      [
+        26,
+        65
+      ]
+    ],
+    "chargeR": [
+      [
+        0,
+        0
+      ],
+      [
+        -15,
+        32
+      ],
+      [
+        -26,
+        65
+      ]
+    ],
+    "runR": [
+      [
+        0,
+        0
+      ],
+      [
+        -22,
+        6
+      ],
+      [
+        -43,
+        17
+      ]
+    ],
+    "runL": [
+      [
+        0,
+        0
+      ],
+      [
+        22,
+        6
+      ],
+      [
+        43,
+        17
+      ]
+    ],
+    "hinge": [
+      [
+        0,
+        0
+      ],
+      [
+        -10,
+        -8
+      ],
+      [
+        -26,
+        1
+      ]
+    ],
+    "vcut": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        43
+      ],
+      [
+        20,
+        71
+      ]
+    ],
+    "recovery": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        25
+      ],
+      [
+        0,
+        51
+      ]
+    ],
+    "stay": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        0,
+        11
+      ]
+    ]
+  },
+  "paces": {
+    "routine": [
+      1,
+      1
+    ],
+    "through": [
+      1,
+      2
+    ],
+    "left": [
+      2,
+      1
+    ],
+    "right": [
+      2,
+      1
+    ],
+    "dropL": [
+      2,
+      1
+    ],
+    "dropR": [
+      2,
+      1
+    ],
+    "dropFront": [
+      2,
+      2,
+      1
+    ],
+    "deepR": [
+      2,
+      1
+    ],
+    "deep": [
+      1,
+      1
+    ],
+    "charge": [
+      2,
+      3
+    ],
+    "chargeL": [
+      2,
+      3
+    ],
+    "chargeR": [
+      2,
+      3
+    ],
+    "runR": [
+      3,
+      3
+    ],
+    "runL": [
+      3,
+      3
+    ],
+    "hinge": [
+      1,
+      1
+    ],
+    "vcut": [
+      3,
+      3
+    ],
+    "recovery": [
+      1,
+      3
+    ],
+    "stay": [
+      1,
+      1
+    ]
+  }
+}
