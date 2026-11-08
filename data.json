@@ -3,254 +3,1726 @@
     {
       "id": 1,
       "name": "Field Through (IF back)",
-      "mode": "through",
       "cues": "Hop step. Fielding position. Field through. Shuffle. Throw and follow.",
-      "note": "No coach audio. Brief field-through cues from the slide-deck name."
+      "note": "No coach audio. Brief field-through cues from the slide-deck name.",
+      "path": {
+        "field": {
+          "x": 0.15,
+          "y": 4.05,
+          "type": "centered"
+        },
+        "finish": "run",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.32,
+            "y": 0.55,
+            "kind": "prep"
+          },
+          {
+            "foot": "L",
+            "x": 0.38,
+            "y": 1.25,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -0.28,
+            "y": 1.95,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.38,
+            "y": 2.65,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -0.22,
+            "y": 3.35,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.42,
+            "y": 4.15,
+            "kind": "step"
+          }
+        ]
+      }
     },
     {
       "id": 2,
       "name": "Drop-step Left, Get In Front",
-      "mode": "dropFrontL",
       "cues": "Hop step. Drop step left. Get in front. Field. Throw and follow.",
-      "note": "No coach audio. Route mirrors Drop Step Right, Get in Front. Cues do not invent a step order."
+      "note": "No coach audio. Route mirrors Drop Step Right, Get in Front. Cues do not invent a step order.",
+      "path": {
+        "field": {
+          "x": 1.55,
+          "y": 0.55,
+          "type": "centered"
+        },
+        "finish": "stepThrough",
+        "steps": [
+          {
+            "foot": "L",
+            "x": 0.7,
+            "y": -0.7,
+            "kind": "drop"
+          },
+          {
+            "foot": "R",
+            "x": 1.55,
+            "y": -0.25,
+            "kind": "crossover"
+          },
+          {
+            "foot": "L",
+            "x": 2.15,
+            "y": 0.35,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": 1.15,
+            "y": 1.05,
+            "kind": "plant"
+          },
+          {
+            "foot": "L",
+            "x": 0.45,
+            "y": 1.5,
+            "kind": "stepThrough"
+          }
+        ]
+      }
     },
     {
       "id": 3,
       "name": "Sweeping Backhand, Set Feet",
-      "mode": "runR",
       "cues": "Hop step. Sweeping backhand. Set feet. Throw and follow.",
-      "note": "No coach audio. Lateral backhand route, then a throw back to first after the feet are set."
+      "note": "No coach audio. Lateral backhand route, then a throw back to first after the feet are set.",
+      "path": {
+        "field": {
+          "x": -3.85,
+          "y": 0.2,
+          "type": "backhand"
+        },
+        "finish": "set",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.85,
+            "y": 0.12,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": -1.75,
+            "y": 0.08,
+            "kind": "crossover"
+          },
+          {
+            "foot": "R",
+            "x": -2.6,
+            "y": 0.22,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": -3.4,
+            "y": 0.12,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -4.15,
+            "y": 0.32,
+            "kind": "plant"
+          },
+          {
+            "foot": "L",
+            "x": -3.2,
+            "y": 0.78,
+            "kind": "replace"
+          },
+          {
+            "foot": "R",
+            "x": -2.45,
+            "y": 0.95,
+            "kind": "plant"
+          }
+        ]
+      }
     },
     {
       "id": 4,
       "name": "Routine",
-      "mode": "routine",
       "cues": "Hop step. Prep step. Step right. Creep. Gather. Right-left field. Step through. Shuffle. Throw. Follow.",
-      "note": "Spoken breakdown from the coach video."
+      "note": "Spoken breakdown from the coach video.",
+      "path": {
+        "field": {
+          "x": 0.1,
+          "y": 1.45,
+          "type": "centered"
+        },
+        "finish": "stepThrough",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.42,
+            "y": 0.42,
+            "kind": "prep"
+          },
+          {
+            "foot": "L",
+            "x": 0.48,
+            "y": 0.72,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -0.12,
+            "y": 1.15,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.42,
+            "y": 1.4,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": 0.12,
+            "y": 1.55,
+            "kind": "replace"
+          },
+          {
+            "foot": "L",
+            "x": 0.95,
+            "y": 1.95,
+            "kind": "stepThrough"
+          }
+        ]
+      }
     },
     {
       "id": 5,
       "name": "Lateral Left, Get in Front",
-      "mode": "left",
       "cues": "Hop step. Prep step. Crossover. Shuffle. Field. L shuffle. Throw. Follow.",
-      "note": "Spoken breakdown from the coach video."
+      "note": "Spoken breakdown from the coach video.",
+      "path": {
+        "field": {
+          "x": 2.15,
+          "y": 0.8,
+          "type": "centered"
+        },
+        "finish": "set",
+        "steps": [
+          {
+            "foot": "L",
+            "x": 0.95,
+            "y": 0.12,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": 1.75,
+            "y": 0.48,
+            "kind": "crossover"
+          },
+          {
+            "foot": "L",
+            "x": 2.65,
+            "y": 0.72,
+            "kind": "plant"
+          },
+          {
+            "foot": "R",
+            "x": 2.1,
+            "y": 0.95,
+            "kind": "shuffle"
+          },
+          {
+            "foot": "L",
+            "x": 2.85,
+            "y": 1.35,
+            "kind": "step"
+          }
+        ]
+      }
     },
     {
       "id": 6,
       "name": "Lateral Right, Get in Front",
-      "mode": "right",
       "cues": "Hop step. Prep step. Crossover. Shuffle. Field. Step through. Shuffle. Throw. Follow.",
-      "note": "Spoken breakdown from the coach video."
+      "note": "Spoken breakdown from the coach video.",
+      "path": {
+        "field": {
+          "x": -2.25,
+          "y": 0.68,
+          "type": "centered"
+        },
+        "finish": "stepThrough",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.95,
+            "y": 0.12,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": -1.85,
+            "y": 0.42,
+            "kind": "crossover"
+          },
+          {
+            "foot": "R",
+            "x": -2.55,
+            "y": 0.32,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": -1.95,
+            "y": 0.98,
+            "kind": "plant"
+          },
+          {
+            "foot": "R",
+            "x": -1.4,
+            "y": 1.12,
+            "kind": "shuffle"
+          },
+          {
+            "foot": "L",
+            "x": -0.55,
+            "y": 1.55,
+            "kind": "stepThrough"
+          }
+        ]
+      }
     },
     {
       "id": 7,
       "name": "Routine Cut the Distance, Adjust",
-      "mode": "routine",
       "cues": "Hop step. Prep step. Left foot. Step right. Gather. Step back. Fielding position. L shuffle. Throw. Follow.",
-      "note": "Spoken breakdown from the coach video."
+      "note": "Spoken breakdown from the coach video.",
+      "path": {
+        "field": {
+          "x": 0.15,
+          "y": 2.85,
+          "type": "centered"
+        },
+        "finish": "set",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.3,
+            "y": 0.75,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.4,
+            "y": 1.5,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -0.25,
+            "y": 2.25,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.42,
+            "y": 2.9,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -0.2,
+            "y": 3.35,
+            "kind": "chop"
+          },
+          {
+            "foot": "L",
+            "x": 0.55,
+            "y": 3.05,
+            "kind": "chop"
+          },
+          {
+            "foot": "R",
+            "x": 0.05,
+            "y": 2.7,
+            "kind": "replace"
+          },
+          {
+            "foot": "L",
+            "x": 1.05,
+            "y": 3.15,
+            "kind": "step"
+          }
+        ]
+      }
     },
     {
       "id": 8,
       "name": "Drop-step, Crossover Shuffle Forehand",
-      "mode": "dropL",
       "cues": "Hop. Prep. Drop step. Crossover. Shuffle. Step through. Shuffle. Throw. Follow.",
-      "note": "Spoken breakdown from the coach video."
+      "note": "Spoken breakdown from the coach video.",
+      "path": {
+        "field": {
+          "x": 2.0,
+          "y": -0.9,
+          "type": "forehand"
+        },
+        "finish": "stepThrough",
+        "steps": [
+          {
+            "foot": "L",
+            "x": 0.75,
+            "y": -0.72,
+            "kind": "drop"
+          },
+          {
+            "foot": "R",
+            "x": 1.6,
+            "y": -0.95,
+            "kind": "crossover"
+          },
+          {
+            "foot": "L",
+            "x": 2.3,
+            "y": -1.15,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": 1.7,
+            "y": -0.65,
+            "kind": "shuffle"
+          },
+          {
+            "foot": "L",
+            "x": 1.25,
+            "y": -0.15,
+            "kind": "stepThrough"
+          }
+        ]
+      }
     },
     {
       "id": 9,
       "name": "Drop-step, Crossover Shuffle Backhand",
-      "mode": "dropR",
       "cues": "Hop. Prep. Drop step. Crossover. Shuffle. Field. Shuffle. Throw. Follow.",
-      "note": "Spoken breakdown from the coach video."
+      "note": "Spoken breakdown from the coach video.",
+      "path": {
+        "field": {
+          "x": -2.15,
+          "y": -0.85,
+          "type": "backhand"
+        },
+        "finish": "set",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.75,
+            "y": -0.68,
+            "kind": "drop"
+          },
+          {
+            "foot": "L",
+            "x": -1.6,
+            "y": -0.88,
+            "kind": "crossover"
+          },
+          {
+            "foot": "R",
+            "x": -2.35,
+            "y": -1.0,
+            "kind": "plant"
+          },
+          {
+            "foot": "L",
+            "x": -1.55,
+            "y": -0.5,
+            "kind": "shuffle"
+          }
+        ]
+      }
     },
     {
       "id": 10,
       "name": "Field Through (IF in)",
-      "mode": "through",
       "cues": "Hop step. Fielding position. Field. L shuffle. Throw. Follow.",
-      "note": "Spoken breakdown from the coach video."
+      "note": "Spoken breakdown from the coach video.",
+      "path": {
+        "field": {
+          "x": 0.15,
+          "y": 2.25,
+          "type": "centered"
+        },
+        "finish": "run",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.28,
+            "y": 0.55,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.38,
+            "y": 1.15,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -0.22,
+            "y": 1.8,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.42,
+            "y": 2.4,
+            "kind": "step"
+          }
+        ]
+      }
     },
     {
       "id": 11,
       "name": "Drop-step Left, Shuffle Forehand (IF in)",
-      "mode": "dropL",
       "cues": "Hop. Prep. Drop. Shuffle. L shuffle. Throw. Follow.",
-      "note": "Spoken breakdown from the coach video."
+      "note": "Spoken breakdown from the coach video.",
+      "path": {
+        "field": {
+          "x": 1.4,
+          "y": -0.65,
+          "type": "forehand"
+        },
+        "finish": "set",
+        "steps": [
+          {
+            "foot": "L",
+            "x": 0.75,
+            "y": -0.55,
+            "kind": "drop"
+          },
+          {
+            "foot": "R",
+            "x": -0.05,
+            "y": -0.05,
+            "kind": "shuffle"
+          },
+          {
+            "foot": "L",
+            "x": 1.55,
+            "y": -0.9,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": 0.55,
+            "y": -0.25,
+            "kind": "shuffle"
+          },
+          {
+            "foot": "L",
+            "x": 1.15,
+            "y": 0.35,
+            "kind": "step"
+          }
+        ]
+      }
     },
     {
       "id": 12,
       "name": "Drop-step Right, Shuffle Backhand (IF in)",
-      "mode": "dropR",
       "cues": "Hop. Prep. Drop. Shuffle. Shuffle. Throw. Follow.",
-      "note": "Spoken breakdown from the coach video. The two shuffle cues are both in the call."
+      "note": "Spoken breakdown from the coach video. The two shuffle cues are both in the call.",
+      "path": {
+        "field": {
+          "x": -1.15,
+          "y": -0.52,
+          "type": "backhand"
+        },
+        "finish": "set",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.6,
+            "y": -0.42,
+            "kind": "drop"
+          },
+          {
+            "foot": "L",
+            "x": -0.05,
+            "y": -0.18,
+            "kind": "shuffle"
+          },
+          {
+            "foot": "R",
+            "x": -1.25,
+            "y": -0.7,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": -0.4,
+            "y": 0.08,
+            "kind": "step"
+          }
+        ]
+      }
     },
     {
       "id": 13,
       "name": "2-Handed Slow Roller Left",
-      "mode": "chargeL",
       "cues": "Hop. Prep. Right foot step through. Gather. Right-left field. Right-left throw. Follow.",
-      "note": "Spoken breakdown from the coach video. The earlier site name said one-hand."
+      "note": "Spoken breakdown from the coach video. The earlier site name said one-hand.",
+      "path": {
+        "field": {
+          "x": 0.85,
+          "y": 2.55,
+          "type": "centered"
+        },
+        "finish": "jump",
+        "steps": [
+          {
+            "foot": "R",
+            "x": 0.12,
+            "y": 0.5,
+            "kind": "stepThrough"
+          },
+          {
+            "foot": "L",
+            "x": 0.72,
+            "y": 1.05,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": 0.38,
+            "y": 1.6,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 1.05,
+            "y": 2.15,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": 0.7,
+            "y": 2.7,
+            "kind": "plant"
+          }
+        ]
+      }
     },
     {
       "id": 14,
       "name": "Drop Step Right, Get in Front",
-      "mode": "dropFront",
       "cues": "Hop. Prep. Drop step. Crossover. Field. Step through. Shuffle throw. Follow.",
-      "note": "Spoken breakdown from the coach video."
+      "note": "Spoken breakdown from the coach video.",
+      "path": {
+        "field": {
+          "x": -1.6,
+          "y": 0.55,
+          "type": "centered"
+        },
+        "finish": "stepThrough",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.75,
+            "y": -0.72,
+            "kind": "drop"
+          },
+          {
+            "foot": "L",
+            "x": -1.6,
+            "y": -0.22,
+            "kind": "crossover"
+          },
+          {
+            "foot": "R",
+            "x": -2.2,
+            "y": 0.38,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": -1.15,
+            "y": 1.05,
+            "kind": "plant"
+          },
+          {
+            "foot": "R",
+            "x": -0.6,
+            "y": 1.2,
+            "kind": "shuffle"
+          },
+          {
+            "foot": "L",
+            "x": 0.2,
+            "y": 1.6,
+            "kind": "stepThrough"
+          }
+        ]
+      }
     },
     {
       "id": 15,
       "name": "Drop Step Crossover Backhand",
-      "mode": "dropR",
       "cues": "Hop. Prep. Drop step. Crossover field. Shuffle throw. Follow.",
-      "note": "Spoken breakdown from the coach video."
+      "note": "Spoken breakdown from the coach video.",
+      "path": {
+        "field": {
+          "x": -2.0,
+          "y": -0.42,
+          "type": "backhand"
+        },
+        "finish": "set",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.7,
+            "y": -0.62,
+            "kind": "drop"
+          },
+          {
+            "foot": "L",
+            "x": -1.5,
+            "y": -0.5,
+            "kind": "crossover"
+          },
+          {
+            "foot": "R",
+            "x": -2.15,
+            "y": -0.32,
+            "kind": "plant"
+          },
+          {
+            "foot": "L",
+            "x": -1.2,
+            "y": 0.18,
+            "kind": "shuffle"
+          }
+        ]
+      }
     },
     {
       "id": 16,
       "name": "Routine Come and Get it, 1-Handed",
-      "mode": "charge",
       "cues": "Hop. Prep. Step right. Creep. Shuffle reach. L-shuffle throw. Follow.",
-      "note": "Spoken breakdown from the coach video."
+      "note": "Spoken breakdown from the coach video.",
+      "path": {
+        "field": {
+          "x": 0.65,
+          "y": 2.35,
+          "type": "1-handed"
+        },
+        "finish": "set",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.18,
+            "y": 0.55,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.38,
+            "y": 1.15,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": 0.02,
+            "y": 1.75,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.58,
+            "y": 2.35,
+            "kind": "plant"
+          },
+          {
+            "foot": "R",
+            "x": 0.22,
+            "y": 2.4,
+            "kind": "replace"
+          },
+          {
+            "foot": "L",
+            "x": 1.05,
+            "y": 2.8,
+            "kind": "step"
+          }
+        ]
+      }
     },
     {
       "id": 17,
       "name": "Drop Step Backhand, Lengthen Hop",
-      "mode": "deepR",
       "cues": "Hop. Prep. Deep drop. Knee drop. Replace. Throw and follow.",
-      "note": "Spoken breakdown. The earlier cue said throw and fall."
+      "note": "Spoken breakdown. The earlier cue said throw and fall.",
+      "path": {
+        "field": {
+          "x": -1.85,
+          "y": -1.45,
+          "type": "backhand"
+        },
+        "finish": "replace",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.95,
+            "y": -1.05,
+            "kind": "drop"
+          },
+          {
+            "foot": "L",
+            "x": -1.85,
+            "y": -1.65,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -1.15,
+            "y": -1.15,
+            "kind": "replace"
+          },
+          {
+            "foot": "L",
+            "x": -0.45,
+            "y": -0.55,
+            "kind": "step"
+          }
+        ]
+      }
     },
     {
       "id": 18,
       "name": "Lateral Backhand on the Run, Jump Throw",
-      "mode": "runR",
       "cues": "Hop. Prep. Crossover run. Field off right. Step with left. Jump throw.",
-      "note": "Spoken breakdown from the coach video."
+      "note": "Spoken breakdown from the coach video.",
+      "path": {
+        "field": {
+          "x": -4.0,
+          "y": 0.15,
+          "type": "backhand"
+        },
+        "finish": "jump",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.85,
+            "y": 0.08,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": -1.75,
+            "y": 0.12,
+            "kind": "crossover"
+          },
+          {
+            "foot": "R",
+            "x": -2.55,
+            "y": 0.08,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": -3.3,
+            "y": 0.18,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -4.15,
+            "y": 0.25,
+            "kind": "plant"
+          }
+        ]
+      }
     },
     {
       "id": 19,
       "name": "Chopper Come and Get it, 2-Handed (Above Knee)",
-      "mode": "charge",
       "cues": "Hop. Prep. Left foot step right. Catch off left. Throw off right. Follow.",
-      "note": "Spoken breakdown from the coach video. The earlier site name said one-hand."
+      "note": "Spoken breakdown from the coach video. The earlier site name said one-hand.",
+      "path": {
+        "field": {
+          "x": 0.1,
+          "y": 1.9,
+          "type": "centered"
+        },
+        "finish": "stepThrough",
+        "steps": [
+          {
+            "foot": "L",
+            "x": 0.4,
+            "y": 0.6,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -0.22,
+            "y": 1.25,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.42,
+            "y": 1.95,
+            "kind": "plant"
+          },
+          {
+            "foot": "R",
+            "x": 0.15,
+            "y": 2.5,
+            "kind": "stepThrough"
+          },
+          {
+            "foot": "L",
+            "x": 0.95,
+            "y": 2.8,
+            "kind": "step"
+          }
+        ]
+      }
     },
     {
       "id": 20,
       "name": "Lateral Forehand on the Run, Set Feet",
-      "mode": "runL",
       "cues": "Hop. Prep. Crossover run. Field off left. L-shuffle throw. Follow.",
-      "note": "Spoken breakdown from the coach video."
+      "note": "Spoken breakdown from the coach video.",
+      "path": {
+        "field": {
+          "x": 4.0,
+          "y": 0.22,
+          "type": "forehand"
+        },
+        "finish": "set",
+        "steps": [
+          {
+            "foot": "L",
+            "x": 0.85,
+            "y": 0.08,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": 1.75,
+            "y": 0.18,
+            "kind": "crossover"
+          },
+          {
+            "foot": "L",
+            "x": 2.6,
+            "y": 0.08,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": 3.35,
+            "y": 0.22,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 4.15,
+            "y": 0.28,
+            "kind": "plant"
+          },
+          {
+            "foot": "R",
+            "x": 3.45,
+            "y": 0.78,
+            "kind": "replace"
+          },
+          {
+            "foot": "L",
+            "x": 4.0,
+            "y": 1.1,
+            "kind": "step"
+          }
+        ]
+      }
     },
     {
       "id": 21,
       "name": "Field-With",
-      "mode": "deep",
       "cues": "Hop. Prep. Deep drop. Replace the feet. L-shuffle throw. Follow.",
-      "note": "Spoken breakdown from the coach video."
+      "note": "Spoken breakdown from the coach video.",
+      "path": {
+        "field": {
+          "x": 0.1,
+          "y": -1.15,
+          "type": "centered"
+        },
+        "finish": "replace",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.2,
+            "y": -0.65,
+            "kind": "drop"
+          },
+          {
+            "foot": "L",
+            "x": 0.38,
+            "y": -1.3,
+            "kind": "drop"
+          },
+          {
+            "foot": "R",
+            "x": -0.12,
+            "y": -1.05,
+            "kind": "replace"
+          },
+          {
+            "foot": "L",
+            "x": 0.42,
+            "y": -0.82,
+            "kind": "replace"
+          },
+          {
+            "foot": "L",
+            "x": 1.0,
+            "y": -0.28,
+            "kind": "shuffle"
+          }
+        ]
+      }
     },
     {
       "id": 22,
       "name": "Hinge Step Back, Backhand Gather",
-      "mode": "hinge",
       "cues": "Hop. Prep. Hinge step. Field. Gather. Shuffle throw. Follow.",
-      "note": "Spoken breakdown from the coach video."
+      "note": "Spoken breakdown from the coach video.",
+      "path": {
+        "field": {
+          "x": -0.5,
+          "y": -0.78,
+          "type": "backhand"
+        },
+        "finish": "set",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.48,
+            "y": -0.42,
+            "kind": "drop"
+          },
+          {
+            "foot": "L",
+            "x": 0.18,
+            "y": -0.68,
+            "kind": "shuffle"
+          },
+          {
+            "foot": "R",
+            "x": -0.38,
+            "y": -0.98,
+            "kind": "plant"
+          },
+          {
+            "foot": "L",
+            "x": 0.35,
+            "y": -0.38,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": 0.05,
+            "y": -0.28,
+            "kind": "shuffle"
+          }
+        ]
+      }
     },
     {
       "id": 23,
       "name": "Backhand Come and Get it, Throw on the Run",
-      "mode": "chargeR",
       "cues": "Hop. Prep. Left foot step through. Field off right. Left-right throw.",
-      "note": "Spoken breakdown from the coach video."
+      "note": "Spoken breakdown from the coach video.",
+      "path": {
+        "field": {
+          "x": -0.55,
+          "y": 2.1,
+          "type": "backhand"
+        },
+        "finish": "run",
+        "steps": [
+          {
+            "foot": "L",
+            "x": 0.28,
+            "y": 0.55,
+            "kind": "stepThrough"
+          },
+          {
+            "foot": "R",
+            "x": -0.45,
+            "y": 1.15,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": -0.12,
+            "y": 1.75,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -0.72,
+            "y": 2.3,
+            "kind": "plant"
+          }
+        ]
+      }
     },
     {
       "id": 24,
       "name": "Ball Right Come and Get it, 1-Handed, Set Feet",
-      "mode": "chargeR",
       "cues": "Hop. Prep. Left foot step right. Field off right. Shuffle throw. Follow.",
-      "note": "Spoken breakdown. The title card said 2-handed; the coach called it 1-handed and set feet."
+      "note": "Spoken breakdown. The title card said 2-handed; the coach called it 1-handed and set feet.",
+      "path": {
+        "field": {
+          "x": -0.7,
+          "y": 1.95,
+          "type": "1-handed"
+        },
+        "finish": "set",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.55,
+            "y": 0.5,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": -0.18,
+            "y": 1.05,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -0.78,
+            "y": 1.6,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": -0.32,
+            "y": 2.15,
+            "kind": "plant"
+          },
+          {
+            "foot": "R",
+            "x": -0.08,
+            "y": 2.15,
+            "kind": "replace"
+          },
+          {
+            "foot": "L",
+            "x": 0.62,
+            "y": 2.55,
+            "kind": "shuffle"
+          }
+        ]
+      }
     },
     {
       "id": 25,
       "name": "Routine Cut the Distance, Boot Barehand, Arm Fake",
-      "mode": "charge",
       "cues": "Charge. Field at the body. Ball boots out. Barehand. Arm fake.",
-      "note": "No coach audio. Cues follow the drill: charge, field at the body, the ball boots out, barehand, arm fake."
+      "note": "No coach audio. Cues follow the drill: charge, field at the body, the ball boots out, barehand, arm fake.",
+      "path": {
+        "field": {
+          "x": 0.1,
+          "y": 2.25,
+          "type": "boot"
+        },
+        "recover": {
+          "x": 0.85,
+          "y": 3.45
+        },
+        "finish": "fake",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.28,
+            "y": 0.6,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.38,
+            "y": 1.2,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -0.22,
+            "y": 1.85,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.38,
+            "y": 2.4,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": 0.22,
+            "y": 2.85,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.75,
+            "y": 3.25,
+            "kind": "step"
+          }
+        ]
+      }
     },
     {
       "id": 26,
       "name": "Ball Right, Routine Cut the Distance",
-      "mode": "chargeR",
       "cues": "Hop. Prep. Cut the distance to your right. Field. Shuffle. Throw and follow.",
-      "note": "No coach audio. Forward-right approach at the same pace as Ball Left, Routine Cut the Distance."
+      "note": "No coach audio. Forward-right approach at the same pace as Ball Left, Routine Cut the Distance.",
+      "path": {
+        "field": {
+          "x": -2.05,
+          "y": 1.15,
+          "type": "centered"
+        },
+        "finish": "set",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -1.05,
+            "y": 0.32,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": -2.05,
+            "y": 0.78,
+            "kind": "shuffle"
+          },
+          {
+            "foot": "R",
+            "x": -2.45,
+            "y": 1.4,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": -1.45,
+            "y": 1.85,
+            "kind": "plant"
+          },
+          {
+            "foot": "R",
+            "x": -1.05,
+            "y": 1.8,
+            "kind": "replace"
+          }
+        ]
+      }
     },
     {
       "id": 27,
       "name": "Rake Through Backhand",
-      "mode": "rakeR",
       "cues": "Rake through the backhand. Throw and follow.",
-      "note": "No coach audio. Medium-soft ball to the backhand, often a second baseman on a ball up the middle."
+      "note": "No coach audio. Medium-soft ball to the backhand, often a second baseman on a ball up the middle.",
+      "path": {
+        "field": {
+          "x": -0.45,
+          "y": 0.55,
+          "type": "backhand"
+        },
+        "finish": "run",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.75,
+            "y": 0.32,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.15,
+            "y": 0.85,
+            "kind": "stepThrough"
+          },
+          {
+            "foot": "R",
+            "x": 0.55,
+            "y": 1.4,
+            "kind": "step"
+          }
+        ]
+      }
     },
     {
       "id": 28,
       "name": "Routine Cut the Distance",
-      "mode": "routine",
       "cues": "Prep. Left foot. Step right. Gather right-left. Field. Left shuffle. Throw and follow.",
-      "note": "Cues kept from the previous site play 22."
+      "note": "Cues kept from the previous site play 22.",
+      "path": {
+        "field": {
+          "x": 0.05,
+          "y": 2.1,
+          "type": "centered"
+        },
+        "finish": "set",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.28,
+            "y": 0.55,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.38,
+            "y": 1.1,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -0.2,
+            "y": 1.7,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.38,
+            "y": 2.25,
+            "kind": "plant"
+          },
+          {
+            "foot": "R",
+            "x": 0.08,
+            "y": 2.25,
+            "kind": "replace"
+          },
+          {
+            "foot": "L",
+            "x": 0.9,
+            "y": 2.65,
+            "kind": "shuffle"
+          }
+        ]
+      }
     },
     {
       "id": 29,
       "name": "Do or Die, Come and Get it 1-Handed",
-      "mode": "charge",
       "cues": "Prep. Left foot. Step right. Field off right-left-right. Throw and follow.",
-      "note": "Cues kept from the previous site play 23."
+      "note": "Cues kept from the previous site play 23.",
+      "path": {
+        "field": {
+          "x": 0.6,
+          "y": 3.0,
+          "type": "1-handed"
+        },
+        "finish": "run",
+        "steps": [
+          {
+            "foot": "L",
+            "x": 0.35,
+            "y": 0.55,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -0.28,
+            "y": 1.15,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.42,
+            "y": 1.8,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -0.2,
+            "y": 2.45,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.48,
+            "y": 3.1,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": 0.12,
+            "y": 3.65,
+            "kind": "step"
+          }
+        ]
+      }
     },
     {
       "id": 30,
       "name": "Do or Die, Come and Get it Barehanded",
-      "mode": "vcut",
       "cues": "Prep. Run straight. V-cut. \"Heel off left.\" Throw off right. Follow.",
-      "note": "Cues kept from the previous site play 24. Confirm \"heel off left\"."
+      "note": "Cues kept from the previous site play 24. Confirm \"heel off left\".",
+      "path": {
+        "field": {
+          "x": 0.15,
+          "y": 2.8,
+          "type": "barehand"
+        },
+        "finish": "run",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.22,
+            "y": 0.6,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.38,
+            "y": 1.25,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -0.15,
+            "y": 1.9,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.55,
+            "y": 2.4,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -0.12,
+            "y": 2.95,
+            "kind": "step"
+          }
+        ]
+      }
     },
     {
       "id": 31,
       "name": "Chopper Come and Get it, 1-Handed (Below Knee)",
-      "mode": "charge",
       "cues": "Prep. Left foot. Step right. Field off left. Step right. Throw and follow.",
-      "note": "Cues kept from the previous site play 25."
+      "note": "Cues kept from the previous site play 25.",
+      "path": {
+        "field": {
+          "x": 0.5,
+          "y": 1.75,
+          "type": "1-handed"
+        },
+        "finish": "set",
+        "steps": [
+          {
+            "foot": "L",
+            "x": 0.35,
+            "y": 0.55,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -0.22,
+            "y": 1.15,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.48,
+            "y": 1.8,
+            "kind": "plant"
+          },
+          {
+            "foot": "R",
+            "x": 0.08,
+            "y": 2.1,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.58,
+            "y": 2.32,
+            "kind": "shuffle"
+          }
+        ]
+      }
     },
     {
       "id": 32,
       "name": "Ball Left, Routine Cut the Distance",
-      "mode": "chargeL",
       "cues": "Prep. Right foot. Step left-right-left. Field. Left shuffle. Throw and follow.",
-      "note": "Cues kept from the previous site play 26."
+      "note": "Cues kept from the previous site play 26.",
+      "path": {
+        "field": {
+          "x": 2.15,
+          "y": 1.2,
+          "type": "centered"
+        },
+        "finish": "stepThrough",
+        "steps": [
+          {
+            "foot": "L",
+            "x": 0.95,
+            "y": 0.32,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": 1.95,
+            "y": 0.58,
+            "kind": "shuffle"
+          },
+          {
+            "foot": "L",
+            "x": 2.6,
+            "y": 1.2,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": 2.1,
+            "y": 1.75,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 2.7,
+            "y": 2.15,
+            "kind": "plant"
+          },
+          {
+            "foot": "R",
+            "x": 2.25,
+            "y": 2.05,
+            "kind": "stepThrough"
+          },
+          {
+            "foot": "L",
+            "x": 3.15,
+            "y": 2.45,
+            "kind": "step"
+          }
+        ]
+      }
     },
     {
       "id": 33,
       "name": "Drop Step Crossover Backhand, No Step Throw",
-      "mode": "dropR",
       "cues": "Prep. Drop step. Crossover. Field. Load and throw.",
-      "note": "Cues kept from the previous site play 27. No extra step after the field."
+      "note": "Cues kept from the previous site play 27. No extra step after the field.",
+      "path": {
+        "field": {
+          "x": -2.6,
+          "y": -1.2,
+          "type": "backhand"
+        },
+        "finish": "nostep",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.9,
+            "y": -0.85,
+            "kind": "drop"
+          },
+          {
+            "foot": "L",
+            "x": -1.85,
+            "y": -1.15,
+            "kind": "crossover"
+          },
+          {
+            "foot": "R",
+            "x": -2.75,
+            "y": -1.35,
+            "kind": "plant"
+          }
+        ]
+      }
     },
     {
       "id": 34,
       "name": "Field Through, Boot Barehand and Throw",
-      "mode": "recovery",
       "cues": "Hop step. Fielding position. Boot ball. Right-left field. Shuffle. Throw and follow.",
-      "note": "Cues kept from the previous site play 28."
+      "note": "Cues kept from the previous site play 28.",
+      "path": {
+        "field": {
+          "x": 0.05,
+          "y": 0.9,
+          "type": "boot"
+        },
+        "recover": {
+          "x": 0.55,
+          "y": 1.85
+        },
+        "finish": "stepThrough",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.22,
+            "y": 0.42,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.32,
+            "y": 0.95,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": 0.12,
+            "y": 1.55,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.62,
+            "y": 1.95,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": 0.28,
+            "y": 2.1,
+            "kind": "shuffle"
+          },
+          {
+            "foot": "L",
+            "x": 1.1,
+            "y": 2.4,
+            "kind": "step"
+          }
+        ]
+      }
     },
     {
       "id": 35,
       "name": "Chopper Sit Back, Quick Exchange",
-      "mode": "stay",
       "cues": "Hop. Step. Gather. Catch off left. Shuffle. Throw and follow.",
-      "note": "Cues kept from the previous site play 29. The call is sit back."
+      "note": "Cues kept from the previous site play 29. The call is sit back.",
+      "path": {
+        "field": {
+          "x": 0.05,
+          "y": 0.0,
+          "type": "centered"
+        },
+        "finish": "replace",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.6,
+            "y": -0.32,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": 0.65,
+            "y": 0.32,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -0.15,
+            "y": -0.02,
+            "kind": "replace"
+          },
+          {
+            "foot": "L",
+            "x": 0.75,
+            "y": 0.55,
+            "kind": "shuffle"
+          }
+        ]
+      }
     },
     {
       "id": 36,
       "name": "Lateral Backhand on the Run, Set Feet",
-      "mode": "runR",
       "cues": "Prep. Crossover. Field off left. Replace. Throw and follow.",
-      "note": "Cues kept from the previous site play 30."
+      "note": "Cues kept from the previous site play 30.",
+      "path": {
+        "field": {
+          "x": -3.7,
+          "y": 0.15,
+          "type": "backhand"
+        },
+        "finish": "set",
+        "steps": [
+          {
+            "foot": "R",
+            "x": -0.8,
+            "y": 0.08,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": -1.65,
+            "y": 0.12,
+            "kind": "crossover"
+          },
+          {
+            "foot": "R",
+            "x": -2.45,
+            "y": 0.08,
+            "kind": "step"
+          },
+          {
+            "foot": "L",
+            "x": -3.15,
+            "y": 0.22,
+            "kind": "step"
+          },
+          {
+            "foot": "R",
+            "x": -3.9,
+            "y": 0.28,
+            "kind": "plant"
+          },
+          {
+            "foot": "L",
+            "x": -3.1,
+            "y": 0.78,
+            "kind": "replace"
+          },
+          {
+            "foot": "R",
+            "x": -2.4,
+            "y": 0.95,
+            "kind": "plant"
+          }
+        ]
+      }
     }
   ],
   "sequences": [
@@ -314,379 +1786,5 @@
       "title": "Boot, sit-back, and set feet",
       "description": "Recover a boot and throw. Sit back on the chopper for a quick exchange, then set your feet on the lateral backhand."
     }
-  ],
-  "routes": {
-    "routine": [
-      [
-        0,
-        0
-      ],
-      [
-        0,
-        14
-      ],
-      [
-        0,
-        28
-      ]
-    ],
-    "through": [
-      [
-        0,
-        0
-      ],
-      [
-        0,
-        16
-      ],
-      [
-        0,
-        35
-      ]
-    ],
-    "left": [
-      [
-        0,
-        0
-      ],
-      [
-        23,
-        8
-      ],
-      [
-        37,
-        20
-      ]
-    ],
-    "right": [
-      [
-        0,
-        0
-      ],
-      [
-        -23,
-        8
-      ],
-      [
-        -37,
-        20
-      ]
-    ],
-    "dropL": [
-      [
-        0,
-        0
-      ],
-      [
-        14,
-        -14
-      ],
-      [
-        34,
-        -23
-      ]
-    ],
-    "dropR": [
-      [
-        0,
-        0
-      ],
-      [
-        -14,
-        -14
-      ],
-      [
-        -34,
-        -23
-      ]
-    ],
-    "dropFront": [
-      [
-        0,
-        0
-      ],
-      [
-        -15,
-        -16
-      ],
-      [
-        -37,
-        -9
-      ],
-      [
-        -30,
-        13
-      ]
-    ],
-    "deepR": [
-      [
-        0,
-        0
-      ],
-      [
-        -14,
-        -21
-      ],
-      [
-        -33,
-        -35
-      ]
-    ],
-    "deep": [
-      [
-        0,
-        0
-      ],
-      [
-        0,
-        -19
-      ],
-      [
-        0,
-        -36
-      ]
-    ],
-    "charge": [
-      [
-        0,
-        0
-      ],
-      [
-        0,
-        35
-      ],
-      [
-        0,
-        70
-      ]
-    ],
-    "chargeL": [
-      [
-        0,
-        0
-      ],
-      [
-        15,
-        32
-      ],
-      [
-        26,
-        65
-      ]
-    ],
-    "chargeR": [
-      [
-        0,
-        0
-      ],
-      [
-        -15,
-        32
-      ],
-      [
-        -26,
-        65
-      ]
-    ],
-    "runR": [
-      [
-        0,
-        0
-      ],
-      [
-        -22,
-        6
-      ],
-      [
-        -43,
-        17
-      ]
-    ],
-    "runL": [
-      [
-        0,
-        0
-      ],
-      [
-        22,
-        6
-      ],
-      [
-        43,
-        17
-      ]
-    ],
-    "hinge": [
-      [
-        0,
-        0
-      ],
-      [
-        -10,
-        -8
-      ],
-      [
-        -26,
-        1
-      ]
-    ],
-    "vcut": [
-      [
-        0,
-        0
-      ],
-      [
-        0,
-        43
-      ],
-      [
-        20,
-        71
-      ]
-    ],
-    "recovery": [
-      [
-        0,
-        0
-      ],
-      [
-        0,
-        25
-      ],
-      [
-        0,
-        51
-      ]
-    ],
-    "stay": [
-      [
-        0,
-        0
-      ],
-      [
-        0,
-        5
-      ],
-      [
-        0,
-        11
-      ]
-    ],
-    "dropFrontL": [
-      [
-        0,
-        0
-      ],
-      [
-        15,
-        -16
-      ],
-      [
-        37,
-        -9
-      ],
-      [
-        30,
-        13
-      ]
-    ],
-    "rakeR": [
-      [
-        0,
-        0
-      ],
-      [
-        -16,
-        16
-      ],
-      [
-        -30,
-        34
-      ]
-    ]
-  },
-  "paces": {
-    "routine": [
-      1,
-      1
-    ],
-    "through": [
-      1,
-      2
-    ],
-    "left": [
-      2,
-      1
-    ],
-    "right": [
-      2,
-      1
-    ],
-    "dropL": [
-      2,
-      1
-    ],
-    "dropR": [
-      2,
-      1
-    ],
-    "dropFront": [
-      2,
-      2,
-      1
-    ],
-    "deepR": [
-      2,
-      1
-    ],
-    "deep": [
-      1,
-      1
-    ],
-    "charge": [
-      2,
-      3
-    ],
-    "chargeL": [
-      2,
-      3
-    ],
-    "chargeR": [
-      2,
-      3
-    ],
-    "runR": [
-      3,
-      3
-    ],
-    "runL": [
-      3,
-      3
-    ],
-    "hinge": [
-      1,
-      1
-    ],
-    "vcut": [
-      3,
-      3
-    ],
-    "recovery": [
-      1,
-      3
-    ],
-    "stay": [
-      1,
-      1
-    ],
-    "dropFrontL": [
-      2,
-      2,
-      1
-    ],
-    "rakeR": [
-      2,
-      2
-    ]
-  }
+  ]
 }
