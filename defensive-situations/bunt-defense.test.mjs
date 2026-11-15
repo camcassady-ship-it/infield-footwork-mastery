@@ -21,7 +21,7 @@ function samples(S) {
 }
 
 test('the original 28 situations are unchanged and still compile', () => {
-  assert.equal(SITS.length, 57);
+  assert.equal(SITS.length, 67);
   for (let i = 0; i < 28; i++) assert.equal(SITS[i].id, 's' + (i + 1));
   assert.equal(SITS[0].group.includes('Bunt'), false);
   const first = compile(SITS[0]);
@@ -115,6 +115,31 @@ test('double-steal and pick-off groups are complete', () => {
   assert.match(daylight.beats.map(b => b[1]).join(' '), /Daylight/);
   const stretch = compile(SITS.find(s => s.id === 's43'));
   assert.match(stretch.beats.map(b => b[1]).join(' '), /stretch/i);
+});
+
+test('drills add extras, multi-ball paths, and a job for every position', () => {
+  const drills = SITS.filter(s => s.group === 'Drills');
+  assert.equal(drills.length, 10);
+  assert.deepEqual(drills.map(s => s.id), ['s58','s59','s60','s61','s62','s63','s64','s65','s66','s67']);
+  for (const S of drills) {
+    for (const p of POS) assert.ok(S.jobs[p] && S.jobs[p].length > 12, S.id + ' ' + p);
+    assert.ok(S.drill && S.balls && S.balls.length >= 1, S.id);
+    assert.ok(S.caps && S.caps.length >= 2, S.id);
+    const C = compile(S);
+    assert.ok(C.balls && C.balls.length === S.balls.length, S.id);
+    assert.ok(C.xtr && Object.keys(C.xtr).length === (S.extras||[]).length, S.id);
+    for (const ball of C.balls) {
+      for (const k of ball) {
+        assert.ok(Math.hypot(k.p[0], k.p[1]) < 300, S.id + ' ball ' + k.p);
+      }
+    }
+  }
+  const doubled = SITS.find(s => s.id === 's62');
+  assert.ok(doubled.extras.some(e => e.label === 'LF②'));
+  assert.ok(doubled.extras.some(e => e.label === 'Fungo'));
+  assert.equal(doubled.balls.length, 2);
+  const horn = SITS.find(s => s.id === 's65');
+  assert.equal(horn.balls.length, 2);
 });
 
 test('bunt plays stay on the field and do not stack two fielders', () => {
