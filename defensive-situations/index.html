@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Byrd Baseball: Defensive Situations</title>
+<style>
+:root{--navy:#14213d;--gold:#f2b705;--bg:#f4f5f8;--card:#fff;--ink:#1d2433;--muted:#5b6475}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
+header{background:var(--navy);color:#fff;padding:12px 14px 10px;border-bottom:4px solid var(--gold);position:sticky;top:0;z-index:5}
+header h1{margin:0;font-size:19px;letter-spacing:.2px}
+header .sub{font-size:12px;opacity:.8;margin-top:2px}
+main{max-width:720px;margin:0 auto;padding:10px 10px 40px}
+.picker{display:flex;gap:8px;align-items:stretch}
+select{flex:1;min-width:0;font-size:16px;padding:10px;border-radius:10px;border:2px solid var(--navy);background:#fff;color:var(--ink);min-height:48px}
+button{font:inherit;font-size:15px;white-space:nowrap;font-weight:700;border:none;border-radius:10px;min-height:48px;min-width:48px;padding:0 14px;background:var(--navy);color:#fff;cursor:pointer;touch-action:manipulation}
+button:active{transform:scale(.97)}
+button.alt{background:#fff;color:var(--navy);border:2px solid var(--navy)}
+button.on{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.title{font-size:17px;font-weight:800;margin:12px 2px 4px}
+.grp{font-size:12px;color:var(--muted);margin:0 2px;text-transform:uppercase;letter-spacing:.5px}
+.fieldwrap{background:#2f7d32;border-radius:14px;overflow:hidden;margin-top:8px;position:relative;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+svg{display:block;width:100%;height:auto}
+.caption{background:var(--navy);color:#fff;font-size:15px;font-weight:700;padding:9px 12px;border-radius:10px;margin-top:8px;min-height:40px;display:flex;align-items:center;border-left:6px solid var(--gold)}
+.controls button,.controls2 button{padding:0 6px;font-size:14px}
+.controls{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-top:10px}
+.controls2{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px}
+.scrub{display:flex;align-items:center;gap:10px;margin-top:10px}
+.scrub input{flex:1;height:32px;accent-color:var(--navy)}
+.scrub span{font-variant-numeric:tabular-nums;font-size:13px;color:var(--muted);min-width:70px;text-align:right}
+.card{background:var(--card);border-radius:12px;padding:10px 12px;margin-top:12px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card h2{font-size:15px;margin:2px 0 8px;color:var(--navy)}
+.job{display:flex;gap:10px;align-items:flex-start;padding:9px 6px;border-radius:9px;cursor:pointer;border-bottom:1px solid #eef0f4}
+.job:last-child{border-bottom:none}
+.job.sel{background:#fff6d6}
+.tag{flex:0 0 38px;height:30px;border-radius:15px;color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.job p{margin:4px 0 0;font-size:14px;line-height:1.35}
+ul.notes{margin:0;padding-left:18px;font-size:14px;line-height:1.4}
+ul.notes li{margin:4px 0}
+.assume{background:#fff8e6;border-left:4px solid var(--gold)}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted);margin-top:8px;align-items:center}
+.legend i{display:inline-block;vertical-align:middle;margin-right:4px}
+footer{font-size:12px;color:var(--muted);text-align:center;margin-top:18px}
+</style>
+</head>
+<body>
+<header><h1>Byrd Baseball: Defensive Situations</h1><div class="sub">Tap a situation, hit Play, and watch every position move.</div></header>
+<main>
+  <div class="picker">
+    <button class="alt" id="prev" aria-label="Previous situation">&#9664;</button>
+    <select id="sit" aria-label="Situation"></select>
+    <button class="alt" id="next" aria-label="Next situation">&#9654;</button>
+  </div>
+  <div class="grp" id="grp" style="margin-top:10px"></div>
+  <div class="title" id="ttl"></div>
+  <div class="fieldwrap">
+    <svg id="field" viewBox="-228 -320 456 378" aria-label="Overhead baseball field"></svg>
+  </div>
+  <div class="caption" id="cap"></div>
+  <div class="scrub"><input type="range" id="scrub" min="0" max="1000" value="0" aria-label="Timeline"><span id="clock">0.0s</span></div>
+  <div class="controls">
+    <button id="play">&#9654; Play</button>
+    <button class="alt" id="pause">&#10073;&#10073;&nbsp;Pause</button>
+    <button class="alt" id="replay">&#8635; Replay</button>
+    <button class="alt" id="slow">0.5x</button>
+  </div>
+  <div class="controls2">
+    <button class="alt" id="routes">Routes</button>
+    <button class="alt" id="labels">Labels</button>
+    <button class="alt" id="clear">Clear focus</button>
+  </div>
+  <div class="legend">
+    <span><i style="width:14px;height:14px;border-radius:7px;background:#14213d;border:2px solid #fff"></i>Fielder</span>
+    <span><i style="width:13px;height:13px;background:#d62828;transform:rotate(45deg);border:2px solid #fff"></i>Runner / batter (B)</span>
+    <span><i style="width:10px;height:10px;border-radius:5px;background:#fff;border:2px solid #d62828"></i>Ball</span>
+    <span><i style="width:16px;border-top:3px dashed #ffd166"></i>Cut-off line</span>
+  </div>
+  <div class="card" id="notesCard" style="display:none"><h2>Key points</h2><ul class="notes" id="notes"></ul></div>
+  <div class="card"><h2>Every position’s job <span style="font-weight:400;color:#5b6475;font-size:12px">(tap one to follow that player)</span></h2><div id="jobs"></div></div>
+  <div class="card assume" id="assumeCard" style="display:none"><h2>Coach’s note</h2><ul class="notes" id="assume"></ul></div>
+  <footer>Based on Coach Cassady’s “Defensive Situations and Positional Movement” deck (from Ron Polk’s Baseball Playbook). WBB 2025-26.</footer>
+</main>
+<script>
+// ---- SITUATIONS (text from "Defensive Situations and Positional Movement", Ron Polk's Baseball Playbook) ----
+const SITS = [
+// ================= SINGLES, BASES EMPTY / R3 =================
+{id:'s1', group:'Singles – bases empty (or runner on 3rd)', title:'Single to LF – no runners (or runner on 3rd)',
+ runners:[], hit:{to:'sLF', t:2.0, by:'LF'}, throws:['SS','2B'],
+ f:{LF:['sLF'], CF:[{behind:['H','sLF',30]}], SS:[{cut:['sLF','B2',0.45]}], '2B':['B2'], '3B':['B3'],
+    '1B':[[60,84],{to:[38,104],wait:0.6}], P:[{to:'B1',wait:0.3}], C:[[82,44]], RF:[[45,178]]},
+ run:{B:['B1','T1',{to:'B1',wait:0.4}]},
+ jobs:{P:'Covers first base, backing up potential throws.',C:'Moves behind first base to back up potential throws.','1B':'Backs up the throw to second base; calls out if the runner advances.','2B':'Covers second base for a possible play; assists shortstop in cut-off alignment.','3B':'Covers third base; moves toward second if the ball is deflected.',SS:'Positions for the cut-off to second base; throws to first if a play develops.',LF:'Fields the ball and throws to second via the shortstop as the cut-off.',CF:'Backs up the left fielder.',RF:'Moves to back up the first baseman on possible throws to second.'}},
+
+{id:'s2', group:'Singles – bases empty (or runner on 3rd)', title:'Single to CF – no runners (or runner on 3rd)',
+ runners:[], hit:{to:'sCF', t:2.0, by:'CF'}, throws:['SS','2B'],
+ f:{CF:['sCF'], LF:[[-38,262]], RF:[[38,262]], SS:[{cut:['sCF','B2',0.45]}], '2B':['B2'], P:[[4,100]], '3B':[[-36,104]],
+    '1B':[[58,86]], C:[[82,44]]},
+ run:{B:['B1','T1',{to:'B1',wait:0.4}]},
+ jobs:{P:'Backs up the throw from center field to second base or covers second if needed.',C:'Moves behind first base to back up possible throws.','1B':'Watches the runner touch first and communicates if they advance.','2B':'Covers second base if the shortstop goes for the cut-off; otherwise, assists as the cut-off.','3B':'Moves toward second base in case of a deflected ball or if the pitcher covers second.',SS:'Acts as the cut-off for a throw to second base unless the second baseman takes the role.',LF:'Backs up the center fielder.',CF:'Fields the ball and throws to second base using the cut-off if needed.',RF:'Backs up the center fielder.'}},
+
+{id:'s3', group:'Singles – bases empty (or runner on 3rd)', title:'Single to RF – no runners (or runner on 3rd)',
+ runners:[], hit:{to:'sRF', t:2.0, by:'RF'}, throws:['2B','SS'],
+ f:{RF:['sRF'], CF:[{behind:['H','sRF',30]}], '2B':[{cut:['sRF','B2',0.45]}], SS:['B2'], '3B':[{behind:['sRF','B2',28]}],
+    LF:[[-62,178]], '1B':[[50,92]], C:[[40,36],{to:'B1',wait:0.1}], P:[{behind:['sRF','B1',28]}]},
+ run:{B:['B1','T1',{to:'B1',wait:0.4}]},
+ jobs:{P:'Backs up a potential throw from the right fielder to the catcher at first base.',C:'Trails the hitter down the first baseline, preparing for a throw from the right fielder if the runner takes a big turn.','1B':'Walks away from first base to decoy the runner into taking a wider turn.','2B':'Acts as the cut-off for the right fielder’s throw to second base; checks for a possible play at first after fielding.','3B':'Backs up the throw to second base.',SS:'Covers second base for a potential play; assists in aligning the cut-off.',LF:'Backs up second base on a throw from the right fielder or second baseman.',CF:'Backs up the right fielder.',RF:'Fields the ball, glances at first base, and throws either to the catcher (if the runner hesitates) or to second base using the second baseman as the cut-off.'}},
+
+// ================= SINGLES, R1 =================
+{id:'s4', group:'Singles – runner on 1st (or 1st & 3rd)', title:'Single to LF – runner on 1st (or 1st & 3rd)',
+ runners:['R1'], hit:{to:'sLF', t:2.0, by:'LF'}, throws:['SS','3B'],
+ f:{LF:['sLF'], CF:[{behind:['H','sLF',30]}], SS:[{cut:['sLF','B3',0.5]}], '3B':['B3'], '2B':['B2'],
+    P:[{behind:['sLF','B3',32]}], C:[[-14,8]], '1B':[[80,70],{to:[22,128],wait:0.5}], RF:[{behind:['B3','B2',45]}]},
+ run:{R1:['B2','B3'], B:['B1','T1',{to:'B1',wait:0.6}]},
+ jobs:{P:'Moves behind third base to back up a potential throw from the left fielder.',C:'Positions in foul territory behind third base to back up a wild throw and covers home if the runner advances.','1B':'Moves outside the baseline, watching the hitter touch first; backs up a throw to second from the infield while the right fielder backs up from the outfield.','2B':'Prepares to receive a throw from the left fielder if the runner takes a wide turn at second; alerts the third baseman if the runner breaks for third.','3B':'Sets up at third for a possible throw from left field; assists in aligning the shortstop for the cut-off; checks second base for a potential play on the batter-runner.',SS:'Acts as the cut-off for the left fielder’s throw to third; adjusts based on third baseman’s call; checks the runner rounding second for a possible play.',LF:'Fields the ball to attempt a play at third; uses the shortstop as the cut-off; may throw behind the runner at second if they take a wide turn.',CF:'Backs up the left fielder.',RF:'Backs up throws to second base from the left fielder, shortstop, or third baseman; adjusts to back up a throw from third to second if needed.'},
+ assumed:['Catcher: the deck has him both backing up third and covering home. The animation keeps him near the plate (a few steps up the line) because the pitcher is already backing up third.']},
+
+{id:'s5', group:'Singles – runner on 1st (or 1st & 3rd)', title:'Single to CF – runner on 1st (or 1st & 3rd)',
+ runners:['R1'], hit:{to:'sCF', t:2.0, by:'CF'}, throws:['SS','3B'],
+ f:{CF:['sCF'], LF:[[-38,262]], RF:[[38,262],{to:[22,172],wait:0.2}], SS:[{cut:['sCF','B3',0.5]}], '3B':['B3'], '2B':['B2'],
+    P:[{behind:['sCF','B3',32]}], C:[[0,14],{to:'H',wait:1.0}], '1B':[[55,80],{to:'B1',wait:0.6}]},
+ run:{R1:['B2','B3'], B:['B1','T1',{to:'B1',wait:0.6}]},
+ jobs:{P:'Moves behind third base to back up a potential throw from the center fielder.',C:'Moves to the infield side of home plate to back up a throw from the center fielder to second; must be ready to cover home if the throw goes through to third.','1B':'Moves inside the diamond, watches the runner touch first, and alerts the defense if they break for second; responsible for first base if a play occurs there. Covers second base if both the shortstop and second baseman go out for a short fly ball.','2B':'Covers second base in case of a throw from the center fielder behind a runner; if the runner advances to third, prepares for a possible throw from the shortstop or third baseman; ensures the runner touches second base.','3B':'Sets up at third base for a possible throw from center field; assists the shortstop in positioning for the cut-off; if the ball reaches third base, looks for a potential play at second.',SS:'Acts as the cut-off for a throw from center field to third; listens for the third baseman’s direction; if no play at third, checks the runner at second for a possible throw.',LF:'Backs up the center fielder.',CF:'Fields the ball and attempts a play at third if the runner advances; uses the shortstop as the cut-off; may throw to second base if the runner takes a wide turn.',RF:'Backs up the center fielder; moves behind second base to cover potential overthrows from the shortstop or third baseman.'}},
+
+{id:'s6', group:'Singles – runner on 1st (or 1st & 3rd)', title:'Single to RF – runner on 1st (or 1st & 3rd)',
+ runners:['R1'], hit:{to:'sRF', t:2.0, by:'RF'}, throws:['SS','3B'],
+ f:{RF:['sRF'], CF:[{behind:['H','sRF',30]},{to:[-8,172],wait:0.2}], SS:[{cut:['sRF','B3',0.45]}], '3B':['B3'], '2B':[[68,160],{to:'B2',wait:0.2}],
+    P:[{behind:['sRF','B3',32]}], C:[[-22,16]], '1B':[[55,80],{to:'B1',wait:0.6}], LF:[{behind:['sRF','B2',45]}]},
+ run:{R1:['B2','B3'], B:['B1','T1',{to:'B1',wait:0.6}]},
+ jobs:{P:'Moves behind third base to back up a potential throw from the right fielder.',C:'Moves down the third baseline to recover deflected balls and be in position for a potential play at the plate.','1B':'Moves inside the diamond, watching the runner touch first; alerts the defense if the runner breaks for second; responsible for first base if a play develops there.','2B':'Moves a few steps toward the right fielder in case of a misplay; if the right fielder makes a clean play, he breaks for second base to prepare for a possible throw from the shortstop or third baseman.','3B':'Sets up at third base for a potential throw from the right fielder; helps the shortstop position for the cut-off; checks for a possible play at second base.',SS:'Acts as the cut-off for a throw to third; if the runner does not advance past second, he prepares to receive a throw from the right fielder to tag out a runner taking a wide turn at second.',LF:'Backs up the throw from the right fielder to second base.',CF:'Backs up the right fielder; moves behind second base to cover potential overthrows from the shortstop or third baseman.',RF:'Fields the ball and throws to third if the runner advances; if the runner stays at second, he throws to the shortstop for a potential tag play on a runner rounding the bag too far. If uncertain, he throws to third even if the shortstop is moving toward second.'}},
+
+// ================= SINGLES IN THE HOLE (SWITCH) =================
+{id:'s7', group:'Singles in the hole – “Switch!”', title:'Single to LF in the hole (SS/3B switch) – no runners',
+ runners:[], hit:{to:'sLF2', t:2.2, by:'LF'}, throws:['3B','2B'],
+ f:{SS:[{to:[-62,112],spd:30},{to:'B3',wait:0.5}], '3B':[{to:[-58,96],spd:30},{to:{cut:['sLF2','B2',0.45]},wait:0.15}],
+    LF:['sLF2'], CF:[{behind:['H','sLF2',30]}], '2B':['B2'], '1B':[[60,84],{to:[38,104],wait:0.6}], P:[{to:'B1',wait:0.3}], C:[[82,44]], RF:[[45,178]]},
+ run:{B:['B1','T1',{to:'B1',wait:0.4}]},
+ notes:['The shortstop and third baseman may need to switch responsibilities when the ball is fielded deep in the hole.','The third baseman takes the shortstop’s role (cut-off); the shortstop takes over at third base.','If a runner is on second (or first and second), the shortstop may act as the cut-off for a throw from left field to home.','Communication is key: call “SWITCH!” so nobody is confused.','Return to your natural positions when you can; if not, the switch keeps every spot covered.'],
+ jobs:{P:'Covers first base, backing up potential throws.*',C:'Moves behind first base to back up potential throws.*','1B':'Watches the hitter touch first; backs up the throw to second.*','2B':'Covers second base.*','3B':'SWITCH – dives for the ball, then becomes the cut-off man for the throw to second.',SS:'SWITCH – goes deep in the hole, then recovers to cover third base.',LF:'Fields the ball and throws to second through the cut-off (the third baseman).*',CF:'Backs up the left fielder.*',RF:'Backs up throws to second.*'},
+ assumed:['This slide only has the switch notes. Jobs marked * use the regular single-to-LF assignments from the first slide.']},
+
+{id:'s8', group:'Singles in the hole – “Switch!”', title:'Single up the middle to CF (SS/2B switch) – runner on 1st',
+ runners:['R1'], hit:{to:'sCF2', t:2.1, by:'CF'}, throws:['2B','3B'],
+ f:{'2B':[{to:[10,124],spd:30},{to:{cut:['sCF2','B3',0.5]},wait:0.15}], SS:[{to:[-6,132],spd:30},{to:'B2',wait:0.2}],
+    CF:['sCF2'], LF:[[-25,262]], RF:[[50,262],{to:[22,172],wait:0.2}], '3B':['B3'], P:[{behind:['sCF2','B3',32]}], C:[[0,14],{to:'H',wait:1.0}], '1B':[[55,80],{to:'B1',wait:0.6}]},
+ run:{R1:['B2','B3'], B:['B1','T1',{to:'B1',wait:0.6}]},
+ notes:['The shortstop and second baseman may need to switch responsibilities because they cross in the middle of the infield.','The second baseman becomes the cut-off man for the throw from center field to third base.','The shortstop covers second base instead of his usual cut-off role.','Call “SWITCH!” when changing roles.','Return to natural positions when possible; if not, the switch keeps the defense efficient.'],
+ jobs:{P:'Moves behind third base to back up the throw.*',C:'Infield side of home, then covers home.*','1B':'Watches the runner touch first; responsible for first base.*','2B':'SWITCH – crosses for the ball, then becomes the cut-off for the throw from center field to third.',SS:'SWITCH – crosses for the ball, then covers second base.','3B':'Sets up at third for the throw.*',LF:'Backs up the center fielder.*',CF:'Fields the ball and throws to third through the cut-off (now the second baseman).*',RF:'Backs up the center fielder, then moves behind second base.*'},
+ assumed:['This slide only has the switch notes. Jobs marked * use the regular single-to-CF, runner-on-1st assignments.']},
+
+{id:'s9', group:'Singles in the hole – “Switch!”', title:'Single to RF in the hole (1B/2B switch) – no runners',
+ runners:[], hit:{to:'sRF2', t:2.1, by:'RF'}, throws:['1B','SS'],
+ f:{'1B':[{to:[62,98],spd:30},{to:{cut:['sRF2','B2',0.45]},wait:0.15}], '2B':[{to:[52,110],spd:30},{to:'B1',wait:0.15}],
+    RF:['sRF2'], CF:[{behind:['H','sRF2',30]}], SS:['B2'], '3B':[{behind:['sRF2','B2',28]}], LF:[[-62,178]], C:[[42,36]], P:[{behind:['sRF2','B1',28]}]},
+ run:{B:['B1','T1',{to:'B1',wait:0.4}]},
+ notes:['The first baseman and second baseman may switch roles because they cross paths going after a ball deep in the hole.','The first baseman becomes the cut-off for the throw from right field to the shortstop at second.','The second baseman shifts toward first base and covers the bag if the catcher is unavailable.','With a runner on first, the switch can also be: first baseman covers second, second baseman takes first.','Call “SWITCH!” to signal the swap.'],
+ jobs:{P:'Backs up a potential throw to first base.*',C:'Trails the hitter down the first-base line.*','1B':'SWITCH – dives for the ball, then becomes the cut-off for the throw to second.','2B':'SWITCH – goes after the ball, then covers first base.',SS:'Covers second base and lines up the cut-off.*','3B':'Backs up the throw to second base.*',LF:'Backs up second base.*',CF:'Backs up the right fielder.*',RF:'Fields the ball and throws to second through the cut-off (now the first baseman).*'},
+ assumed:['This slide only has the switch notes. Jobs marked * use the regular single-to-RF, bases-empty assignments.']},
+
+// ================= SINGLES, R2 =================
+{id:'s10', group:'Singles – runner on 2nd (or 2nd & 3rd)', title:'Single to LF – runner on 2nd (or 2nd & 3rd)',
+ runners:['R2'], hit:{to:'sLF', t:2.0, by:'LF'}, throws:[{to:'C',via:'3B'}],
+ f:{LF:['sLF'], CF:[{behind:['H','sLF',30]}], '3B':[{cut:['sLF','H',0.78]}], SS:['B3'], '2B':['B2'], C:['H'],
+    P:[{behind:['sLF','H',35]}], '1B':[[62,82],{to:[30,112],wait:0.5}], RF:[[18,172]]},
+ run:{R2:['B3','H'], B:['B1','T1',{to:'B1',wait:0.6}]},
+ jobs:{P:'Backs up a potential throw from the left fielder to home.',C:'Positions for a play at the plate; helps align the third baseman for the cut-off.','1B':'Monitors the batter-runner at first and signals if they break for second; backs up a throw to second or may shift into a cut-off role for a throw home.','2B':'Covers second base in case of a throw from left field; prepares for a secondary throw if the ball goes home.','3B':'Moves into cut-off position for a throw to the plate; listens for catcher’s call to relay or cut.',SS:'Covers third base if there is a play at home; otherwise, moves into a cut-off role for a throw to second.',LF:'Throws home if a play is possible; otherwise, throws to second to hold the batter-runner.',CF:'Backs up the left fielder.',RF:'Moves behind second base to back up possible throws from the third baseman or catcher.'}},
+
+{id:'s11', group:'Singles – runner on 2nd (or 2nd & 3rd)', title:'Single to CF – runner on 2nd (or 2nd & 3rd)',
+ runners:['R2'], hit:{to:'sCF', t:2.0, by:'CF'}, throws:[{to:'C',via:'1B'}],
+ f:{CF:['sCF'], LF:[[-38,262]], RF:[[38,262]], '1B':[{cut:['sCF','H',0.8]}], '2B':['B1'], SS:['B2'], '3B':['B3'], C:['H'], P:[{behind:['sCF','H',35]}]},
+ run:{R2:['B3','H'], B:['B1','T1',{to:'B1',wait:0.6}]},
+ jobs:{P:'Backs up a potential throw from the center fielder to home.',C:'Positions for a throw to the plate; assists in aligning the first baseman for a cut-off.','1B':'Moves into cut-off position for a throw home; backs up a throw to second if the center fielder goes there.','2B':'Moves to cover first base to prevent a wide turn; watches the batter-runner.','3B':'Covers third base; moves toward the mound if a deflection occurs; helps align a cut-off for a throw home.',SS:'Covers second base for a throw from center field; listens for signals if the batter-runner breaks.',LF:'Backs up the center fielder and prepares to support a throw to third.',CF:'Decides whether to throw home or to second; if no play at the plate, throws to shortstop to prevent the batter-runner from advancing.',RF:'Backs up the center fielder.'}},
+
+// ================= SINGLES, R1 & R2 / LOADED =================
+{id:'s12', group:'Singles – runners on 1st & 2nd (or loaded)', title:'Single to LF – runners on 1st & 2nd (or loaded)',
+ runners:['R1','R2'], hit:{to:'sLF', t:2.0, by:'LF'}, throws:[{to:'C',via:'3B'}],
+ f:{LF:['sLF'], CF:[{behind:['H','sLF',30]}], '3B':[{cut:['sLF','H',0.78]}], SS:['B3'], '2B':['B2'], C:['H'],
+    P:[{behind:['sLF','H',35]}], '1B':['B1'], RF:[[10,172]]},
+ run:{R2:['B3','H'], R1:['B2','T2',{to:'B2',wait:0.5}], B:['B1','T1',{to:'B1',wait:0.6}]},
+ jobs:{P:'Moves behind home plate to back up a potential throw from the left fielder to third or home.',C:'Positions for a throw from left field and assists in setting up the third baseman for a cut-off.','1B':'Stays at first unless the third baseman cannot get to the cut-off position, in which case he assumes that role. If he stays at first, he monitors and alerts if the batter-runner attempts to advance.','2B':'Covers second base for a possible throw if the play is not at home or third. Listens for signals about the batter-runner advancing.','3B':'Moves into cut-off position for a throw home. If the first baseman assumes that role, he returns to cover third.',SS:'Covers third base for a potential play. If the third baseman is at the cut-off, the shortstop becomes the cut-off for a throw to third.',LF:'Throws home if a play is possible; otherwise, relays to third or second to prevent the batter-runner from advancing.',CF:'Backs up the left fielder.',RF:'Moves behind second base to back up any potential throws from the catcher, shortstop, or third baseman.'}},
+
+{id:'s13', group:'Singles – runners on 1st & 2nd (or loaded)', title:'Single to CF – runners on 1st & 2nd (or loaded)',
+ runners:['R1','R2'], hit:{to:'sCF', t:2.0, by:'CF'}, throws:[{to:'C',via:'1B'}],
+ f:{CF:['sCF'], LF:[[-38,262]], RF:[[0,172]], '1B':[{cut:['sCF','H',0.8]}], SS:[{cut:['sCF','B3',0.5]}], '2B':['B2'], '3B':['B3'], C:['H'],
+    P:[[-46,20],{to:{behind:['sCF','H',35]},wait:0.5}]},
+ run:{R2:['B3','H'], R1:['B2','T2',{to:'B2',wait:0.5}], B:['B1','T1',{to:'B1',wait:0.6}]},
+ jobs:{P:'Positions in foul territory, equidistant between third base and home, then moves to back up the actual throw.',C:'Prepares for a throw from center field and assists in aligning the first baseman for a cut-off.','1B':'Moves into cut-off position for a throw home and listens for a relay to third or second.','2B':'Covers second base if there’s no play at home or third; watches the runner touch second.','3B':'Covers third base but prepares to receive a throw if the play goes home.',SS:'Acts as the cut-off for a throw to third; listens for directions to redirect to second if needed.',LF:'Backs up center field.',CF:'Throws home if there\'s a play; otherwise, relays through the shortstop to third.',RF:'Backs up second base.'}},
+
+{id:'s14', group:'Singles – runners on 1st & 2nd (or loaded)', title:'Single to RF – runners on 1st & 2nd (or loaded)',
+ runners:['R1','R2'], hit:{to:'sRF', t:2.0, by:'RF'}, throws:[{to:'C',via:'1B'}],
+ f:{RF:['sRF'], CF:[{behind:['H','sRF',30]}], '1B':[{cut:['sRF','H',0.8]}], SS:[{cut:['sRF','B3',0.5]}], '2B':['B2'], '3B':['B3'], C:['H'],
+    P:[[-46,20],{to:{behind:['sRF','H',35]},wait:0.5}], LF:[{behind:['sRF','B3',32]}]},
+ run:{R2:['B3','H'], R1:['B2','T2',{to:'B2',wait:0.5}], B:['B1','T1',{to:'B1',wait:0.6}]},
+ jobs:{P:'Positions in foul territory, equidistant between third and home, then moves to back up the actual throw.',C:'Prepares for a throw from right field and assists in aligning the first baseman for a cut-off.','1B':'Moves into cut-off position for a throw home and listens for a relay to third or second.','2B':'Covers second if the play is not at home or third.','3B':'Covers third base but prepares for a potential relay throw.',SS:'Acts as the cut-off for a throw to third; may redirect the ball to second.',LF:'Backs up throws to third.',CF:'Backs up the right fielder.',RF:'Throws home if a play is possible; otherwise, relays through the shortstop to third.'},
+ assumed:['The deck has this slide twice, word for word (the first copy sits where a “single to RF, runner on 2nd” slide would be). It appears once here.']},
+
+// ================= DIVING =================
+{id:'s15', group:'Singles – infielder dives', title:'Single to LF – 3B must dive (runners on 1st & 2nd)',
+ runners:['R1','R2'], hit:{to:'sLF', t:2.1, by:'LF'}, throws:[{to:'C',via:'1B'}],
+ f:{'3B':[{to:[-58,98],spd:30},{to:[-58,74],wait:0.9,spd:16}], SS:['B3'], '1B':[{cut:['sLF','H',0.85]}], LF:['sLF'], CF:[{behind:['H','sLF',30]}],
+    '2B':['B2'], C:['H'], P:[{behind:['sLF','H',35]}], RF:[[8,172]]},
+ run:{R2:['B3','H'], R1:['B2','T2',{to:'B2',wait:0.5}], B:['B1','T1',{to:'B1',wait:0.6}]},
+ jobs:{P:'Moves behind home plate to back up a potential throw from the left fielder.',C:'Prepares for a throw from left field and assists in adjusting the first baseman for a cut-off.','1B':'Moves into cut-off position if the third baseman cannot get there.','2B':'Covers second if the play is not at home or third.','3B':'Attempts to recover to cover third if he misses the cut-off; otherwise, the shortstop takes over.',SS:'Covers third base if the third baseman cannot recover.',LF:'Throws home if there’s a play; otherwise, relays to third or second.',CF:'Backs up left field.',RF:'Backs up second base.'},
+ assumed:['The slide doesn’t list runners. Runners on 1st and 2nd are shown because the plan is built around a throw home.','The animation shows the shortstop taking third while the third baseman gets up.']},
+
+{id:'s16', group:'Singles – infielder dives', title:'Single to RF – 1B must dive (runner on 2nd)',
+ runners:['R2'], hit:{to:'sRF', t:2.1, by:'RF'}, throws:[{to:'C',via:'3B'}],
+ f:{'1B':[{to:[62,96],spd:30},{to:'B1',wait:0.9,spd:16}], '3B':[{cut:['sRF','H',0.8]}], SS:['B3'], '2B':['B2'], RF:['sRF'], CF:[{behind:['H','sRF',30]}],
+    C:['H'], P:[{behind:['sRF','H',35]}], LF:[{behind:['sRF','B3',32]}]},
+ run:{R2:['B3','H'], B:['B1','T1',{to:'B1',wait:0.6}]},
+ jobs:{P:'Moves behind home plate to backup a potential throw from right field.',C:'Prepares for a throw from right field and helps position the third baseman for a cut-off.','1B':'Attempts to recover and cover first base.','2B':'Covers second if no play is at home.','3B':'Moves into cut-off position if the first baseman cannot get there.',SS:'Covers second but moves to third if the second baseman can cover his base.',LF:'Backs up third base.',CF:'Backs up the right fielder.',RF:'Throws home if a play is possible; otherwise, relays to third or second.'},
+ assumed:['The slide doesn’t list runners. A runner on 2nd is shown because the plan is built around a throw home.','Because the 2B covers second, the shortstop is shown moving to third.']},
+
+{id:'s17', group:'Singles – infielder dives', title:'Single to RF – 1B dives, runners on 1st & 2nd (or loaded)',
+ runners:['R1','R2'], hit:{to:'sRF', t:2.1, by:'RF'}, throws:[{to:'C',via:'P'}],
+ f:{'1B':[{to:[62,96],spd:30},{to:'B1',wait:0.9,spd:16}], P:[{cut:['sRF','H',0.78]}], C:['H'], '2B':['B2'], '3B':['B3'], SS:[{cut:['sRF','B3',0.5]}],
+    LF:[{behind:['sRF','B3',32]}], RF:['sRF'], CF:[{behind:['H','sRF',30]},{to:[-8,172],wait:0.2}]},
+ run:{R2:['B3','H'], R1:['B2','T2',{to:'B2',wait:0.5}], B:['B1','T1',{to:'B1',wait:0.6}]},
+ jobs:{P:'Moves to the cut-off position for a throw from the right fielder to home plate. He listens for the catcher’s call on whether the throw will be to home, third, or second.',C:'Covers home plate and helps guide the pitcher into the correct cut-off position.','1B':'If diving for the ball takes him away from the cut-off position, he will attempt to recover and cover first base. He communicates if the runner breaks for second.','2B':'Covers second base, preparing for a throw from the right fielder. If no play at third or home, he backs up throws to second.','3B':'Covers third base, watching the runner. If there is no play at home, he prepares for a throw to third.',SS:'Moves into the cut-off position for the right fielder’s throw. He listens for calls from the third baseman and backs up throws to second if needed.',LF:'Moves behind third base to back up throws to that base.',CF:'Backs up the right fielder and then shifts behind second base to cover throws.',RF:'Fields the ball: play at home → throw through the pitcher (cut-off). No play at home → look to third using the shortstop as cut-off. If both runners advance safely → throw directly to second.'}},
+
+// ================= DOUBLES =================
+{id:'s18', group:'Sure doubles – tandem relay', title:'Double down the LF line – no runners',
+ runners:[], hit:{to:'dLF', t:3.0, by:'LF'}, throws:['SS','3B'], tandem:['SS','2B'],
+ f:{LF:['dLF'], SS:[{cut:['dLF','B3',0.4]}], '2B':[{cut:['dLF','B3',0.5]}], '3B':['B3'], P:[{behind:['dLF','B3',32]}], C:[[-18,12]],
+    '1B':[[50,92],{to:'B2',wait:0.9}], CF:[[-25,182]], RF:[[22,180]]},
+ run:{B:['B1','B2','T2',{to:'B2',wait:0.4}]},
+ jobs:{P:'Moves behind third base to back up a throw from the shortstop or second baseman.',C:'Assists in a potential play at third.','1B':'Trails the runner to second in case of a throw.','2B':'Positions as the backup for the shortstop in the tandem relay.',SS:'Acts as the front cut-off in the tandem relay.','3B':'Covers third base and communicates play calls.',LF:'Throws to shortstop for the relay.',CF:'Moves behind second base for backup.',RF:'Moves behind second base for backup.'},
+ assumed:['The slide doesn’t name the relay target. The relay is shown going to third to stop a triple, since that’s the base the pitcher is backing up.']},
+
+{id:'s19', group:'Sure doubles – tandem relay', title:'Double down the RF line – no runners',
+ runners:[], hit:{to:'dRF', t:3.0, by:'RF'}, throws:['2B','3B'], tandem:['2B','SS'],
+ f:{RF:['dRF'], '2B':[{cut:['dRF','B3',0.33]}], SS:[{cut:['dRF','B3',0.42]}], '3B':['B3'], P:[{behind:['dRF','B3',32]}], C:[[-18,12]],
+    '1B':[[50,92],{to:'B2',wait:0.9}], CF:[[25,182]], LF:[[-25,180]]},
+ run:{B:['B1','B2','T2',{to:'B2',wait:0.4}]},
+ jobs:{P:'Moves behind third base to back up a throw.',C:'Assists in a potential play at third.','1B':'Trails the runner to second in case of a throw.','2B':'Acts as the front man in the tandem relay.',SS:'Serves as the backup relay man.','3B':'Covers third and communicates play calls.',LF:'Backs up second base.',CF:'Moves behind second base for backup.',RF:'Fields and throws to second baseman for the relay.'},
+ assumed:['The relay is shown going to third to stop a triple, since that’s the base the pitcher is backing up.']},
+
+{id:'s20', group:'Sure doubles – tandem relay', title:'Double down the LF line – runner on 1st',
+ runners:['R1'], hit:{to:'dLF', t:3.0, by:'LF'}, throws:['SS',{to:'C',via:'1B'}], tandem:['SS','2B'],
+ f:{LF:['dLF'], SS:[{cut:['dLF','H',0.33]}], '2B':[{cut:['dLF','H',0.42]}], '1B':[{cut:['dLF','H',0.86]}], '3B':['B3'], C:['H'], P:[{behind:['dLF','H',35]}],
+    RF:['B2'], CF:[[-10,180]]},
+ run:{R1:['B2','B3','H'], B:['B1','B2']},
+ jobs:{P:'Moves behind home to back up a throw.',C:'Prepares for a throw from the cutoff.','1B':'Moves to the cut-off position.','2B':'Plays as the back man in the tandem relay.',SS:'Acts as the front cut-off man.','3B':'Covers third and communicates play calls.',LF:'Throws to the shortstop.',CF:'Backs up throws to second.',RF:'Covers second for a throw.'}},
+
+{id:'s21', group:'Sure doubles – tandem relay', title:'Double to the gap (CF) – runner on 1st',
+ runners:['R1'], hit:{to:'dCF', t:3.0, by:'CF'}, throws:['SS',{to:'C',via:'1B'}], tandem:['SS','2B'],
+ f:{CF:['dCF'], LF:[[-112,262]], SS:[{cut:['dCF','H',0.33]}], '2B':[{cut:['dCF','H',0.42]}], '1B':[{cut:['dCF','H',0.86]}], '3B':['B3'], C:['H'], P:[{behind:['dCF','H',35]}],
+    RF:['B2']},
+ run:{R1:['B2','B3','H'], B:['B1','B2']},
+ jobs:{P:'Moves behind home for a throw.',C:'Prepares for a possible play at the plate.','1B':'Moves to the cut-off position.','2B':'Plays as the back man in the tandem relay.',SS:'Acts as the front cut-off.','3B':'Covers third and makes play calls.',LF:'Throws to the shortstop.',CF:'Throws to the shortstop in the tandem relay.',RF:'Covers second base.'},
+ assumed:['The slide has both LF and CF “throws to the shortstop,” so whoever gets to the ball throws. The animation puts the ball in the left-center gap, with the CF fielding it and the LF backing up.']},
+
+{id:'s22', group:'Sure doubles – tandem relay', title:'Double down the RF line – runner on 1st',
+ runners:['R1'], hit:{to:'dRF', t:3.0, by:'RF'}, throws:['2B',{to:'C',via:'1B'}], tandem:['2B','SS'],
+ f:{RF:['dRF'], '2B':[{cut:['dRF','H',0.33]}], SS:[{cut:['dRF','H',0.42]}], '1B':[{cut:['dRF','H',0.86]}], '3B':['B3'], C:['H'], P:[{behind:['dRF','H',35]}],
+    LF:[{behind:['dRF','B3',32]}], CF:['B2']},
+ run:{R1:['B2','B3','H'], B:['B1','B2']},
+ notes:['3B call words: “Four-four” = throw home · “Three-three” = throw to third · “Two-two” = throw to second · “Cut and hold” = no play, get the ball back to the infield.'],
+ jobs:{P:'Moves behind home plate to back up a possible throw from the outfield to home.',C:'Covers home plate and helps guide the first baseman into the proper cut-off position.','1B':'Breaks to the cut-off position for a throw from the right fielder. He listens for a call from the catcher for a possible throw to home, third, or second.','2B':'Serves as the front man in the tandem relay, responsible for catching the throw from the right fielder. He determines whether the ball will go to third base, the plate, second base, or back to the infield.',SS:'Backs up the second baseman on the tandem relay and communicates positioning.','3B':'Covers third base and communicates with the shortstop and second baseman, calling out where the ball should go.',LF:'Moves behind third base to back up possible plays.',CF:'Breaks toward second base to cover the bag in case of a throw or to prevent the batter-runner from taking a wide turn.',RF:'Fields the ball down the right field line and makes a throw to the second baseman, who serves as the front man in the tandem relay.'},
+ assumed:['The deck has two RF-line, runner-on-1st slides that match. They’re combined here using the more detailed one.']},
+
+// ================= POP FOULS =================
+{id:'s23', group:'Pop flies in foul territory', title:'Foul pop – between home and 1st',
+ runners:[], hit:{to:'pf1', t:3.6, by:'1B', pop:true}, throws:[],
+ f:{'1B':['pf1'], C:[[24,8]], P:[{to:'H',wait:0.4}], '2B':['B1'], SS:['B2'], '3B':['B3'], LF:[[-96,112]], CF:[[0,178]], RF:[[100,86]]},
+ run:{},
+ jobs:{P:'Covers home for a possible play at the plate.',C:'Attempts to field the ball and checks runners.','1B':'Has priority over catcher for the fly ball.','2B':'Covers second in case the runner advances. (Animation: covers 1st – see note)',SS:'Prepares for a throw from second. (Animation: covers 2nd)','3B':'Covers third and communicates play calls.',LF:'Backs up third base.',CF:'Backs up second base.',RF:'Backs up first base.'},
+ assumed:['With the 1B chasing the pop, the deck leaves first base empty. The animation uses the standard coverage, with the 2B covering first and the SS covering second.']},
+
+{id:'s24', group:'Pop flies in foul territory', title:'Foul pop – between home and 3rd',
+ runners:[], hit:{to:'pf3', t:3.6, by:'3B', pop:true}, throws:[],
+ f:{'3B':['pf3'], C:[[-24,8]], P:[{to:'H',wait:0.4}], '1B':['B1'], '2B':['B2'], SS:['B3'], LF:[[-96,112]], CF:[[0,178]], RF:[[100,86]]},
+ run:{},
+ jobs:{P:'Covers home for a possible play.',C:'Attempts to field the ball and checks runners.','1B':'Covers first base.','2B':'Covers second in case the runner advances.',SS:'Covers second. (Animation: covers 3rd – see note)','3B':'Covers third base and has priority over the catcher (goes after the pop).',LF:'Backs up third base.',CF:'Backs up second base.',RF:'Backs up first base.'},
+ assumed:['The deck has both the 2B and SS covering second, and the 3B both covering third and catching the pop. The animation uses the standard coverage: the 3B catches it and the SS covers third.']},
+
+{id:'s25', group:'Pop flies in foul territory', title:'Foul pop – behind 1st base',
+ runners:[], hit:{to:'pfb1', t:3.8, by:'1B', pop:true}, throws:[],
+ f:{'1B':['pfb1'], C:[[6,-2]], P:[[14,18]], '2B':['B1'], SS:['B2'], '3B':['B3'], LF:[[-96,112]], CF:[[0,178]], RF:[[118,98]]},
+ run:{},
+ jobs:{P:'Covers home for a play.',C:'Prepares for a play at the plate.','1B':'Attempts to catch the fly ball and check runners.','2B':'Covers second. (Animation: covers 1st – see note)',SS:'Covers second for a throw.','3B':'Communicates with defense.',LF:'Backs up third base.',CF:'Backs up second base.',RF:'Backs up first base.'},
+ assumed:['The deck has both the 2B and SS covering second, which leaves first open. The animation shows the 2B covering first. The pitcher and catcher both work the home-plate area.']},
+
+{id:'s26', group:'Pop flies in foul territory', title:'Foul pop – behind 3rd base',
+ runners:[], hit:{to:'pfb3', t:3.8, by:'SS', pop:true}, throws:[],
+ f:{SS:['pfb3'], '3B':['B3'], C:[[-6,-2]], P:[[-14,18]], '1B':['B1'], '2B':['B2'], LF:[[-120,100]], CF:[[0,178]], RF:[[100,86]]},
+ run:{},
+ jobs:{P:'Covers home for a play.',C:'Prepares for a play at the plate.','1B':'Covers first base.','2B':'Covers second.',SS:'Attempts to catch the fly ball.','3B':'Covers third base.',LF:'Backs up third base.',CF:'Backs up second base.',RF:'Backs up first base.'}},
+
+// ================= PASSED BALL / WILD PITCH =================
+{id:'s27', group:'Passed ball / wild pitch', title:'Passed ball / wild pitch – runners on 2nd & 3rd',
+ runners:['R2','R3'], pb:true, hit:{to:'pb', t:1.1, by:'C'}, throws:['P'],
+ f:{C:[{to:'pb',wait:0.2}], P:[{to:[0,4],wait:0.15}], SS:[[-8,40]], '1B':[[18,34]], '2B':['B2'], '3B':['B3'], LF:[[-100,104]], CF:[[0,178]], RF:[[60,240]]},
+ run:{R3:['H'], R2:['B3']},
+ notes:['Deflections: if the ball deflects toward third base, the 3B backs up the throw home. If it deflects toward first base, the 1B backs up the throw home.'],
+ jobs:{P:'Covers home plate for a potential throw from the catcher if a runner attempts to score.',C:'Retrieves the ball and throws home if a runner advances.','1B':'Moves forward to assist the shortstop in backing up the catcher’s throw to home.','2B':'Covers second base.',SS:'Moves toward the mound to help back up the throw home.','3B':'Covers third base.',LF:'Backs up third base.',CF:'Backs up second base.',RF:'Supports center field.'},
+ assumed:['The slide also covers runners on 1st and 2nd and bases loaded. Runners on 2nd and 3rd are shown.']},
+
+{id:'s28', group:'Passed ball / wild pitch', title:'Ball four / strike three gets by the catcher – runner on 2nd (or 2nd & 3rd)',
+ runners:['R2'], pb:true, hit:{to:'pb', t:1.1, by:'C'}, throws:['SS'],
+ f:{C:[{to:'pb',wait:0.2}], P:[{to:[0,4],wait:0.15}], SS:[[-6,62]], '1B':[[44,70]], '2B':['B2'], '3B':['B3'], LF:[[-100,104]], CF:[[0,178]], RF:[[92,78]]},
+ run:{R2:[[-22,108],{to:'B2',wait:0.5}], B:['B1']},
+ jobs:{P:'Covers home plate if a runner attempts to score.',C:'Retrieves the ball and throws home if needed.','1B':'Watches the runner at second and signals “two-two” if the runner is advancing.','2B':'Prepares for a throw from the shortstop.',SS:'Breaks toward the mound, checking runners at third and second.','3B':'Watches for a runner breaking home and signals “four-four” if so.',LF:'Backs up throws to third.',CF:'Backs up throws to second.',RF:'Covers first if there’s a rundown between first and second.'},
+ assumed:['The animation shows the runner on 2nd faking toward third and getting held, and the catcher throwing to the SS near the mound.']}
+];
+
+</script>
+<script>
+(function(){
+const PT={H:[0,0],B1:[63.6,63.6],B2:[0,127.3],B3:[-63.6,63.6],M:[0,60.5],
+ sLF:[-115,200],sCF:[0,236],sRF:[115,200],sLF2:[-122,190],sCF2:[16,236],sRF2:[106,192],
+ dLF:[-198,222],dRF:[198,222],dCF:[-75,284],pf1:[44,16],pf3:[-44,16],pfb1:[104,62],pfb3:[-104,62],pb:[18,-40],
+ T1:[60,84],T2:[-14,124],T3:[-60,48],L1:[56,71],L2:[-9,119],L3:[-56,55]};
+const START={P:[0,58],C:[0,-7],'1B':[72,90],'2B':[40,150],SS:[-40,150],'3B':[-72,84],LF:[-140,236],CF:[0,276],RF:[140,236]};
+const POS=['P','C','1B','2B','SS','3B','LF','CF','RF'];
+const COLOR={P:'#14213d',C:'#14213d','1B':'#1d4e89','2B':'#1d4e89',SS:'#1d4e89','3B':'#1d4e89',LF:'#5a189a',CF:'#5a189a',RF:'#5a189a'};
+const SPD={P:22,C:20,'1B':24,'2B':25,SS:25,'3B':24,LF:27,CF:27,RF:27};
+const REACT={P:0.45,C:0.5,'1B':0.3,'2B':0.3,SS:0.3,'3B':0.3,LF:0.25,CF:0.25,RF:0.25};
+const RUN_SPD=26, THROW_SPD=110, PITCH=0.45;
+const NAME={P:'P',C:'C','1B':'1B','2B':'2B',SS:'SS','3B':'3B',LF:'LF',CF:'CF',RF:'RF'};
+const LONG={P:'Pitcher',C:'Catcher','1B':'First Base','2B':'Second Base',SS:'Shortstop','3B':'Third Base',LF:'Left Field',CF:'Center Field',RF:'Right Field'};
+const BASEFOR={'R1':'B1','R2':'B2','R3':'B3'}, LEAD={'R1':'L1','R2':'L2','R3':'L3'};
+
+function R(s){
+  if(typeof s==='string') return PT[s]||START[s];
+  if(Array.isArray(s)) return s;
+  if(s.cut){const A=R(s.cut[0]),B=R(s.cut[1]),f=s.cut[2];return [A[0]+(B[0]-A[0])*f,A[1]+(B[1]-A[1])*f];}
+  if(s.behind){const A=R(s.behind[0]),B=R(s.behind[1]),d=s.behind[2];const dx=B[0]-A[0],dy=B[1]-A[1],L=Math.hypot(dx,dy);return [B[0]+dx/L*d,B[1]+dy/L*d];}
+  throw new Error('bad spec');
+}
+const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
+const ease=u=>u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2;
+
+const COVER={B1:[55,64],B2:[0,117],B3:[-55,64],H:[-5,-7]};
+function buildTrack(start,steps,react,spd,linear,cover){
+  const kf=[{t:0,p:start}];let cur=start,t=PITCH+react;
+  (steps||[]).forEach(st=>{
+    const o=(st&&st.to!==undefined)?st:{to:st};
+    const tgt=R(cover&&COVER[o.to]?COVER[o.to]:o.to); const s=t+(o.wait||0);
+    const d=dist(cur,tgt); const dur=Math.max(0.25,d/(o.spd||spd));
+    kf.push({t:s,p:cur}); kf.push({t:s+dur,p:tgt}); cur=tgt; t=s+dur+0.1;
+  });
+  return {kf,linear};
+}
+function at(track,t){
+  const k=track.kf; if(t<=k[0].t) return k[0].p;
+  for(let i=1;i<k.length;i++){ if(t<=k[i].t){const a=k[i-1],b=k[i];const span=b.t-a.t; if(span<=0) return b.p; let u=(t-a.t)/span; u=track.linear?u:ease(u); return [a.p[0]+(b.p[0]-a.p[0])*u,a.p[1]+(b.p[1]-a.p[1])*u];}}
+  return k[k.length-1].p;
+}
+const endT=tr=>tr.kf[tr.kf.length-1].t;
+
+function compile(S){
+  const tr={};
+  POS.forEach(p=>{tr[p]=buildTrack(START[p],S.f[p]||[],REACT[p],SPD[p],false,true);});
+  // runners
+  const rtr={};
+  (S.runners||[]).forEach(r=>{rtr[r]=null;});
+  const runIds=Object.keys(Object.assign({},...((S.runners||[]).map(r=>({[r]:1}))),S.run||{}));
+  runIds.forEach(id=>{
+    const st=id==='B'?[2,-4]:R(LEAD[id]);
+    const k=buildTrack(st,(S.run||{})[id]||[],id==='B'?0.15:0.0,RUN_SPD,true);
+    if(id==='B') k.kf.forEach(f=>{if(f.t===0){}});
+    rtr[id]=k;
+  });
+  // ball
+  const ball=[]; const beats=[]; const lines=[];
+  const pitchFrom=[0,54];
+  ball.push({t:0,p:pitchFrom}); 
+  let holder=S.hit.by, catchPt=R(S.hit.to), tHold;
+  if(S.pb){
+    ball.push({t:PITCH,p:[0,0]});
+    const tPb=PITCH+S.hit.t; ball.push({t:tPb,p:catchPt});
+    const ca=endT(tr[holder]); tHold=Math.max(tPb,ca);
+    ball.push({t:tHold,p:catchPt});
+    beats.push([0,'Pitch…']);beats.push([PITCH+0.1,'Ball gets by the catcher!']);
+    beats.push([tHold,LONG[holder]+' retrieves the ball']);
+  } else {
+    ball.push({t:PITCH,p:[0,2]});
+    const fa=tr[holder].kf[Math.min(2,tr[holder].kf.length-1)].t; // arrival at first step
+    const arr=Math.max(PITCH+S.hit.t,fa); tHold=arr;
+    ball.push({t:arr,p:catchPt,air:S.hit.pop?2.6:(S.hit.to[0]==='d'?0.5:0.15)});
+    const where={sLF:'left field',sLF2:'left field (through the hole)',sCF:'center field',sCF2:'center field (up the middle)',sRF:'right field',sRF2:'right field (through the hole)',dLF:'the left-field corner',dRF:'the right-field corner',dCF:'the left-center gap',pf1:'foul ground, home–1st',pf3:'foul ground, home–3rd',pfb1:'foul ground behind 1st',pfb3:'foul ground behind 3rd'}[S.hit.to]||'the field';
+    beats.push([0,'Pitch…']);
+    beats.push([PITCH,(S.hit.pop?'Pop-up to ':S.hit.to[0]==='d'?'Extra-base hit to ':'Base hit to ')+where+'!']);
+    beats.push([arr,S.hit.pop?(LONG[holder]+' makes the catch – everyone covered'):(LONG[holder]+' fields it')]);
+  }
+  // throws
+  const firstCatch=catchPt, firstHold=tHold;
+  (S.throws||[]).forEach((th,i)=>{
+    const o=typeof th==='string'?{to:th}:th;
+    const rec=o.to; let rel=tHold+(i===0?0.55:0.35);
+    let tgt=at(tr[rec],1e9); let fl=dist(catchPt,tgt)/THROW_SPD;
+    rel=Math.max(rel,endT(tr[rec])-fl+0.05);
+    ball.push({t:rel,p:catchPt});
+    const arr=rel+fl; ball.push({t:arr,p:tgt,air:0.35});
+    let txt=LONG[holder]+' throws to '+LONG[rec];
+    if(o.via) txt=LONG[holder]+' throws home, through the cut-off ('+NAME[o.via]+')';
+    else if(S.tandem&&i===0) txt=LONG[holder]+' hits the front relay man ('+NAME[rec]+'); '+NAME[S.tandem[1]]+' is the back man';
+    else if(i>0) txt=LONG[holder]+' relays to '+LONG[rec];
+    else if(rec==='SS'||rec==='2B'||rec==='1B'||rec==='3B') { if(i<S.throws.length-1) txt=LONG[holder]+' hits the cut-off man ('+NAME[rec]+')'; }
+    beats.push([rel,txt]);
+    if(o.via) lines.push({a:catchPt,b:tgt,t:tHold});
+    holder=rec; catchPt=tgt; tHold=arr;
+  });
+  if((S.throws||[]).length>1) lines.push({a:firstCatch,b:catchPt,t:firstHold});
+  if((S.throws||[]).length) beats.push([tHold,'Ball in. '+LONG[holder]+' has it – play over']);
+  let end=tHold;
+  POS.forEach(p=>end=Math.max(end,endT(tr[p])));
+  Object.values(rtr).forEach(r=>{if(r) end=Math.max(end,endT(r));});
+
+  return {tr,rtr,ball,beats,end:end+0.8,lines};
+}
+function ballAt(B,t){
+  if(t<=B[0].t) return {p:B[0].p,h:0};
+  for(let i=1;i<B.length;i++){ if(t<=B[i].t){const a=B[i-1],b=B[i];const sp=b.t-a.t;if(sp<=0)return{p:b.p,h:0};const u=(t-a.t)/sp;return{p:[a.p[0]+(b.p[0]-a.p[0])*u,a.p[1]+(b.p[1]-a.p[1])*u],h:(b.air||0)*Math.sin(Math.PI*u)};}}
+  return {p:B[B.length-1].p,h:0};
+}
+
+// ---------- SVG field ----------
+const NS='http://www.w3.org/2000/svg';
+const svg=document.getElementById('field');
+function el(n,a,parent){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);(parent||svg).appendChild(e);return e;}
+const X=p=>p[0], Y=p=>-p[1];
+function drawField(){
+  el('rect',{x:-228,y:-320,width:456,height:378,fill:'#2f7d32'});
+  // outfield grass with mowing stripes
+  const fence='M0,0 L-219,-219 A310,310 0 0 1 219,-219 Z';
+  el('path',{d:fence,fill:'#3a9a3f'});
+  for(let i=0;i<8;i++){el('path',{d:`M0,0 L${-198+i*49.5},-${198+(i%2?0:0)}`,stroke:'none'});}
+  const stripes=el('g',{opacity:.12});
+  for(let x=-240;x<240;x+=40) el('rect',{x:x,y:-320,width:20,height:378,fill:'#fff'},stripes);
+  stripes.setAttribute('clip-path','url(#fc)');
+  const defs=el('defs',{}); const cp=el('clipPath',{id:'fc'},defs); el('path',{d:fence},cp);
+  // warning track
+  el('path',{d:'M-215,-215 A304,304 0 0 1 215,-215',fill:'none',stroke:'#b98b5a',"stroke-width":12});
+  el('path',{d:'M-220,-220 A311,311 0 0 1 220,-220',fill:'none',stroke:'#e8e8e8',"stroke-width":3});
+  // infield dirt
+  el('path',{d:'M0,0 L-88,-88 A95,95 0 0 1 88,-88 Z',fill:'#c79a64'});
+  el('path',{d:'M0,0 L-63.6,-63.6 L0,-127.3 L63.6,-63.6 Z',fill:'#3a9a3f'});
+  // base paths
+  el('path',{d:'M0,0 L63.6,-63.6 L0,-127.3 L-63.6,-63.6 Z',fill:'none',stroke:'#c79a64',"stroke-width":7,"stroke-linejoin":'round'});
+  // home circle & mound
+  el('circle',{cx:0,cy:0,r:14,fill:'#c79a64'});
+  el('circle',{cx:0,cy:-60.5,r:9,fill:'#c79a64'});
+  el('rect',{x:-3,y:-61.5,width:6,height:2,fill:'#fff'});
+  // foul lines
+  el('line',{x1:0,y1:0,x2:-219,y2:-219,stroke:'#fff',"stroke-width":1.6});
+  el('line',{x1:0,y1:0,x2:219,y2:-219,stroke:'#fff',"stroke-width":1.6});
+  // backstop
+  el('path',{d:'M-70,40 Q0,56 70,40',fill:'none',stroke:'#7a5c3a',"stroke-width":4});
+  // bases
+  [[63.6,63.6],[0,127.3],[-63.6,63.6]].forEach(b=>el('rect',{x:b[0]-3.2,y:-b[1]-3.2,width:6.4,height:6.4,fill:'#fff',transform:`rotate(45 ${b[0]} ${-b[1]})`}));
+  el('path',{d:'M-3.5,-1 L3.5,-1 L3.5,2 L0,5 L-3.5,2 Z',fill:'#fff',transform:'scale(1,-1)'});
+}
+drawField();
+const gRoutes=el('g',{}); const gLines=el('g',{}); const gTrail=el('g',{}); const gActors=el('g',{});
+const shadow=el('ellipse',{rx:4.5,ry:3,fill:'rgba(0,0,0,.35)'},gActors);
+const fNodes={};
+POS.forEach(p=>{
+  const g=el('g',{style:'cursor:pointer'},gActors);
+  const halo=el('circle',{r:17,fill:'none',stroke:'#ffd166',"stroke-width":3.5,opacity:0},g);
+  el('circle',{r:12,fill:COLOR[p],stroke:'#fff',"stroke-width":2},g);
+  const t=el('text',{y:4,"text-anchor":'middle',"font-size":p.length>1?10:11,"font-weight":800,fill:'#fff',"font-family":'Arial,Helvetica,sans-serif'},g);t.textContent=p;
+  g.addEventListener('click',()=>focus(p));
+  fNodes[p]={g,halo};
+});
+const rNodes={};
+['R3','R2','R1','B'].forEach(id=>{
+  const g=el('g',{},gActors);
+  el('rect',{x:-7,y:-7,width:14,height:14,fill:'#d62828',stroke:'#fff',"stroke-width":2,transform:'rotate(45)'},g);
+  const t=el('text',{y:3.5,"text-anchor":'middle',"font-size":id==='B'?10:8.5,"font-weight":800,fill:'#fff',"font-family":'Arial,Helvetica,sans-serif'},g);t.textContent=id;
+  rNodes[id]=g;
+});
+const ballN=el('circle',{r:4.5,fill:'#fff',stroke:'#d62828',"stroke-width":1.6},gActors);
+const trail=el('polyline',{fill:'none',stroke:'rgba(255,255,255,.75)',"stroke-width":1.6,"stroke-dasharray":'3 3'},gTrail);
+
+// ---------- state ----------
+const sel=document.getElementById('sit'), cap=document.getElementById('cap'), scrub=document.getElementById('scrub'), clock=document.getElementById('clock');
+let cur=0, C=null, t=0, playing=false, speed=1, last=null, showRoutes=false, showLabels=true, focused=null, trailPts=[];
+let groups={};
+SITS.forEach((s,i)=>{ if(!groups[s.group]){const og=document.createElement('optgroup');og.label=s.group;sel.appendChild(og);groups[s.group]=og;} const o=document.createElement('option');o.value=i;o.textContent=(i+1)+'. '+s.title;groups[s.group].appendChild(o);});
+
+function load(i){
+  cur=(i+SITS.length)%SITS.length; sel.value=cur; const S=SITS[cur];
+  C=compile(S); t=0; playing=false; trailPts=[]; focused=null;
+  document.getElementById('ttl').textContent=S.title; document.getElementById('grp').textContent=S.group;
+  // jobs
+  const jobs=document.getElementById('jobs'); jobs.innerHTML='';
+  POS.forEach(p=>{const d=document.createElement('div');d.className='job';d.dataset.p=p;
+    d.innerHTML=`<div class="tag" style="background:${COLOR[p]}">${p}</div><div><b>${LONG[p]}</b><p></p></div>`;
+    d.querySelector('p').textContent=S.jobs[p]||'';
+    d.addEventListener('click',()=>focus(p)); jobs.appendChild(d);});
+  const nc=document.getElementById('notesCard'), nl=document.getElementById('notes'); nl.innerHTML='';
+  (S.notes||[]).forEach(n=>{const li=document.createElement('li');li.textContent=n;nl.appendChild(li);}); nc.style.display=(S.notes||[]).length?'':'none';
+  const ac=document.getElementById('assumeCard'), al=document.getElementById('assume'); al.innerHTML='';
+  (S.assumed||[]).forEach(n=>{const li=document.createElement('li');li.textContent=n;al.appendChild(li);}); ac.style.display=(S.assumed||[]).length?'':'none';
+  // runners visibility
+  Object.keys(rNodes).forEach(id=>rNodes[id].style.display=C.rtr[id]?'':'none');
+  // routes
+  gRoutes.innerHTML='';
+  POS.forEach(p=>{const pts=C.tr[p].kf.map(k=>X(k.p)+','+Y(k.p)).join(' ');el('polyline',{points:pts,fill:'none',stroke:'rgba(255,255,255,.55)',"stroke-width":1.4,"stroke-dasharray":'4 3'},gRoutes);
+    const e=C.tr[p].kf[C.tr[p].kf.length-1].p; el('circle',{cx:X(e),cy:Y(e),r:3,fill:'rgba(255,255,255,.6)'},gRoutes);});
+  gRoutes.style.display=showRoutes?'':'none';
+  setPlayBtn(); render(); 
+}
+function focus(p){ focused=(focused===p)?null:p; document.querySelectorAll('.job').forEach(d=>d.classList.toggle('sel',d.dataset.p===focused)); render(); }
+function render(){
+  POS.forEach(p=>{const q=at(C.tr[p],t);fNodes[p].g.setAttribute('transform',`translate(${X(q)},${Y(q)})`);
+    fNodes[p].halo.setAttribute('opacity',focused===p?1:0); fNodes[p].g.style.opacity=(focused&&focused!==p)?.45:1;});
+  Object.keys(rNodes).forEach(id=>{const r=C.rtr[id]; if(!r) return; const q=at(r,t); rNodes[id].setAttribute('transform',`translate(${X(q)},${Y(q)})`);});
+  const b=ballAt(C.ball,t); const sc=1+b.h;
+  shadow.setAttribute('cx',X(b.p)); shadow.setAttribute('cy',Y(b.p)); shadow.setAttribute('opacity',b.h>0.05?1:0);
+  ballN.setAttribute('cx',X(b.p)); ballN.setAttribute('cy',Y(b.p)-b.h*10); ballN.setAttribute('r',4.5*sc);
+  // trail
+  if(t>PITCH-0.01){ const pts=[]; C.ball.forEach(k=>{if(k.t<=t&&k.t>=PITCH)pts.push(k.p);}); pts.push(b.p); trail.setAttribute('points',pts.map(p=>X(p)+','+Y(p)).join(' ')); } else trail.setAttribute('points','');
+  // cut lines (once fielder near spot)
+  gLines.innerHTML='';
+  C.lines.forEach(L=>{ if(t>L.t-1.0) el('line',{x1:X(L.a),y1:Y(L.a),x2:X(L.b),y2:Y(L.b),stroke:'#ffd166',"stroke-width":2,"stroke-dasharray":'6 4',opacity:.85},gLines); });
+  // caption
+  let txt=''; C.beats.forEach(bt=>{if(t>=bt[0]) txt=bt[1];}); cap.textContent=txt||'Press Play';
+  cap.style.display=showLabels?'':'none';
+  scrub.value=Math.round(t/C.end*1000); clock.textContent=t.toFixed(1)+'s / '+C.end.toFixed(1)+'s';
+}
+function frame(ts){
+  if(playing){ if(last!=null){ t+=Math.min(0.05,(ts-last)/1000)*speed; if(t>=C.end){t=C.end;playing=false;setPlayBtn();} render(); } last=ts; }
+  else last=null;
+  requestAnimationFrame(frame);
+}
+function setPlayBtn(){ document.getElementById('play').classList.toggle('on',playing); }
+document.getElementById('play').onclick=()=>{ if(t>=C.end) t=0; playing=true; setPlayBtn(); };
+document.getElementById('pause').onclick=()=>{ playing=false; setPlayBtn(); };
+document.getElementById('replay').onclick=()=>{ t=0; playing=true; setPlayBtn(); render(); };
+document.getElementById('slow').onclick=e=>{ speed=speed===1?0.5:1; e.target.classList.toggle('on',speed!==1); };
+document.getElementById('routes').onclick=e=>{ showRoutes=!showRoutes; gRoutes.style.display=showRoutes?'':'none'; e.target.classList.toggle('on',showRoutes); };
+document.getElementById('labels').onclick=e=>{ showLabels=!showLabels; e.target.classList.toggle('on',!showLabels); render(); };
+document.getElementById('labels').textContent='Hide captions';
+document.getElementById('labels').onclick=e=>{ showLabels=!showLabels; e.target.textContent=showLabels?'Hide captions':'Show captions'; render(); };
+document.getElementById('clear').onclick=()=>{ focused=null; document.querySelectorAll('.job').forEach(d=>d.classList.remove('sel')); render(); };
+document.getElementById('prev').onclick=()=>load(cur-1);
+document.getElementById('next').onclick=()=>load(cur+1);
+sel.onchange=()=>load(+sel.value);
+scrub.oninput=()=>{ playing=false; setPlayBtn(); t=scrub.value/1000*C.end; render(); };
+// deep link: #s=5&t=3.2
+const h=new URLSearchParams(location.hash.slice(1));
+load(h.has('s')?(+h.get('s')-1):0);
+if(h.has('t')){ t=Math.min(C.end,+h.get('t')); render(); }
+if(h.has('focus')) focus(h.get('focus'));
+if(h.has('routes')) document.getElementById('routes').click();
+requestAnimationFrame(frame);
+window.__SITS=SITS; window.__compile=compile;
+})();
+</script>
+</body>
+</html>
