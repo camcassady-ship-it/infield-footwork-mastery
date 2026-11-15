@@ -137,9 +137,52 @@ test('drills add extras, multi-ball paths, and a job for every position', () => 
   const doubled = SITS.find(s => s.id === 's62');
   assert.ok(doubled.extras.some(e => e.label === 'LF②'));
   assert.ok(doubled.extras.some(e => e.label === 'Fungo'));
-  assert.equal(doubled.balls.length, 2);
+  assert.equal(doubled.balls.length, 12);
   const horn = SITS.find(s => s.id === 's65');
-  assert.equal(horn.balls.length, 2);
+  assert.equal(horn.balls.length, 8);
+});
+
+test('each drill plays every fielder’s rep, in the book order', () => {
+  const order = {
+    s58: ['3B', 'SS', '2B', '1B', 'C'],
+    s59: ['3B', 'SS', '2B', '1B', 'C'],
+    s60: ['3B', 'SS', '2B', '1B'],
+    s61: ['3B', 'SS', '2B', '1B'],
+    s62: ['LF', 'LF', 'CF', 'CF', 'RF', 'RF', 'LF', 'LF', 'CF', 'CF', 'RF', 'RF'],
+    s63: ['CF', 'RF', 'CF', 'RF'],
+    s64: ['LF', 'LF', 'CF', 'CF', 'RF', 'RF'],
+    s65: ['3B', '3B', 'SS', 'SS', '2B', '2B', '1B', '1B'],
+    s66: ['3B', '3B', 'SS', 'SS', '2B', '2B', '1B', '1B'],
+    s67: ['3B', '3B', 'SS', 'SS', '2B', '2B', '1B', '1B', 'C']
+  };
+  for (const [id, pos] of Object.entries(order)) {
+    const S = SITS.find(s => s.id === id);
+    assert.deepEqual(S.reps.map(r => r.pos), pos, id);
+    assert.equal(S.caps.filter(c => /^Rep \d+ of \d+:/.test(c[1])).length, pos.length, id);
+    pos.forEach((_, i) => {
+      assert.match(S.caps.map(c => c[1]).join('\n'), new RegExp('Rep ' + (i + 1) + ' of ' + pos.length + ':'));
+    });
+    const notes = [...(S.notes || []), ...(S.assumed || [])].join(' ');
+    assert.doesNotMatch(notes, /repeats for the others|one is shown|the same throw repeats|Shown is one/i, id);
+    const times = S.reps.map(r => r.t);
+    for (let i = 1; i < times.length; i++) assert.ok(times[i] > times[i - 1], id + ' rep order');
+    const C = compile(S);
+    assert.ok(C.end > times[times.length - 1] + 0.4, id + ' timeline covers the last rep');
+    if (S.balls.length === pos.length) {
+      S.reps.forEach((r, i) => assert.equal(S.balls[i][0].t, r.t, id + ' ball ' + i));
+    }
+  }
+  const out = SITS.find(s => s.id === 's62');
+  const titles = out.caps.filter(c => c[1].startsWith('Rep')).map(c => c[1]);
+  assert.match(titles[0], /Left field ① to 2nd/);
+  assert.match(titles[1], /Left field ② to 3rd/);
+  assert.match(titles[3], /shortstop cuts/);
+  assert.match(titles[6], /Left field ② to 2nd/);
+  assert.match(titles[11], /Right field ① to 3rd/);
+  const home = SITS.find(s => s.id === 's64').caps.filter(c => c[1].startsWith('Rep')).map(c => c[1]);
+  assert.match(home[0], /Left field/);
+  assert.match(home[2], /Center field/);
+  assert.match(home[4], /Right field/);
 });
 
 test('bunt plays stay on the field and do not stack two fielders', () => {

@@ -38,7 +38,8 @@ svg{display:block;width:100%;height:auto}
 .card h2{font-size:15px;margin:2px 0 8px;color:var(--ink)}
 .job{display:flex;gap:10px;align-items:flex-start;padding:9px 6px;border-radius:9px;cursor:pointer;border-bottom:1px solid var(--line)}
 .job:last-child{border-bottom:none}
-.job.sel{background:#efe8db}
+.job.sel,.job.seq{background:#efe8db}
+.job.seq{box-shadow:inset 4px 0 0 var(--stripe)}
 .tag{flex:0 0 38px;height:30px;border-radius:15px;color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
 .job p{margin:4px 0 0;font-size:14px;line-height:1.35}
 ul.notes{margin:0;padding-left:18px;font-size:14px;line-height:1.4}
@@ -656,166 +657,1183 @@ const SITS = [
 ,
 
 // ================= DRILLS =================
-{id:'s58', group:'Drills', title:'Pre-game infield – out at first',
- drill:true, hide:['P'],
- extras:[
-  {id:'fungo', label:'Fungo', mark:'F', at:[34,14]},
-  {id:'feed', label:'Feeder', mark:'Fd', at:[56,36]}
+{
+ "id": "s58",
+ "group": "Drills",
+ "title": "Pre-game infield – out at first",
+ "drill": true,
+ "hide": ["P"],
+ "extras": [
+  {"id": "fungo", "label": "Fungo", "mark": "F", "at": [34,14]},
+  {"id": "feed", "label": "Feeder", "mark": "Fd", "at": [56,36]}
  ],
- f:{'3B':[{to:[-50,82],spd:22,wait:0.3}], '1B':[{to:[66,68],spd:22,wait:0.6}], C:[{to:[0,6],wait:0.4}]},
- balls:[
-  [{t:0,p:[34,14]},{t:0.9,p:[-50,82],air:0.12},{t:1.7,p:[66,68],air:0.2},{t:2.5,p:[0,6],air:0.15}]
+ "f": {
+  "3B": [
+   {"to": [-66,88], "spd": 24, "wait": 0.25},
+   {"to": [-66,78], "spd": 24, "wait": 4.78}
+  ],
+  "1B": [
+   {"to": [68,76], "spd": 24, "wait": 0.44},
+   {"to": [62,82], "spd": 24, "wait": 3.85},
+   {"to": [68,76], "spd": 24, "wait": 1.96}
+  ],
+  "C": [
+   {"to": [2,8], "spd": 20, "wait": 0.69},
+   {"to": [14,10], "spd": 20, "wait": 5.15}
+  ],
+  "SS": [
+   {"to": [-34,146], "spd": 25, "wait": 1.87}
+  ],
+  "2B": [
+   {"to": [34,146], "spd": 25, "wait": 3.44}
+  ]
+ },
+ "balls": [
+  [
+   {"t": 0, "p": [34,14]},
+   {"t": 0.55, "p": [-66,88], "air": 0.1},
+   {"t": 1.05, "p": [68,76], "air": 0.18},
+   {"t": 1.45, "p": [2,8], "air": 0.12},
+   {"t": 1.61, "p": [34,14], "cut": true},
+   {"t": 2.16, "p": [-34,146], "air": 0.1},
+   {"t": 2.64, "p": [68,76], "air": 0.18},
+   {"t": 3.02, "p": [2,8], "air": 0.12},
+   {"t": 3.18, "p": [34,14], "cut": true},
+   {"t": 3.73, "p": [34,146], "air": 0.1},
+   {"t": 4.21, "p": [68,76], "air": 0.18},
+   {"t": 4.59, "p": [2,8], "air": 0.12},
+   {"t": 4.75, "p": [-32,14], "cut": true},
+   {"t": 5.35, "p": [62,82], "air": 0.1},
+   {"t": 5.85, "p": [-66,78], "air": 0.18},
+   {"t": 6.25, "p": [2,8], "air": 0.14},
+   {"t": 6.41, "p": [18,12], "cut": true},
+   {"t": 7.31, "p": [14,10], "air": 0.02},
+   {"t": 7.76, "p": [68,76], "air": 0.14}
+  ]
  ],
- caps:[[0,'Fungo, first-base side of the plate.'],[0.8,'Ground ball to the third baseman.'],[1.6,'Throw to first. One out.'],[2.4,'First baseman throws back to the catcher.']],
- notes:['Order for the single-ball pre-game infield: two outs at first, two double-play balls, one slow roller, one force at the plate.','The shortstop and the second baseman take the same out-at-first grounder, in turn. The first baseman’s own two grounders are thrown to third, not to first.'],
- jobs:{P:'Not in this rep. The fungo hitter is on the first-base side of the plate when the ball is hit to third, short, or second.',C:'Takes the throw back from first. After each round of outs, fields a bunt the fungo hitter tosses: the first two rounds to first, the next two to second.', '1B':'Covers first for the out, then throws the ball back to the catcher. When it is the first baseman’s own grounder, the throw is to third.', '2B':'Takes the next out-at-first grounder after the shortstop. Alternating fielders, not four throws in a row from one man.','3B':'Fields a big-hop grounder and throws to first for the out.',SS:'Takes the same out-at-first grounder after the third baseman.',LF:'Not part of the infield round. Stays at the shallower left-field spot.',CF:'Stays in center.',RF:'Stays in right.'},
- assumed:['Shown is one grounder, third to first. The same throw repeats for the shortstop and the second baseman. The fungo spot is the one the book gives for balls hit to third, short, and second.','A ball in the air, or a bad throw, comes back to the catcher and that fielder gets another grounder. A boot that can still be played should be played.']},
+ "caps": [
+  [0,"Rep 1 of 5: Third base to 1st"],
+  [1.61,"Rep 2 of 5: Shortstop to 1st"],
+  [3.18,"Rep 3 of 5: Second base to 1st"],
+  [4.75,"Rep 4 of 5: First base to 3rd"],
+  [6.41,"Rep 5 of 5: Catcher bunt to 1st"]
+ ],
+ "reps": [
+  {"t": 0, "who": "3B", "pos": "3B"},
+  {"t": 1.61, "who": "SS", "pos": "SS"},
+  {"t": 3.18, "who": "2B", "pos": "2B"},
+  {"t": 4.75, "who": "1B", "pos": "1B"},
+  {"t": 6.41, "who": "C", "pos": "C"}
+ ],
+ "notes": ["Order: third base, shortstop, second base, first base, then the catcher bunt to first.","The fungo hitter starts on the first-base side for third, short, and second, and swings to the third-base side for the first baseman.","After this round of outs the catcher fields a bunt and throws to first. The next two bunt rounds in the book also go to first. The two double-play rounds go to second."],
+ "jobs": {
+  "P": "Off to the side. The fungo hitter runs this round from the plate.",
+  "C": "Turn 5. After third, short, second, and first have each made an out, he fields the fungo bunt and throws to first. On the first three outs he takes the ball back from first.",
+  "1B": "Turn 4. His own grounder is thrown to third, not to first. On the other three outs he takes the throw at first and returns it to the catcher.",
+  "2B": "Turn 3. Fields the grounder and throws to first for the out.",
+  "SS": "Turn 2. Fields the grounder and throws to first for the out.",
+  "3B": "Turn 1. Fields the grounder and throws to first for the out. On the first baseman’s grounder he is the target at third.",
+  "LF": "Holds in left. This round is the infield.",
+  "CF": "Holds in center.",
+  "RF": "Holds in right."
+ },
+ "assumed": ["A ball in the air, or a bad throw, comes back to the catcher and that fielder gets another grounder. A boot that can still be played should be played."]
+},
 
-{id:'s59', group:'Drills', title:'Pre-game infield – double play',
- drill:true, hide:['P'],
- extras:[
-  {id:'fungo', label:'Fungo', mark:'F', at:[34,14]},
-  {id:'feed', label:'Feeder', mark:'Fd', at:[56,36]}
+{
+ "id": "s59",
+ "group": "Drills",
+ "title": "Pre-game infield – double play",
+ "drill": true,
+ "hide": ["P"],
+ "extras": [
+  {"id": "fungo", "label": "Fungo", "mark": "F", "at": [34,14]},
+  {"id": "feed", "label": "Feeder", "mark": "Fd", "at": [56,36]}
  ],
- f:{'3B':[{to:[-46,86],spd:22,wait:0.25}], '2B':[{to:[6,124],spd:24,wait:0.7}], '1B':[{to:[66,68],spd:22,wait:1.2}]},
- balls:[[{t:0,p:[34,14]},{t:0.8,p:[-46,86],air:0.1},{t:1.5,p:[6,124],air:0.25},{t:2.2,p:[66,68],air:0.2}]],
- caps:[[0,'Fungo on the first-base side.'],[0.7,'Double-play grounder to third.'],[1.4,'Feed to the second baseman.'],[2.1,'On to first. Two outs.']],
- notes:['Each infielder gets two double-play grounders, alternating, the same way as the outs at first.','After the round, the catcher fields a bunt and throws to second, not to first.'],
- jobs:{P:'Steps aside. The fungo hitter is the one delivering the grounder.',C:'After the round, fields the fungo hitter’s bunt and throws it to second for the double-play look.', '1B':'Takes the pivot throw at first.', '2B':'Is the pivot. Takes the feed at second and turns it to first.','3B':'Starts the double play with a firm throw to second.',SS:'Gets the next double-play ball after the third baseman, and is the pivot when the ball is hit to the second baseman.',LF:'Stays in left.',CF:'Stays in center.',RF:'Stays in right.'},
- assumed:['Shown is one double play, third to second to first. The shortstop and the second baseman run the same play on their grounders.','The book does not mark the pivot footwork. The second baseman simply covers the bag and throws to first.']},
+ "f": {
+  "3B": [
+   {"to": [-66,88], "spd": 24, "wait": 0.25}
+  ],
+  "2B": [
+   {"to": [16,128], "spd": 25, "wait": 0.45},
+   {"to": [36,146], "spd": 25, "wait": 1.8},
+   {"to": [22,130], "spd": 25, "wait": 3.91}
+  ],
+  "1B": [
+   {"to": [68,76], "spd": 24, "wait": 1.59},
+   {"to": [62,82], "spd": 24, "wait": 4.11},
+   {"to": [68,76], "spd": 24, "wait": 0.6}
+  ],
+  "SS": [
+   {"to": [-34,146], "spd": 25, "wait": 2.64},
+   {"to": [-16,132], "spd": 25, "wait": 1.64}
+  ],
+  "C": [
+   {"to": [14,10], "spd": 20, "wait": 7.79}
+  ]
+ },
+ "balls": [
+  [
+   {"t": 0, "p": [34,14]},
+   {"t": 0.55, "p": [-66,88], "air": 0.08},
+   {"t": 1.75, "p": [16,128], "air": 0.22},
+   {"t": 2.2, "p": [68,76], "air": 0.16},
+   {"t": 2.38, "p": [34,14], "cut": true},
+   {"t": 2.93, "p": [-34,146], "air": 0.08},
+   {"t": 3.43, "p": [16,128], "air": 0.18},
+   {"t": 3.85, "p": [68,76], "air": 0.16},
+   {"t": 4.03, "p": [34,14], "cut": true},
+   {"t": 4.73, "p": [36,146], "air": 0.08},
+   {"t": 5.58, "p": [-16,132], "air": 0.2},
+   {"t": 6.03, "p": [68,76], "air": 0.16},
+   {"t": 6.21, "p": [-32,14], "cut": true},
+   {"t": 6.76, "p": [62,82], "air": 0.08},
+   {"t": 7.31, "p": [-16,132], "air": 0.18},
+   {"t": 7.81, "p": [68,76], "air": 0.16},
+   {"t": 7.99, "p": [16,12], "cut": true},
+   {"t": 8.89, "p": [14,10], "air": 0.02},
+   {"t": 9.59, "p": [22,130], "air": 0.22}
+  ]
+ ],
+ "caps": [
+  [0,"Rep 1 of 5: Third base, 2nd, 1st"],
+  [2.38,"Rep 2 of 5: Shortstop, 2nd, 1st"],
+  [4.03,"Rep 3 of 5: Second base, short, 1st"],
+  [6.21,"Rep 4 of 5: First base, short, back to 1st"],
+  [7.99,"Rep 5 of 5: Catcher bunt to 2nd"]
+ ],
+ "reps": [
+  {"t": 0, "who": "3B", "pos": "3B"},
+  {"t": 2.38, "who": "SS", "pos": "SS"},
+  {"t": 4.03, "who": "2B", "pos": "2B"},
+  {"t": 6.21, "who": "1B", "pos": "1B"},
+  {"t": 7.99, "who": "C", "pos": "C"}
+ ],
+ "notes": ["Order: third base to second to first, shortstop to second to first, second base to short to first, first base to short and back, then the catcher bunt to second.","The grounders are firm enough that a double play could happen in a game, and no fielder has to range very far."],
+ "jobs": {
+  "P": "Off to the side while the fungo hitter delivers the double-play grounders.",
+  "C": "Turn 5. After the four double plays he fields a bunt and throws it to second.",
+  "1B": "Turn 4. Fields his grounder, throws to the shortstop at second, and gets back to the bag for the return. On the other three he takes the throw at first.",
+  "2B": "Turn 3. Fields and feeds the shortstop, who pivots to first. On balls to third and short he is the pivot at second. He also takes the catcher’s bunt at second.",
+  "SS": "Turn 2. Feeds the second baseman and finishes at first. He is the pivot when the ball is hit to second or to first.",
+  "3B": "Turn 1. Starts the double play with a throw to second.",
+  "LF": "Holds in left.",
+  "CF": "Holds in center.",
+  "RF": "Holds in right."
+ },
+ "assumed": ["The book does not mark the pivot footwork. The pivot man covers the bag and throws to first."]
+},
 
-{id:'s60', group:'Drills', title:'Pre-game infield – slow roller',
- drill:true, hide:['P'],
- extras:[
-  {id:'fungo', label:'Fungo', mark:'F', at:[34,14]},
-  {id:'feed', label:'Feeder', mark:'Fd', at:[56,36]}
+{
+ "id": "s60",
+ "group": "Drills",
+ "title": "Pre-game infield – slow roller",
+ "drill": true,
+ "hide": ["P"],
+ "extras": [
+  {"id": "fungo", "label": "Fungo", "mark": "F", "at": [34,14]},
+  {"id": "feed", "label": "Feeder", "mark": "Fd", "at": [56,36]}
  ],
- f:{'3B':[{to:[-26,40],spd:20,wait:0.2}], '1B':[{to:[66,68],spd:20,wait:1.1}]},
- balls:[[{t:0,p:[34,14]},{t:1.3,p:[-26,40],air:0.05},{t:2.2,p:[66,68],air:0.15}]],
- caps:[[0,'One slow roller for each infielder.'],[0.6,'Third baseman charges it.'],[2.1,'Play at first.']],
- jobs:{P:'Aside for the fungo hitter.',C:'Will get the ball back after the play. No throw around the horn on the slow roller.', '1B':'Takes the throw at first.', '2B':'Gets a slow roller of his own, in turn, and throws to first.','3B':'Charges the slow roller and throws to first.',SS:'Same slow roller, in turn, play at first.',LF:'Stays in left.',CF:'Stays in center.',RF:'Stays in right.'},
- assumed:['One slow roller is shown. Every infielder gets one, alternating, with the play at first.']},
+ "f": {
+  "3B": [
+   {"to": [-48,62], "spd": 24, "wait": 0.19}
+  ],
+  "1B": [
+   {"to": [68,76], "spd": 24, "wait": 1.39},
+   {"to": [58,68], "spd": 24, "wait": 5.32}
+  ],
+  "SS": [
+   {"to": [-30,116], "spd": 25, "wait": 2.33}
+  ],
+  "2B": [
+   {"to": [32,116], "spd": 25, "wait": 4.55}
+  ],
+  "C": [
+   {"to": [2,8], "spd": 20, "wait": 7.69}
+  ]
+ },
+ "balls": [
+  [
+   {"t": 0, "p": [34,14]},
+   {"t": 1.55, "p": [-48,62], "air": 0.04},
+   {"t": 2, "p": [68,76], "air": 0.14},
+   {"t": 2.2, "p": [34,14], "cut": true},
+   {"t": 3.75, "p": [-30,116], "air": 0.04},
+   {"t": 4.2, "p": [68,76], "air": 0.14},
+   {"t": 4.4, "p": [34,14], "cut": true},
+   {"t": 5.95, "p": [32,116], "air": 0.04},
+   {"t": 6.4, "p": [68,76], "air": 0.14},
+   {"t": 6.6, "p": [-32,14], "cut": true},
+   {"t": 7.95, "p": [58,68], "air": 0.04},
+   {"t": 8.45, "p": [2,8], "air": 0.12}
+  ]
+ ],
+ "caps": [
+  [0,"Rep 1 of 4: Third base charges, throw to 1st"],
+  [2.2,"Rep 2 of 4: Shortstop charges, throw to 1st"],
+  [4.4,"Rep 3 of 4: Second base charges, throw to 1st"],
+  [6.6,"Rep 4 of 4: First base charges, throw to the catcher"]
+ ],
+ "reps": [
+  {"t": 0, "who": "3B", "pos": "3B"},
+  {"t": 2.2, "who": "SS", "pos": "SS"},
+  {"t": 4.4, "who": "2B", "pos": "2B"},
+  {"t": 6.6, "who": "1B", "pos": "1B"}
+ ],
+ "notes": ["Order: third base, shortstop, second base, first base. One slow roller each, from regular depth, with no pause between fielders.","There is no throw around the horn on the slow roller."],
+ "jobs": {
+  "P": "Off to the side. The fungo hitter stays at the plate for the rollers.",
+  "C": "Takes the throw when the first baseman charges his own roller. He is not the target on the other three.",
+  "1B": "Turn 4. Charges his roller and throws to the catcher, because the play at first is his own bag. On the first three rollers he takes the throw at first.",
+  "2B": "Turn 3. Charges the roller from regular depth and throws to first.",
+  "SS": "Turn 2. Charges the roller from regular depth and throws to first.",
+  "3B": "Turn 1. Charges the roller from regular depth and throws to first.",
+  "LF": "Holds in left.",
+  "CF": "Holds in center.",
+  "RF": "Holds in right."
+ },
+ "assumed": ["The first baseman’s roller is thrown to the catcher. He cannot make the play at a bag he just left."]
+},
 
-{id:'s61', group:'Drills', title:'Pre-game infield – force at the plate',
- drill:true, hide:['P'],
- extras:[
-  {id:'fungo', label:'Fungo', mark:'F', at:[-30,16]},
-  {id:'feed', label:'Feeder', mark:'Fd', at:[-96,36]}
+{
+ "id": "s61",
+ "group": "Drills",
+ "title": "Pre-game infield – force at the plate",
+ "drill": true,
+ "hide": ["P"],
+ "extras": [
+  {"id": "fungo", "label": "Fungo", "mark": "F", "at": [-32,14]},
+  {"id": "feed", "label": "Feeder", "mark": "Fd", "at": [-78,34]}
  ],
- f:{'3B':[{to:[-40,48],spd:18,wait:0.15}], C:[{to:[2,8],wait:0.8}]},
- balls:[[{t:0,p:[-30,16]},{t:1.0,p:[-40,48],air:0.08},{t:1.9,p:[2,8],air:0.2}]],
- caps:[[0,'Fungo on the third-base side for the first baseman’s angle. Third is already on the grass.'],[0.8,'Force ball on the grass line.'],[1.8,'Throw home. Catcher makes the force.']],
- notes:['This is the last look in the single-ball infield: the fielder is on the infield grass line and the play is a force or a tag at the plate.','The drill can finish with pop-ups at the plate for the catchers.'],
- jobs:{P:'Not the hitter. The fungo is on the third-base side here so he is clear of a throw from third to the plate.',C:'Takes the force or the tag at the plate.', '1B':'Gets the same plate ball when it is his turn, from the grass in front of first.', '2B':'Same force at the plate, from the grass in front of second.','3B':'Plays on the grass line, fields the ball, and throws home.',SS:'Same force, from the grass in front of short.',LF:'Stays in left.',CF:'Stays in center.',RF:'Stays in right.'},
- assumed:['The book says the fielder is on the infield grass line and does not mark the exact step. Third is shown a few steps in front of the bag, on the grass.','Fungo is on the third-base side because that is where the book puts him if he stays on one side for the whole infield, and it is the angle for balls to first.']},
+ "f": {
+  "3B": [
+   {"to": [-52,66], "spd": 24, "wait": 0.33}
+  ],
+  "C": [
+   {"to": [2,8], "spd": 20, "wait": 1.14}
+  ],
+  "SS": [
+   {"to": [-28,112], "spd": 25, "wait": 2.36}
+  ],
+  "2B": [
+   {"to": [32,114], "spd": 25, "wait": 4.82}
+  ],
+  "1B": [
+   {"to": [60,72], "spd": 24, "wait": 7.25}
+  ]
+ },
+ "balls": [
+  [
+   {"t": 0, "p": [-32,14]},
+   {"t": 1.45, "p": [-52,66], "air": 0.06},
+   {"t": 1.9, "p": [2,8], "air": 0.16},
+   {"t": 2.1, "p": [-32,14], "cut": true},
+   {"t": 3.95, "p": [-28,112], "air": 0.06},
+   {"t": 4.4, "p": [2,8], "air": 0.16},
+   {"t": 4.6, "p": [-32,14], "cut": true},
+   {"t": 6.3, "p": [32,114], "air": 0.06},
+   {"t": 6.75, "p": [2,8], "air": 0.16},
+   {"t": 6.95, "p": [-32,14], "cut": true},
+   {"t": 8.15, "p": [60,72], "air": 0.06},
+   {"t": 8.6, "p": [2,8], "air": 0.16}
+  ]
+ ],
+ "caps": [
+  [0,"Rep 1 of 4: Third base on the grass, force at the plate"],
+  [2.1,"Rep 2 of 4: Shortstop on the grass, force at the plate"],
+  [4.6,"Rep 3 of 4: Second base on the grass, force at the plate"],
+  [6.95,"Rep 4 of 4: First base on the grass, force at the plate"]
+ ],
+ "reps": [
+  {"t": 0, "who": "3B", "pos": "3B"},
+  {"t": 2.1, "who": "SS", "pos": "SS"},
+  {"t": 4.6, "who": "2B", "pos": "2B"},
+  {"t": 6.95, "who": "1B", "pos": "1B"}
+ ],
+ "notes": ["Order: third base, shortstop, second base, first base. Each one is on the infield grass and the play is a force at the plate.","This is the last look in the single-ball infield. The fungo hitter stays on the third-base side for the angle to first and to stay clear of the throw from third."],
+ "jobs": {
+  "P": "Off to the side. The fungo hitter is on the third-base side of the plate so he is clear of the throws home.",
+  "C": "Takes every force at the plate: third, short, second, then first.",
+  "1B": "Turn 4. Plays on the grass in front of first, fields, and throws home.",
+  "2B": "Turn 3. Plays on the grass in front of second, fields, and throws home.",
+  "SS": "Turn 2. Plays on the grass in front of short, fields, and throws home.",
+  "3B": "Turn 1. Plays on the grass line, fields, and throws home for the force.",
+  "LF": "Holds in left.",
+  "CF": "Holds in center.",
+  "RF": "Holds in right."
+ },
+ "assumed": ["The book says the fielder is on the infield grass line and does not mark the exact step. Each man is a few steps in front of his spot, on the grass."]
+},
 
-{id:'s62', group:'Drills', title:'Outfield throws – two at each spot, to 2nd and 3rd',
- drill:true, hide:['P'],
- tags:{LF:'LF①',CF:'CF①',RF:'RF①','2B':'2B①','3B':'3B①',SS:'SS'},
- extras:[
-  {id:'lf2', label:'LF②', mark:'②', at:[-98,236]},
-  {id:'cf2', label:'CF②', mark:'②', at:[30,248]},
-  {id:'rf2', label:'RF②', mark:'②', at:[104,234]},
-  {id:'b2', label:'2B②', mark:'②', at:[26,196]},
-  {id:'b3', label:'3B②', mark:'②', at:[-108,112]},
-  {id:'fungo', label:'Fungo', mark:'F', at:[-18,72]},
-  {id:'feed', label:'Feeder', mark:'Fd', at:[-38,56]},
-  {id:'c3', label:'C③', mark:'C', at:[-42,20]}
+{
+ "id": "s62",
+ "group": "Drills",
+ "title": "Outfield throws – two at each spot, to 2nd and 3rd",
+ "drill": true,
+ "hide": ["P"],
+ "extras": [
+  {"id": "lf2", "label": "LF②", "mark": "②", "pos": "LF", "at": [-98,236]},
+  {"id": "cf2", "label": "CF②", "mark": "②", "pos": "CF", "at": [30,248]},
+  {"id": "rf2", "label": "RF②", "mark": "②", "pos": "RF", "at": [104,234]},
+  {"id": "b2", "label": "2B②", "mark": "②", "pos": "2B", "at": [28,198]},
+  {"id": "b3", "label": "3B②", "mark": "②", "pos": "3B", "at": [-108,118]},
+  {"id": "fungo", "label": "Fungo", "mark": "F", "at": [-18,72]},
+  {"id": "feed", "label": "Feeder", "mark": "Fd", "at": [-38,56]},
+  {"id": "c3", "label": "C③", "mark": "C", "at": [-44,20]}
  ],
- f:{LF:[{to:[-118,214],wait:0.3}], '2B':[{to:[8,130],spd:22,wait:1.2}], '3B':[{to:[-62,74],spd:22,wait:2.2}], SS:[{to:[-28,140],wait:0.2}]},
- balls:[
-  [{t:0,p:[-18,72],air:0},{t:1.0,p:[-118,214],air:1.3},{t:2.2,p:[8,130],air:0.35},{t:2.9,p:[26,196],air:0.2},{t:3.7,p:[-38,56],air:0.25}],
-  [{t:1.15,p:[-18,72],air:0},{t:2.15,p:[-98,230],air:1.1},{t:3.3,p:[-62,74],air:0.4},{t:4.0,p:[-108,112],air:0.2},{t:4.8,p:[-42,20],air:0.2}]
+ "f": {
+  "LF": [
+   {"to": [-140,206], "spd": 27, "wait": 0.07},
+   {"to": [-126,230], "spd": 27, "wait": 9.72}
+  ],
+  "2B": [
+   {"to": [8,128], "spd": 25, "wait": 0.18}
+  ],
+  "3B": [
+   {"to": [-62,74], "spd": 24, "wait": 2.19}
+  ],
+  "CF": [
+   {"to": [-14,248], "spd": 27, "wait": 3.18},
+   {"to": [-8,252], "spd": 27, "wait": 10.48}
+  ],
+  "SS": [
+   {"to": [-32,162], "spd": 25, "wait": 5.23},
+   {"to": [48,162], "spd": 28, "wait": 0.04},
+   {"to": [-32,162], "spd": 25, "wait": 3},
+   {"to": [48,162], "spd": 28, "wait": 0.04}
+  ],
+  "RF": [
+   {"to": [142,208], "spd": 27, "wait": 6.28},
+   {"to": [128,230], "spd": 27, "wait": 9.78}
+  ]
+ },
+ "balls": [
+  [
+   {"t": 0, "p": [-18,72]},
+   {"t": 0.68, "p": [-140,206], "air": 0.85},
+   {"t": 1.73, "p": [8,128], "air": 0.3},
+   {"t": 2.05, "p": [28,198], "air": 0.12},
+   {"t": 2.39, "p": [-38,56], "air": 0.1}
+  ],
+  [
+   {"t": 1.55, "p": [-18,72]},
+   {"t": 2.23, "p": [-98,228], "air": 0.85},
+   {"t": 2.78, "p": [-62,74], "air": 0.3},
+   {"t": 3.1, "p": [-108,118], "air": 0.12},
+   {"t": 3.44, "p": [-44,20], "air": 0.1}
+  ],
+  [
+   {"t": 3.1, "p": [-18,72]},
+   {"t": 3.78, "p": [-14,248], "air": 0.85},
+   {"t": 4.83, "p": [8,128], "air": 0.3},
+   {"t": 5.15, "p": [28,198], "air": 0.12},
+   {"t": 5.49, "p": [-38,56], "air": 0.1}
+  ],
+  [
+   {"t": 4.65, "p": [-18,72]},
+   {"t": 5.33, "p": [26,242], "air": 0.85},
+   {"t": 5.81, "p": [-32,162], "air": 0.32},
+   {"t": 6.36, "p": [-62,74], "air": 0.3},
+   {"t": 6.68, "p": [-108,118], "air": 0.12},
+   {"t": 7.02, "p": [-44,20], "air": 0.1}
+  ],
+  [
+   {"t": 6.2, "p": [-18,72]},
+   {"t": 6.88, "p": [142,208], "air": 0.85},
+   {"t": 7.93, "p": [8,128], "air": 0.3},
+   {"t": 8.25, "p": [28,198], "air": 0.12},
+   {"t": 8.59, "p": [-38,56], "air": 0.1}
+  ],
+  [
+   {"t": 7.75, "p": [-18,72]},
+   {"t": 8.43, "p": [102,226], "air": 0.85},
+   {"t": 8.91, "p": [48,162], "air": 0.32},
+   {"t": 9.46, "p": [-62,74], "air": 0.3},
+   {"t": 9.78, "p": [-108,118], "air": 0.12},
+   {"t": 10.12, "p": [-44,20], "air": 0.1}
+  ],
+  [
+   {"t": 9.3, "p": [-18,72]},
+   {"t": 9.98, "p": [-110,214], "air": 0.85},
+   {"t": 11.03, "p": [8,128], "air": 0.3},
+   {"t": 11.35, "p": [28,198], "air": 0.12},
+   {"t": 11.69, "p": [-38,56], "air": 0.1}
+  ],
+  [
+   {"t": 10.85, "p": [-18,72]},
+   {"t": 11.53, "p": [-126,230], "air": 0.85},
+   {"t": 12.08, "p": [-62,74], "air": 0.3},
+   {"t": 12.4, "p": [-108,118], "air": 0.12},
+   {"t": 12.74, "p": [-44,20], "air": 0.1}
+  ],
+  [
+   {"t": 12.4, "p": [-18,72]},
+   {"t": 13.08, "p": [34,236], "air": 0.85},
+   {"t": 14.13, "p": [8,128], "air": 0.3},
+   {"t": 14.45, "p": [28,198], "air": 0.12},
+   {"t": 14.79, "p": [-38,56], "air": 0.1}
+  ],
+  [
+   {"t": 13.95, "p": [-18,72]},
+   {"t": 14.63, "p": [-8,252], "air": 0.85},
+   {"t": 15.11, "p": [-32,162], "air": 0.32},
+   {"t": 15.66, "p": [-62,74], "air": 0.3},
+   {"t": 15.98, "p": [-108,118], "air": 0.12},
+   {"t": 16.32, "p": [-44,20], "air": 0.1}
+  ],
+  [
+   {"t": 15.5, "p": [-18,72]},
+   {"t": 16.18, "p": [112,216], "air": 0.85},
+   {"t": 17.23, "p": [8,128], "air": 0.3},
+   {"t": 17.55, "p": [28,198], "air": 0.12},
+   {"t": 17.89, "p": [-38,56], "air": 0.1}
+  ],
+  [
+   {"t": 17.05, "p": [-18,72]},
+   {"t": 17.73, "p": [128,230], "air": 0.85},
+   {"t": 18.21, "p": [48,162], "air": 0.32},
+   {"t": 18.76, "p": [-62,74], "air": 0.3},
+   {"t": 19.08, "p": [-108,118], "air": 0.12},
+   {"t": 19.42, "p": [-44,20], "air": 0.1}
+  ]
  ],
- caps:[[0,'White ball, then the orange one. Fungo is on the third-base side of the mound.'],[0.9,'LF① to second. No cutoff from left field.'],[2.0,'LF② to third. Still no cutoff.'],[2.8,'2B① throws to 2B②, about 70 feet behind.'],[3.6,'2B② throws to the feeder.'],[4.0,'3B① throws to 3B②, behind third.'],[4.7,'3B② throws to the catcher in the third-base fungo circle.']],
- notes:['First round with two at each spot: LF① and CF① and RF① throw to second. LF② and CF② and RF② throw to third. The next round swaps the bases. Nobody throws to the same base twice in a row.','Left-field throws to second and to third have no cutoff. The shortstop cuts center-field and right-field throws to third only.','Page 6 puts the backup third baseman about 50 feet behind the bag. Page 10 says about 70. He is shown about 60 feet behind.'],
- jobs:{P:'Off the mound. The fungo hitter stands on the third-base side of the mound, with a first baseman feeding him.',C:'One catcher is at the plate. Another, C③, is in the third-base fungo circle with a bucket for balls coming from the backup third baseman.', '1B':'One first baseman feeds the fungo hitter. The other takes the balls from the backup second baseman and puts them in the bucket.', '2B':'2B① fields every throw at second and immediately throws it to 2B②, about 70 feet behind him. 2B② throws to the feeder’s partner.','3B':'3B① fields the bag. 3B②, behind him, throws those balls to the catcher in the third-base fungo circle.',SS:'Not a cutoff for left field. He cuts the center-field and right-field throws to third, and hustles across after the last center fielder.',LF:'LF① throws to second. LF② throws to third. They switch bases on the next round.',CF:'Same alternation: ① to second, ② to third, then they swap. Throws to third use the shortstop as the cutoff.',RF:'Same alternation as center field.'},
- assumed:['Shown is the left-field pair only, which is the first two throws of round one. The white ball is LF①. The orange ball is already in the air to LF②. Center and right follow the same order.','The feeder and the fungo circle are not drawn in the book’s missing diagram, so they are placed where the text puts them: fungo on the third-base side of the mound, a first baseman beside him, and a catcher in the third-base fungo circle.']},
+ "caps": [
+  [0,"Rep 1 of 12: Left field ① to 2nd"],
+  [1.55,"Rep 2 of 12: Left field ② to 3rd"],
+  [3.1,"Rep 3 of 12: Center field ① to 2nd"],
+  [4.65,"Rep 4 of 12: Center field ② to 3rd, shortstop cuts"],
+  [6.2,"Rep 5 of 12: Right field ① to 2nd"],
+  [7.75,"Rep 6 of 12: Right field ② to 3rd, shortstop cuts"],
+  [9.3,"Rep 7 of 12: Left field ② to 2nd"],
+  [10.85,"Rep 8 of 12: Left field ① to 3rd"],
+  [12.4,"Rep 9 of 12: Center field ② to 2nd"],
+  [13.95,"Rep 10 of 12: Center field ① to 3rd, shortstop cuts"],
+  [15.5,"Rep 11 of 12: Right field ② to 2nd"],
+  [17.05,"Rep 12 of 12: Right field ① to 3rd, shortstop cuts"]
+ ],
+ "reps": [
+  {"t": 0, "who": "LF", "pos": "LF"},
+  {"t": 1.55, "who": "lf2", "pos": "LF"},
+  {"t": 3.1, "who": "CF", "pos": "CF"},
+  {"t": 4.65, "who": "cf2", "pos": "CF"},
+  {"t": 6.2, "who": "RF", "pos": "RF"},
+  {"t": 7.75, "who": "rf2", "pos": "RF"},
+  {"t": 9.3, "who": "lf2", "pos": "LF"},
+  {"t": 10.85, "who": "LF", "pos": "LF"},
+  {"t": 12.4, "who": "cf2", "pos": "CF"},
+  {"t": 13.95, "who": "CF", "pos": "CF"},
+  {"t": 15.5, "who": "rf2", "pos": "RF"},
+  {"t": 17.05, "who": "RF", "pos": "RF"}
+ ],
+ "notes": ["Round 1: LF① to 2nd, LF② to 3rd, CF① to 2nd, CF② to 3rd, RF① to 2nd, RF② to 3rd.","Round 2: LF② to 2nd, LF① to 3rd, CF② to 2nd, CF① to 3rd, RF② to 2nd, RF① to 3rd.","The book’s third round follows the first order, and the fourth round follows the second order.","Left-field throws to second and to third have no cutoff. The shortstop cuts center-field and right-field throws to third only.","The fungo hitter works each fielder to one side of the spot he just hit, so the next ball is not on top of him."],
+ "jobs": {
+  "P": "Off the mound. The fungo hitter stands on the third-base side of the mound.",
+  "C": "A catcher is at the plate. C③, in the third-base fungo circle, buckets every ball that comes from the backup third baseman.",
+  "1B": "One first baseman feeds the fungo hitter. The partner takes the balls from the backup second baseman and puts them in the bucket.",
+  "2B": "2B① fields every throw at second and throws at once to 2B②, about 70 feet behind. 2B② throws to the feeder’s partner.",
+  "SS": "No cutoff on any left-field throw. He cuts every center-field and right-field throw to third, and he slides across after center field so he is there for right field.",
+  "3B": "3B① fields the bag. 3B②, behind third, throws those balls to the catcher in the third-base fungo circle.",
+  "LF": "Turns 1, 2, 7, and 8. ① throws to second, then ② throws to third. The next round they swap bases. No cutoff from left field.",
+  "CF": "Turns 3, 4, 9, and 10. ① to second, ② to third through the shortstop, then they swap. Throws to third use the shortstop.",
+  "RF": "Turns 5, 6, 11, and 12. Same bases as center field. The shortstop is already across for the throws to third."
+ },
+ "assumed": ["Page 6 puts the backup third baseman about 50 feet behind the bag. Page 10 says about 70. He is drawn about 60 feet behind.","The feeder stands on the third-base side of the mound, next to the fungo hitter. C③ stands in the third-base fungo circle with the bucket."],
+ "tags": {"LF": "LF①", "CF": "CF①", "RF": "RF①", "2B": "2B①", "3B": "3B①", "SS": "SS"}
+},
 
-{id:'s63', group:'Drills', title:'Outfield throws – shortstop cuts the throw to 3rd',
- drill:true, hide:['P'],
- tags:{CF:'CF②','3B':'3B①',SS:'SS'},
- extras:[
-  {id:'fungo', label:'Fungo', mark:'F', at:[-18,72]},
-  {id:'feed', label:'Feeder', mark:'Fd', at:[-38,56]}
+{
+ "id": "s63",
+ "group": "Drills",
+ "title": "Outfield throws – shortstop cuts the throw to 3rd",
+ "drill": true,
+ "hide": ["P"],
+ "extras": [
+  {"id": "cf2", "label": "CF②", "mark": "②", "pos": "CF", "at": [30,248]},
+  {"id": "rf2", "label": "RF②", "mark": "②", "pos": "RF", "at": [104,234]},
+  {"id": "b3", "label": "3B②", "mark": "②", "pos": "3B", "at": [-108,118]},
+  {"id": "fungo", "label": "Fungo", "mark": "F", "at": [-18,72]},
+  {"id": "feed", "label": "Feeder", "mark": "Fd", "at": [-38,56]},
+  {"id": "c3", "label": "C③", "mark": "C", "at": [-44,20]}
  ],
- f:{CF:[{to:[8,248],wait:0.2}], SS:[{to:[-20,148],spd:26,wait:0.8}], '3B':[{to:[-62,74],spd:22,wait:1.4}]},
- balls:[[{t:0,p:[-18,72]},{t:1.0,p:[8,248],air:1.2},{t:2.0,p:[-20,148],air:0.45},{t:2.8,p:[-62,74],air:0.3}]],
- caps:[[0,'After left field, center field throws to third go through the shortstop.'],[0.9,'CF② has the fly.'],[1.9,'Shortstop cuts it. He calls the third baseman.'],[2.7,'On to third.']],
- notes:['Left-field throws to third have no cutoff. Center field and right field do, and the shortstop is that cutoff. After the last center fielder he hustles over for the right-field throws.','Every other ball is going to second, so he is not rushed on every throw.'],
- jobs:{P:'Aside. Fungo stays on the third-base side of the mound.',C:'Not in the cutoff. The ball is going to third, then back through the backup third baseman.', '1B':'The feeder stays next to the fungo hitter.', '2B':'Has second for the throws that are not coming to third.','3B':'Sets at third and talks the shortstop onto the cutoff.',SS:'Cutoff for every center-field and right-field throw to third. Not for left field.',LF:'Already threw. Left field does not get a cutoff on this throw.',CF:'CF② throws to third. The shortstop is the cutoff.',RF:'Same cutoff on the right-field throws to third, after the shortstop slides over.'},
- assumed:['One throw is shown, center field to third through the shortstop. The book does not mark the cutoff spot. It is placed on the line between center field and third, in the infield.','The round order is on the previous drill. This one is only the cutoff the left-field throws do not use.']},
+ "f": {
+  "2B": [
+   {"to": [8,128], "spd": 25, "wait": 0.2}
+  ],
+  "SS": [
+   {"to": [-32,162], "spd": 25, "wait": 0.54},
+   {"to": [48,162], "spd": 27, "wait": 0.04},
+   {"to": [-32,162], "spd": 27, "wait": 0.04},
+   {"to": [48,162], "spd": 26, "wait": 0.04}
+  ],
+  "3B": [
+   {"to": [-62,74], "spd": 24, "wait": 0.91}
+  ],
+  "CF": [
+   {"to": [-12,250], "spd": 27, "wait": 6.5}
+  ],
+  "RF": [
+   {"to": [132,212], "spd": 27, "wait": 9.89}
+  ]
+ },
+ "balls": [
+  [
+   {"t": 0, "p": [-18,72]},
+   {"t": 0.7, "p": [24,244], "air": 0.8},
+   {"t": 1.12, "p": [-32,162], "air": 0.3},
+   {"t": 1.5, "p": [-62,74], "air": 0.22},
+   {"t": 1.82, "p": [-108,118], "air": 0.1},
+   {"t": 2.14, "p": [-44,20], "air": 0.08}
+  ],
+  [
+   {"t": 3.15, "p": [-18,72]},
+   {"t": 3.85, "p": [104,224], "air": 0.8},
+   {"t": 4.27, "p": [48,162], "air": 0.3},
+   {"t": 4.65, "p": [-62,74], "air": 0.22},
+   {"t": 4.97, "p": [-108,118], "air": 0.1},
+   {"t": 5.29, "p": [-44,20], "air": 0.08}
+  ],
+  [
+   {"t": 6.3, "p": [-18,72]},
+   {"t": 7, "p": [-12,250], "air": 0.8},
+   {"t": 7.42, "p": [-32,162], "air": 0.3},
+   {"t": 7.8, "p": [-62,74], "air": 0.22},
+   {"t": 8.12, "p": [-108,118], "air": 0.1},
+   {"t": 8.44, "p": [-44,20], "air": 0.08}
+  ],
+  [
+   {"t": 9.45, "p": [-18,72]},
+   {"t": 10.15, "p": [132,212], "air": 0.8},
+   {"t": 10.57, "p": [48,162], "air": 0.3},
+   {"t": 10.95, "p": [-62,74], "air": 0.22},
+   {"t": 11.27, "p": [-108,118], "air": 0.1},
+   {"t": 11.59, "p": [-44,20], "air": 0.08}
+  ]
+ ],
+ "caps": [
+  [0,"Rep 1 of 4: Center field ② to 3rd, shortstop cuts"],
+  [3.15,"Rep 2 of 4: Right field ② to 3rd, shortstop slides over"],
+  [6.3,"Rep 3 of 4: Center field ① to 3rd, shortstop cuts"],
+  [9.45,"Rep 4 of 4: Right field ① to 3rd, shortstop slides over"]
+ ],
+ "reps": [
+  {"t": 0, "who": "cf2", "pos": "CF"},
+  {"t": 3.15, "who": "rf2", "pos": "RF"},
+  {"t": 6.3, "who": "CF", "pos": "CF"},
+  {"t": 9.45, "who": "RF", "pos": "RF"}
+ ],
+ "notes": ["Order: CF②, RF②, CF①, RF①. Those are the four throws to third that use a cutoff across the two rounds.","Left field is not in the line. Those throws have no cutoff man.","Every other ball in the full drill is going to second, so the shortstop is not rushed on every throw. Here the cuts are back to back so the slide from center field to right field is the thing to watch."],
+ "jobs": {
+  "P": "Off the mound. The fungo hitter stays on the third-base side of the mound.",
+  "C": "Not the target. The ball is going to third, then through the backup third baseman to the third-base bucket.",
+  "1B": "Feeds the fungo hitter from the third-base side of the mound.",
+  "2B": "Holds second for the throws that are not coming to third.",
+  "SS": "Cutoff for every center-field and right-field throw to third. After center field he hustles across and gets set for right field. He is not the cutoff for left field.",
+  "3B": "Sets at third and talks the shortstop onto the cutoff. The backup behind him throws the ball into the bucket.",
+  "LF": "No turn on this cut. Left-field throws to third come in with no cutoff.",
+  "CF": "Turns 1 and 3. ② throws to third through the shortstop, then ① throws to third through him on the next round.",
+  "RF": "Turns 2 and 4. ②, then ①, throw to third after the shortstop has slid over."
+ },
+ "assumed": ["The book does not mark the cutoff spot. He is on the line from the outfielder to third, deep enough to stay clear of the second baseman."],
+ "tags": {"CF": "CF①", "RF": "RF①", "3B": "3B①", "SS": "SS"}
+},
 
-{id:'s64', group:'Drills', title:'Outfield throws home – cutoffs',
- drill:true, hide:['P','SS'],
- tags:{LF:'LF','3B':'3B','1B':'1B①',CF:'CF',RF:'RF'},
- extras:[
-  {id:'b1', label:'1B②', mark:'②', at:[72,124]},
-  {id:'fungo', label:'Fungo', mark:'F', at:[-24,8]},
-  {id:'feed', label:'Feeder', mark:'Fd', at:[-50,34]}
+{
+ "id": "s64",
+ "group": "Drills",
+ "title": "Outfield throws home – cutoffs",
+ "drill": true,
+ "hide": ["P","SS"],
+ "extras": [
+  {"id": "b1", "label": "1B②", "mark": "②", "pos": "1B", "at": [60,112]},
+  {"id": "b3", "label": "3B②", "mark": "②", "pos": "3B", "at": [-62,74]},
+  {"id": "b2", "label": "2B②", "mark": "②", "pos": "2B", "at": [30,196]},
+  {"id": "c1", "label": "C①", "mark": "C", "at": [74,30]},
+  {"id": "fungo", "label": "Fungo", "mark": "F", "at": [-26,10]},
+  {"id": "feed", "label": "Feeder", "mark": "Fd", "at": [-52,32]}
  ],
- f:{'3B':[{to:[-36,118],spd:24,wait:0.4},{to:[-62,74],spd:24,wait:1.6}], '1B':[{to:[10,86],spd:22,wait:1.0}], '2B':[{to:[6,128],spd:22,wait:2.2}], LF:[{to:[-112,216],wait:0.2}], CF:[{to:[6,250],wait:1.0}], RF:[{to:[118,220],wait:2.0}]},
- balls:[
-  [{t:0,p:[-24,8]},{t:0.9,p:[-112,216],air:1.2},{t:1.9,p:[-36,118],air:0.4},{t:2.7,p:[-62,74],air:0.25}],
-  [{t:1.3,p:[-24,8]},{t:2.2,p:[6,250],air:1.1},{t:3.1,p:[10,86],air:0.45},{t:3.8,p:[6,128],air:0.25}]
+ "f": {
+  "LF": [
+   {"to": [-118,210], "spd": 27, "wait": 0.07},
+   {"to": [-104,224], "spd": 27, "wait": 1.52}
+  ],
+  "3B": [
+   {"to": [-46,116], "spd": 24, "wait": 0.25}
+  ],
+  "C": [
+   {"to": [2,8], "spd": 20, "wait": 1.91}
+  ],
+  "CF": [
+   {"to": [-6,248], "spd": 27, "wait": 4.75},
+   {"to": [16,246], "spd": 27, "wait": 1.58}
+  ],
+  "1B": [
+   {"to": [16,90], "spd": 24, "wait": 3.21}
+  ],
+  "2B": [
+   {"to": [8,128], "spd": 25, "wait": 4.33}
+  ],
+  "RF": [
+   {"to": [122,212], "spd": 27, "wait": 9.54},
+   {"to": [108,226], "spd": 27, "wait": 1.57}
+  ]
+ },
+ "balls": [
+  [
+   {"t": 0, "p": [-26,10]},
+   {"t": 0.62, "p": [-118,210], "air": 0.75},
+   {"t": 1.97, "p": [-46,116], "air": 0.28},
+   {"t": 2.31, "p": [-62,74], "air": 0.16},
+   {"t": 2.67, "p": [2,8], "air": 0.14}
+  ],
+  [
+   {"t": 2.35, "p": [-26,10]},
+   {"t": 2.97, "p": [-104,224], "air": 0.75},
+   {"t": 3.52, "p": [2,8], "air": 0.45}
+  ],
+  [
+   {"t": 4.5, "p": [-26,10]},
+   {"t": 5.12, "p": [-6,248], "air": 0.75},
+   {"t": 5.54, "p": [16,90], "air": 0.3},
+   {"t": 5.88, "p": [8,128], "air": 0.16},
+   {"t": 6.2, "p": [30,196], "air": 0.12},
+   {"t": 6.6, "p": [74,30], "air": 0.16}
+  ],
+  [
+   {"t": 7, "p": [-26,10]},
+   {"t": 7.62, "p": [16,246], "air": 0.75},
+   {"t": 8.17, "p": [2,8], "air": 0.4}
+  ],
+  [
+   {"t": 9.3, "p": [-26,10]},
+   {"t": 9.92, "p": [122,212], "air": 0.75},
+   {"t": 10.34, "p": [60,112], "air": 0.28},
+   {"t": 10.74, "p": [2,8], "air": 0.2}
+  ],
+  [
+   {"t": 11.7, "p": [-26,10]},
+   {"t": 12.32, "p": [108,226], "air": 0.75},
+   {"t": 12.87, "p": [2,8], "air": 0.4}
+  ]
  ],
- caps:[[0,'Fungo is beside the plate, out of the cutoff lanes. White ball to left field.'],[0.8,'Left field to the plate. Third baseman is the cutoff.'],[1.8,'Catcher: cut it, throw to third.'],[1.3,'Orange ball is already on the way to center field.'],[3.0,'First baseman ① cuts the center-field throw and goes to second.'],[3.7,'Right field would use first baseman ②. If the catcher does not call a cut, that ball comes home.']],
- notes:['Each outfielder throws two balls home. Left field uses the third baseman. Center field uses one first baseman, near the mound. Right field uses the other first baseman.','The catcher cuts anything that would pull him off the plate, because another ball is right behind it. A left-field cut goes to third. A center-field cut goes to second. A right-field cut comes back to the plate.'],
- jobs:{P:'Out of the way. The fungo hitter is beside the plate, not on the mound, so he is clear of both first basemen. Their backs are toward him when he hits to center and right.',C:'Runs the cutoffs out loud, the same calls as a game. He never chases a ball away from the plate. Another throw is already coming.', '1B':'1B① cuts center field and, on a cut, throws to second. 1B② cuts right field and, on a cut, throws home.', '2B':'Stays on the bag for a cutoff throw from the first baseman. The backup second baseman, still deep, takes that ball on to the first-base fungo circle.','3B':'Cuts left field. On a cut, throws to third, where the other third baseman now is. That third baseman throws home.',SS:'No job on the throws home.',LF:'Throws home through the third baseman.',CF:'Throws home through first baseman ①.',RF:'Throws home through first baseman ②.'},
- assumed:['Two throws are shown, not all six. The white ball is cut from left field and thrown to third. The orange ball is cut from center field and thrown to second. Right field is the same shape as center field, with the other first baseman, and comes home when the catcher does not call a cut.','The book does not give coordinates for the cutoff men. Third is on the left-field throw. One first baseman is near the mound for center field. The other is on the right-field line for right field.']},
+ "caps": [
+  [0,"Rep 1 of 6: Left field, third cuts it to 3rd"],
+  [2.35,"Rep 2 of 6: Left field comes through to the plate"],
+  [4.5,"Rep 3 of 6: Center field, first cuts it to 2nd"],
+  [7,"Rep 4 of 6: Center field comes through to the plate"],
+  [9.3,"Rep 5 of 6: Right field, first cuts it back to the plate"],
+  [11.7,"Rep 6 of 6: Right field comes through to the plate"]
+ ],
+ "reps": [
+  {"t": 0, "who": "LF", "pos": "LF"},
+  {"t": 2.35, "who": "LF", "pos": "LF"},
+  {"t": 4.5, "who": "CF", "pos": "CF"},
+  {"t": 7, "who": "CF", "pos": "CF"},
+  {"t": 9.3, "who": "RF", "pos": "RF"},
+  {"t": 11.7, "who": "RF", "pos": "RF"}
+ ],
+ "notes": ["Order: left field cut to 3rd, left field through, center field cut to 2nd, center field through, right field cut back to the plate, right field through.","Each outfielder throws two balls home. Left field uses the third baseman. Center field uses one first baseman, near the mound. Right field uses the other first baseman.","A left-field cut goes to third. A center-field cut goes to second. A right-field cut comes back to the plate. With no cut call, the ball comes home."],
+ "jobs": {
+  "P": "Out of the way. The fungo hitter is beside the plate, not on the mound, so both first basemen can work with their backs to him.",
+  "C": "Calls every cutoff the way he would in a game. He cuts the first ball from each outfielder and lets the second one come through. He does not chase a ball off the plate, because the next throw is already coming.",
+  "1B": "1B① cuts center field. On a cut he throws to second. 1B② cuts right field. On a cut he throws home.",
+  "2B": "Stays on the bag for the cutoff throw from 1B①. 2B②, still deep, takes that ball on to the catcher in the first-base fungo circle.",
+  "SS": "No job on the throws home.",
+  "3B": "Cuts left field. On a cut he throws to third, where 3B② throws the ball home.",
+  "LF": "Turns 1 and 2. The first throw is cut by the third baseman and sent to third. The second comes through to the plate.",
+  "CF": "Turns 3 and 4. The first throw is cut by 1B① and sent to second. The second comes through to the plate.",
+  "RF": "Turns 5 and 6. The first throw is cut by 1B② and sent back to the plate. The second comes through to the plate."
+ },
+ "assumed": ["The book does not give a step measurement for the cutoff men. Third is on the left-field throw. One first baseman is near the mound for center field. The other is on the right-field side for right field."],
+ "tags": {"LF": "LF", "CF": "CF", "RF": "RF", "3B": "3B", "1B": "1B①", "2B": "2B①"}
+},
 
-{id:'s65', group:'Drills', title:'Multi-ball infield – around the horn',
- drill:true, hide:['P'],
- tags:{'3B':'3B①','1B':'1B①',SS:'SS①','2B':'2B①'},
- extras:[
-  {id:'t2', label:'3B②', mark:'②', at:[-86,118]},
-  {id:'f2', label:'1B②', mark:'②', at:[100,114]},
-  {id:'fungo', label:'Fungo', mark:'F', at:[36,12]},
-  {id:'feed', label:'Feeder', mark:'Fd', at:[58,38]},
-  {id:'c3', label:'C③', mark:'C', at:[-40,18]}
+{
+ "id": "s65",
+ "group": "Drills",
+ "title": "Multi-ball infield – around the horn",
+ "drill": true,
+ "hide": ["P"],
+ "extras": [
+  {"id": "t2", "label": "3B②", "mark": "②", "pos": "3B", "at": [-94,122]},
+  {"id": "s2", "label": "SS②", "mark": "②", "pos": "SS", "at": [-70,172]},
+  {"id": "b2", "label": "2B②", "mark": "②", "pos": "2B", "at": [72,170]},
+  {"id": "f2", "label": "1B②", "mark": "②", "pos": "1B", "at": [104,118]},
+  {
+   "id": "fungo",
+   "label": "Fungo",
+   "mark": "F",
+   "at": [36,12],
+   "f": [
+    {"to": [-30,16], "spd": 22, "wait": 7.6}
+   ]
+  },
+  {
+   "id": "feed",
+   "label": "Feeder",
+   "mark": "Fd",
+   "at": [58,38],
+   "f": [
+    {"to": [0,10], "spd": 20, "wait": 9.3}
+   ]
+  },
+  {"id": "c3", "label": "C③", "mark": "C", "at": [-44,20]}
  ],
- f:{'3B':[{to:[-52,88],spd:22,wait:0.2},{to:[-62,72],spd:22,wait:2.2}], '1B':[{to:[66,68],spd:22,wait:0.8}]},
- balls:[
-  [{t:0,p:[36,12]},{t:0.7,p:[-52,88],air:0.1},{t:1.4,p:[66,68],air:0.22},{t:2.1,p:[0,6],air:0.18},{t:2.8,p:[-62,72],air:0.22},{t:3.5,p:[-40,18],air:0.15}],
-  [{t:1.2,p:[36,12]},{t:1.9,p:[-78,112],air:0.1},{t:2.6,p:[100,114],air:0.2}]
+ "f": {
+  "3B": [
+   {"to": [-64,88], "spd": 24, "wait": 0.18}
+  ],
+  "1B": [
+   {"to": [66,70], "spd": 24, "wait": 0.23},
+   {"to": [56,78], "spd": 24, "wait": 7.39},
+   {"to": [66,70], "spd": 24, "wait": 1.28}
+  ],
+  "C": [
+   {"to": [2,8], "spd": 20, "wait": 0.74},
+   {"to": [22,14], "spd": 20, "wait": 7.99},
+   {"to": [78,28], "spd": 20, "wait": 0.51}
+  ],
+  "SS": [
+   {"to": [-38,144], "spd": 25, "wait": 2.8}
+  ],
+  "2B": [
+   {"to": [34,144], "spd": 25, "wait": 5.21}
+  ]
+ },
+ "balls": [
+  [
+   {"t": 0, "p": [36,12]},
+   {"t": 0.55, "p": [-64,88], "air": 0.08},
+   {"t": 1.1, "p": [66,70], "air": 0.16},
+   {"t": 1.5, "p": [2,8], "air": 0.14},
+   {"t": 1.9, "p": [-64,88], "air": 0.16},
+   {"t": 2.28, "p": [-64,88], "air": 0.14},
+   {"t": 2.62, "p": [-44,20], "air": 0.1}
+  ],
+  [
+   {"t": 1.25, "p": [36,12]},
+   {"t": 1.8, "p": [-94,122], "air": 0.08},
+   {"t": 2.35, "p": [104,118], "air": 0.16},
+   {"t": 2.75, "p": [2,8], "air": 0.14},
+   {"t": 3.15, "p": [-94,122], "air": 0.16},
+   {"t": 3.53, "p": [-94,122], "air": 0.14},
+   {"t": 3.87, "p": [-44,20], "air": 0.1}
+  ],
+  [
+   {"t": 2.5, "p": [36,12]},
+   {"t": 3.05, "p": [-38,144], "air": 0.08},
+   {"t": 3.6, "p": [66,70], "air": 0.16},
+   {"t": 4, "p": [2,8], "air": 0.14},
+   {"t": 4.4, "p": [-38,144], "air": 0.16},
+   {"t": 4.78, "p": [-64,88], "air": 0.14},
+   {"t": 5.12, "p": [-44,20], "air": 0.1}
+  ],
+  [
+   {"t": 3.75, "p": [36,12]},
+   {"t": 4.3, "p": [-70,172], "air": 0.08},
+   {"t": 4.85, "p": [104,118], "air": 0.16},
+   {"t": 5.25, "p": [2,8], "air": 0.14},
+   {"t": 5.65, "p": [-70,172], "air": 0.16},
+   {"t": 6.03, "p": [-94,122], "air": 0.14},
+   {"t": 6.37, "p": [-44,20], "air": 0.1}
+  ],
+  [
+   {"t": 5, "p": [36,12]},
+   {"t": 5.55, "p": [34,144], "air": 0.08},
+   {"t": 6.1, "p": [66,70], "air": 0.16},
+   {"t": 6.5, "p": [2,8], "air": 0.14},
+   {"t": 6.9, "p": [34,144], "air": 0.16},
+   {"t": 7.28, "p": [-64,88], "air": 0.14},
+   {"t": 7.62, "p": [-44,20], "air": 0.1}
+  ],
+  [
+   {"t": 6.25, "p": [36,12]},
+   {"t": 6.8, "p": [72,170], "air": 0.08},
+   {"t": 7.35, "p": [104,118], "air": 0.16},
+   {"t": 7.75, "p": [2,8], "air": 0.14},
+   {"t": 8.15, "p": [72,170], "air": 0.16},
+   {"t": 8.53, "p": [-94,122], "air": 0.14},
+   {"t": 8.87, "p": [-44,20], "air": 0.1}
+  ],
+  [
+   {"t": 8.7, "p": [-30,16]},
+   {"t": 9.12, "p": [56,78], "air": 0.08},
+   {"t": 9.48, "p": [2,8], "air": 0.14},
+   {"t": 10.63, "p": [22,14], "air": 0.02},
+   {"t": 11.03, "p": [66,70], "air": 0.14},
+   {"t": 14.13, "p": [78,28], "air": 0.2}
+  ],
+  [
+   {"t": 14.3, "p": [-30,16]},
+   {"t": 14.72, "p": [104,118], "air": 0.08},
+   {"t": 15.1, "p": [-64,88], "air": 0.16},
+   {"t": 15.46, "p": [2,8], "air": 0.14},
+   {"t": 15.8, "p": [-20,14], "air": 0.02},
+   {"t": 16.16, "p": [104,118], "air": 0.14},
+   {"t": 16.52, "p": [78,28], "air": 0.12}
+  ]
  ],
- caps:[[0,'White ball to 3B①. Fungo is on the first-base side.'],[0.6,'3B① to 1B①.'],[1.3,'Orange ball is already hit to 3B②. Do not hit it through 3B①’s throw.'],[2.0,'Catcher throws the white ball back to 3B①.'],[2.7,'3B① throws to C③, the third-base fungo circle, and it goes in the bucket.','The catcher at home is too busy to take that throw.']],
- notes:['With two at each spot the order is 3B①, 3B②, SS①, SS②, 2B①, 2B②, then the first basemen. The ball always comes back through the home catcher to the fielder, then to a third baseman, then to C③.','Catcher throw order on the double-play rounds is listed with that round. Most balls end in the third-base bucket.'],
- jobs:{P:'Aside. The fungo hitter is on the first-base side for third, short, and second.',C:'Throws the ball back to the base of the fielder who made the play, quickly. He does not take the ball that is going into the third-base bucket.', '1B':'1B① and 1B② alternate the throws at first, then throw a good ball home for the catcher.', '2B':'2B① and 2B② get their grounders after the shortstops, and the ball takes the same path home and back.','3B':'3B① starts it. 3B② gets the next grounder while the first ball is still going around. Every return that is headed for the bucket goes through a third baseman to C③.',SS:'SS① and SS② follow the third basemen. Same path: to first, home, back to the shortstop, to a third baseman, to C③.',LF:'Not in the infield round.',CF:'Stays in center.',RF:'Stays in right.'},
- assumed:['Two cycles are shown, both to the third basemen, so the second ball is in the air while the first is still on its way around the horn. Shortstop and second base repeat that same path.','The book’s diagram page was described in the text but not drawn here. Spots for 3B②, 1B②, the fungo hitter, and C③ are taken from the written setup.']},
+ "caps": [
+  [0,"Rep 1 of 8: Third base ① around the horn"],
+  [1.25,"Rep 2 of 8: Third base ② around the horn"],
+  [2.5,"Rep 3 of 8: Shortstop ① around the horn"],
+  [3.75,"Rep 4 of 8: Shortstop ② around the horn"],
+  [5,"Rep 5 of 8: Second base ① around the horn"],
+  [6.25,"Rep 6 of 8: Second base ② around the horn"],
+  [8.7,"Rep 7 of 8: First base ① to the plate, catcher bunts to 1st"],
+  [14.3,"Rep 8 of 8: First base ② to 3rd, new catcher bunts to 1st"]
+ ],
+ "reps": [
+  {"t": 0, "who": "3B", "pos": "3B"},
+  {"t": 1.25, "who": "t2", "pos": "3B"},
+  {"t": 2.5, "who": "SS", "pos": "SS"},
+  {"t": 3.75, "who": "s2", "pos": "SS"},
+  {"t": 5, "who": "2B", "pos": "2B"},
+  {"t": 6.25, "who": "b2", "pos": "2B"},
+  {"t": 8.7, "who": "1B", "pos": "1B"},
+  {"t": 14.3, "who": "f2", "pos": "1B"}
+ ],
+ "notes": ["Order: 3B①, 3B②, SS①, SS②, 2B①, 2B②, 1B①, 1B②.","3B① to 1B①, home, back to 3B①, C③. 3B② takes the same path with the ②s.","SS① to 1B①, home, back to SS①, 3B①, C③. SS② uses the ②s.","2B① to 1B①, home, back to 2B①, 3B①, C③. 2B② uses the ②s.","1B① throws home. The catcher bunts on the first-base side, throws to first, and that first baseman throws to him as he moves to the first-base side. 1B② throws to 3B①, the new plate catcher bunts on the third-base side, and the ball ends in the first-base bucket. The catcher who threw that bunt goes to the third-base circle, and the catcher who was there comes to the plate."],
+ "jobs": {
+  "P": "Off to the side. The fungo hitter starts on the first-base side and crosses behind the plate before the first basemen.",
+  "C": "Throws the ball back to the fielder who just made the play, then that ball goes to a third baseman and into the third-base bucket. On 1B① he rolls a bunt on the first-base side, throws to first, and goes to the first-base fungo circle. The feeder who was on the first-base side becomes the plate catcher for 1B② and rolls the bunt on the third-base side.",
+  "1B": "Turns 7 and 8. ① throws his grounder home, takes the bunt at first, and throws to the catcher sliding to the first-base side. ② throws to third, then takes the new catcher’s bunt and throws it to the first-base side.",
+  "2B": "Turns 5 and 6. ①, then ②. The ball goes to first, home, back to that second baseman, to a third baseman, and into the bucket.",
+  "SS": "Turns 3 and 4. ①, then ②. Same path, with the return going back to the shortstop before a third baseman buckets it.",
+  "3B": "Turns 1 and 2. ①, then ②. Each ball goes to a first baseman, home, back to that third baseman, and to C③. Later, ① takes 1B②’s grounder and throws it to the new plate catcher. That is the one time a third baseman throws home.",
+  "LF": "Holds in left. This is the infield round.",
+  "CF": "Holds in center.",
+  "RF": "Holds in right."
+ },
+ "assumed": ["The book’s diagram was described and not drawn. ②s, the fungo hitter, and C③ are placed where the text puts them.","Most balls end in the third-base bucket. The catcher at the plate is too busy to take that last throw."],
+ "tags": {"3B": "3B①", "1B": "1B①", "SS": "SS①", "2B": "2B①"}
+},
 
-{id:'s66', group:'Drills', title:'Multi-ball infield – double-play round',
- drill:true, hide:['P'],
- tags:{'3B':'3B①','2B':'2B①','1B':'1B①',SS:'SS①'},
- extras:[
-  {id:'fungo', label:'Fungo', mark:'F', at:[36,12]},
-  {id:'feed', label:'Feeder', mark:'Fd', at:[58,36]}
+{
+ "id": "s66",
+ "group": "Drills",
+ "title": "Multi-ball infield – double-play round",
+ "drill": true,
+ "hide": ["P"],
+ "extras": [
+  {"id": "t2", "label": "3B②", "mark": "②", "pos": "3B", "at": [-94,122]},
+  {"id": "s2", "label": "SS②", "mark": "②", "pos": "SS", "at": [-70,172]},
+  {"id": "b2", "label": "2B②", "mark": "②", "pos": "2B", "at": [72,170]},
+  {"id": "f2", "label": "1B②", "mark": "②", "pos": "1B", "at": [104,118]},
+  {
+   "id": "fungo",
+   "label": "Fungo",
+   "mark": "F",
+   "at": [36,12],
+   "f": [
+    {"to": [-30,16], "spd": 22, "wait": 8}
+   ]
+  },
+  {
+   "id": "feed",
+   "label": "Feeder",
+   "mark": "Fd",
+   "at": [58,36],
+   "f": [
+    {"to": [2,12], "spd": 20, "wait": 10.2}
+   ]
+  },
+  {"id": "c3", "label": "C③", "mark": "C", "at": [-44,20]}
  ],
- f:{'3B':[{to:[-48,90],spd:22,wait:0.2}], '2B':[{to:[8,128],spd:24,wait:0.7}], '1B':[{to:[66,68],spd:22,wait:1.3}], SS:[{to:[-10,98],spd:22,wait:2.4}]},
- balls:[[{t:0,p:[36,12]},{t:0.7,p:[-48,90],air:0.1},{t:1.4,p:[8,128],air:0.25},{t:2.1,p:[66,68],air:0.2},{t:2.8,p:[0,8],air:0.18},{t:3.5,p:[-10,98],air:0.2}]],
- caps:[[0,'Double-play grounders. Hard enough for a real double play, not a chase.'],[0.6,'3B① to 2B①.'],[1.3,'Pivot throw to 1B①.'],[2.7,'Catcher’s throw back is taken about 15 feet in front of second, so it does not hit the pivot man.']],
- notes:['The path matches the first rounds, except the shortstop or second baseman turns the double play. When the catcher throws back toward second, that fielder is 15 feet in front of the bag.','On this round the catcher’s bunt, on the first-baseman grounders, is thrown to second, not to first.','Catcher order, two at each spot: 3B①–2B①–1B①–home–3B①–C③. Then 3B② the same way. Shortstops go through a second baseman, then come back to a cutoff 15 feet in front of second. Second basemen go through a shortstop.'],
- jobs:{P:'Aside for the fungo hitter, back on the first-base side.',C:'Throws back toward second accurately, to the man 15 feet in front of the bag, not through the pivot. On the first-baseman round, the bunt he rolls himself is thrown to second.', '1B':'Takes the double-play throw at first.', '2B':'Pivot when the ball comes from third or short. When the ball is hit to him, the shortstop is the pivot.','3B':'Starts the double play to the second baseman.',SS:'Pivot for balls hit to the second baseman. On his own ball he throws to the second baseman. The return throw from home is taken 15 feet in front of the bag.',LF:'Not in this round.',CF:'Stays in center.',RF:'Stays in right.'},
- assumed:['One double play is shown, third to second to first, plus the catcher’s return taken in front of the bag. The second third baseman, and the shortstops and second basemen, repeat it.','The bunt on the first-baseman grounders goes to second on this round. That rotation is the next drill.']},
-
-{id:'s67', group:'Drills', title:'Multi-ball infield – slow roller, then the catcher bunt',
- drill:true, hide:['P'],
- tags:{'3B':'3B①','1B':'1B①'},
- extras:[
-  {id:'fungo', label:'Fungo', mark:'F', at:[32,18], f:[{to:[-8,80],spd:22,wait:2.2}]},
-  {id:'feed', label:'Feeder', mark:'Fd', at:[54,40]},
-  {id:'cside', label:'C side', mark:'C', at:[76,24]}
+ "f": {
+  "3B": [
+   {"to": [-64,88], "spd": 24, "wait": 0.13}
+  ],
+  "2B": [
+   {"to": [14,126], "spd": 25, "wait": 0.23},
+   {"to": [34,144], "spd": 25, "wait": 3.37},
+   {"to": [20,112], "spd": 25, "wait": 0.63},
+   {"to": [14,126], "spd": 25, "wait": 2.93}
+  ],
+  "1B": [
+   {"to": [66,70], "spd": 24, "wait": 1.1},
+   {"to": [52,76], "spd": 24, "wait": 6.7},
+   {"to": [66,70], "spd": 28, "wait": 0.04}
+  ],
+  "C": [
+   {"to": [2,8], "spd": 20, "wait": 1.53},
+   {"to": [18,12], "spd": 20, "wait": 8.36}
+  ],
+  "SS": [
+   {"to": [-38,144], "spd": 25, "wait": 2.95},
+   {"to": [-16,112], "spd": 25, "wait": 0.48},
+   {"to": [-14,128], "spd": 25, "wait": 1.28}
+  ]
+ },
+ "balls": [
+  [
+   {"t": 0, "p": [36,12]},
+   {"t": 0.5, "p": [-64,88], "air": 0.08},
+   {"t": 1.65, "p": [14,126], "air": 0.2},
+   {"t": 1.97, "p": [66,70], "air": 0.14},
+   {"t": 2.29, "p": [2,8], "air": 0.12},
+   {"t": 2.63, "p": [-64,88], "air": 0.14},
+   {"t": 2.95, "p": [-64,88], "air": 0.12},
+   {"t": 3.25, "p": [-44,20], "air": 0.08}
+  ],
+  [
+   {"t": 1.35, "p": [36,12]},
+   {"t": 1.85, "p": [-94,122], "air": 0.08},
+   {"t": 3, "p": [72,170], "air": 0.2},
+   {"t": 3.32, "p": [66,70], "air": 0.14},
+   {"t": 3.64, "p": [2,8], "air": 0.12},
+   {"t": 3.98, "p": [-94,122], "air": 0.14},
+   {"t": 4.3, "p": [-94,122], "air": 0.12},
+   {"t": 4.6, "p": [-44,20], "air": 0.08}
+  ],
+  [
+   {"t": 2.7, "p": [36,12]},
+   {"t": 3.2, "p": [-38,144], "air": 0.08},
+   {"t": 4.35, "p": [14,126], "air": 0.2},
+   {"t": 4.67, "p": [66,70], "air": 0.14},
+   {"t": 4.99, "p": [2,8], "air": 0.12},
+   {"t": 5.33, "p": [-16,112], "air": 0.14},
+   {"t": 5.65, "p": [-64,88], "air": 0.12},
+   {"t": 5.95, "p": [-44,20], "air": 0.08}
+  ],
+  [
+   {"t": 4.15, "p": [36,12]},
+   {"t": 4.65, "p": [-70,172], "air": 0.08},
+   {"t": 5.8, "p": [72,170], "air": 0.2},
+   {"t": 6.12, "p": [66,70], "air": 0.14},
+   {"t": 6.44, "p": [2,8], "air": 0.12},
+   {"t": 6.78, "p": [-70,172], "air": 0.14},
+   {"t": 7.1, "p": [-94,122], "air": 0.12},
+   {"t": 7.4, "p": [-44,20], "air": 0.08}
+  ],
+  [
+   {"t": 5.7, "p": [36,12]},
+   {"t": 6.2, "p": [34,144], "air": 0.08},
+   {"t": 7.35, "p": [-14,128], "air": 0.2},
+   {"t": 7.67, "p": [66,70], "air": 0.14},
+   {"t": 7.99, "p": [2,8], "air": 0.12},
+   {"t": 8.33, "p": [20,112], "air": 0.14},
+   {"t": 8.65, "p": [-64,88], "air": 0.12},
+   {"t": 8.95, "p": [-44,20], "air": 0.08}
+  ],
+  [
+   {"t": 7.2, "p": [36,12]},
+   {"t": 7.7, "p": [72,170], "air": 0.08},
+   {"t": 8.85, "p": [-70,172], "air": 0.2},
+   {"t": 9.17, "p": [66,70], "air": 0.14},
+   {"t": 9.49, "p": [2,8], "air": 0.12},
+   {"t": 9.83, "p": [72,170], "air": 0.14},
+   {"t": 10.15, "p": [-94,122], "air": 0.12},
+   {"t": 10.45, "p": [-44,20], "air": 0.08}
+  ],
+  [
+   {"t": 9, "p": [-30,16]},
+   {"t": 9.4, "p": [52,76], "air": 0.08},
+   {"t": 9.76, "p": [-14,128], "air": 0.18},
+   {"t": 10.1, "p": [66,70], "air": 0.14},
+   {"t": 10.42, "p": [2,8], "air": 0.12},
+   {"t": 11.57, "p": [18,12], "air": 0.02},
+   {"t": 11.97, "p": [14,126], "air": 0.18},
+   {"t": 12.31, "p": [66,70], "air": 0.12},
+   {"t": 12.67, "p": [78,28], "air": 0.1}
+  ],
+  [
+   {"t": 13.4, "p": [-30,16]},
+   {"t": 13.8, "p": [104,118], "air": 0.08},
+   {"t": 14.16, "p": [-30,150], "air": 0.16},
+   {"t": 14.5, "p": [104,118], "air": 0.12},
+   {"t": 14.84, "p": [2,8], "air": 0.12},
+   {"t": 15.14, "p": [-18,12], "air": 0.02},
+   {"t": 15.52, "p": [-30,150], "air": 0.18},
+   {"t": 15.84, "p": [104,118], "air": 0.12},
+   {"t": 16.16, "p": [78,28], "air": 0.1}
+  ]
  ],
- f:{'3B':[{to:[-24,44],spd:20,wait:0.15},{to:[-64,92],spd:22,wait:2.0}], '1B':[{to:[66,68],spd:22,wait:0.9}], C:[{to:[0,8],wait:3.6},{to:[30,26],spd:16,wait:4.6}]},
- balls:[[
-  {t:0,p:[32,18]},{t:1.1,p:[-24,44],air:0.05},{t:1.9,p:[66,68],air:0.15},{t:2.6,p:[76,24],air:0.15},
-  {t:3.6,p:[-8,80]},{t:4.3,p:[66,68],air:0.1},{t:4.9,p:[0,8],air:0.15},{t:5.5,p:[30,26],air:0.05},{t:6.2,p:[66,68],air:0.15}
- ]],
- caps:[[0,'Slow rollers from regular depth. No pause between fielders.'],[1.0,'3B① charges and throws to first.'],[1.8,'1B① throws to the catcher beside the feeder, not to the plate.'],[3.2,'Fungo crosses to the third-base side and hits the first baseman.'],[4.5,'Catcher rolls himself a bunt on the first-base side and throws to first.'],[5.8,'That catcher then rotates to the first-base fungo circle.']],
- notes:['After the slow rollers the fungo hitter hits the first basemen. The first first baseman throws home. The catcher rolls a bunt on the first-base side, throws to first, and becomes the first-base feeder. The second first baseman’s grounder is thrown to third, and the new plate catcher rolls a bunt on the third-base side.','The drill ends with a pop-up to the catcher at the plate. With two outs in a game you would not add extra rounds. Here the slow-roller round is one each, then that pop-up.'],
- jobs:{P:'Not hitting. The fungo hitter moves from the first-base side to the third-base side between the slow rollers and the first basemen.',C:'On the slow rollers he is not the target. The throw from first goes to the catcher standing beside the feeder. On the first baseman’s grounder he is at the plate, rolls himself the bunt, throws it, and rotates.', '1B':'Alternates the slow-roller throws, and throws them to the catcher on the first-base side of the feeder. Then takes a grounder to the plate and, on the bunt, covers first.', '2B':'Gets a slow roller too, in turn, play at first.','3B':'Charges the slow roller and throws to first.',SS:'Same slow roller, in his turn.',LF:'Not in this round.',CF:'Stays in center.',RF:'Stays in right.'},
- assumed:['The slow roller and the catcher’s bunt are one sequence so both show up. In the live drill every infielder gets a slow roller before the fungo hitter crosses to hit the first basemen.','The side catcher is placed just up the first-base line from the feeder. The book says “on the first-base side of the feeder” and does not give a step measurement.']}
+ "caps": [
+  [0,"Rep 1 of 8: Third base ① double play"],
+  [1.35,"Rep 2 of 8: Third base ② double play"],
+  [2.7,"Rep 3 of 8: Shortstop ① double play, return in front of 2nd"],
+  [4.15,"Rep 4 of 8: Shortstop ② double play, return in front of 2nd"],
+  [5.7,"Rep 5 of 8: Second base ① double play, shortstop pivots"],
+  [7.2,"Rep 6 of 8: Second base ② double play, shortstop pivots"],
+  [9,"Rep 7 of 8: First base ① double play, catcher bunts to 2nd"],
+  [13.4,"Rep 8 of 8: First base ② double play, catcher bunts to 2nd"]
+ ],
+ "reps": [
+  {"t": 0, "who": "3B", "pos": "3B"},
+  {"t": 1.35, "who": "t2", "pos": "3B"},
+  {"t": 2.7, "who": "SS", "pos": "SS"},
+  {"t": 4.15, "who": "s2", "pos": "SS"},
+  {"t": 5.7, "who": "2B", "pos": "2B"},
+  {"t": 7.2, "who": "b2", "pos": "2B"},
+  {"t": 9, "who": "1B", "pos": "1B"},
+  {"t": 13.4, "who": "f2", "pos": "1B"}
+ ],
+ "notes": ["Order: 3B①, 3B②, SS①, SS②, 2B①, 2B②, 1B①, 1B②.","3B① to 2B① to 1B①, home, back to 3B①, C③. 3B② uses the ②s.","SS① to 2B① to 1B①, home, then SS① in front of second, 3B①, C③. SS② uses the ②s.","2B① to SS① to 1B①, home, then 2B① in front of second, 3B①, C③. 2B② uses the ②s.","1B① to SS① and back to first. The catcher then bunts on the first-base side and the throw is to second, not to first. 1B② goes through SS②, and the new plate catcher bunts on the third-base side."],
+ "jobs": {
+  "P": "Off to the side. The fungo hitter is back on the first-base side for the double plays, then crosses for the first basemen.",
+  "C": "Throws back toward second, to the man about 15 feet in front of the bag, so the ball does not run into the pivot. On the first-baseman grounders he rolls his own bunt and throws it to second, not to first.",
+  "1B": "Turns 7 and 8. ① throws to the shortstop, gets the return at first, then takes the catcher’s bunt at second and throws to the catcher moving to the first-base side. ② does the same with the other shortstop, and the new plate catcher bunts on the third-base side.",
+  "2B": "Turns 5 and 6 as the fielder, and the pivot on balls from third and short. ① feeds the shortstop. When the catcher throws back, ① takes it about 15 feet in front of the bag. ② pivots the ② balls.",
+  "SS": "Turns 3 and 4 as the fielder, and the pivot on balls from second and first. The return from home is taken about 15 feet in front of second.",
+  "3B": "Turns 1 and 2. ① feeds 2B①. ② feeds 2B②. The ball still comes home, back to that third baseman, and into the bucket.",
+  "LF": "Holds in left.",
+  "CF": "Holds in center.",
+  "RF": "Holds in right."
+ },
+ "assumed": ["The return is taken about 15 feet in front of the bag. The dots sit just wide of that so the pivot man and the cutoff man can both be read."],
+ "tags": {"3B": "3B①", "2B": "2B①", "1B": "1B①", "SS": "SS①"}
+},
 
+{
+ "id": "s67",
+ "group": "Drills",
+ "title": "Multi-ball infield – slow roller, then the catcher bunt",
+ "drill": true,
+ "hide": ["P"],
+ "extras": [
+  {"id": "t2", "label": "3B②", "mark": "②", "pos": "3B", "at": [-94,122]},
+  {"id": "s2", "label": "SS②", "mark": "②", "pos": "SS", "at": [-70,172]},
+  {"id": "b2", "label": "2B②", "mark": "②", "pos": "2B", "at": [72,170]},
+  {"id": "f2", "label": "1B②", "mark": "②", "pos": "1B", "at": [104,118]},
+  {
+   "id": "fungo",
+   "label": "Fungo",
+   "mark": "F",
+   "at": [36,12],
+   "f": [
+    {"to": [-30,16], "spd": 22, "wait": 11.4}
+   ]
+  },
+  {"id": "feed", "label": "Feeder", "mark": "Fd", "at": [54,40]},
+  {
+   "id": "cside",
+   "label": "C side",
+   "mark": "C",
+   "at": [78,28],
+   "f": [
+    {"to": [0,10], "spd": 18, "wait": 15.2}
+   ]
+  }
+ ],
+ "f": {
+  "C": [
+   {"to": [2,8], "spd": 20, "wait": 0.19},
+   {"to": [22,14], "spd": 20, "wait": 12.79},
+   {"to": [78,28], "spd": 20, "wait": 0.51},
+   {"to": [0,6], "spd": 20, "wait": 0.62}
+  ],
+  "3B": [
+   {"to": [-50,66], "spd": 24, "wait": 0.32},
+   {"to": [-64,88], "spd": 24, "wait": 13.57}
+  ],
+  "1B": [
+   {"to": [66,70], "spd": 24, "wait": 1.11},
+   {"to": [50,76], "spd": 24, "wait": 10.53},
+   {"to": [66,70], "spd": 24, "wait": 1.15}
+  ],
+  "SS": [
+   {"to": [-32,118], "spd": 25, "wait": 4.28}
+  ],
+  "2B": [
+   {"to": [34,118], "spd": 25, "wait": 8.4}
+  ]
+ },
+ "balls": [
+  [
+   {"t": 0, "p": [36,12]},
+   {"t": 1.5, "p": [-50,66], "air": 0.04},
+   {"t": 1.98, "p": [66,70], "air": 0.14},
+   {"t": 2.34, "p": [78,28], "air": 0.12}
+  ],
+  [
+   {"t": 2.05, "p": [36,12]},
+   {"t": 3.55, "p": [-94,122], "air": 0.04},
+   {"t": 4.03, "p": [104,118], "air": 0.14},
+   {"t": 4.39, "p": [78,28], "air": 0.12}
+  ],
+  [
+   {"t": 4.1, "p": [36,12]},
+   {"t": 5.6, "p": [-32,118], "air": 0.04},
+   {"t": 6.08, "p": [66,70], "air": 0.14},
+   {"t": 6.44, "p": [78,28], "air": 0.12}
+  ],
+  [
+   {"t": 6.15, "p": [36,12]},
+   {"t": 7.65, "p": [-70,172], "air": 0.04},
+   {"t": 8.13, "p": [104,118], "air": 0.14},
+   {"t": 8.49, "p": [78,28], "air": 0.12}
+  ],
+  [
+   {"t": 8.2, "p": [36,12]},
+   {"t": 9.7, "p": [34,118], "air": 0.04},
+   {"t": 10.18, "p": [66,70], "air": 0.14},
+   {"t": 10.54, "p": [78,28], "air": 0.12}
+  ],
+  [
+   {"t": 10.25, "p": [36,12]},
+   {"t": 11.75, "p": [72,170], "air": 0.04},
+   {"t": 12.23, "p": [104,118], "air": 0.14},
+   {"t": 12.59, "p": [78,28], "air": 0.12}
+  ],
+  [
+   {"t": 12.9, "p": [-30,16]},
+   {"t": 13.32, "p": [50,76], "air": 0.08},
+   {"t": 13.68, "p": [2,8], "air": 0.14},
+   {"t": 14.88, "p": [22,14], "air": 0.02},
+   {"t": 15.28, "p": [66,70], "air": 0.14},
+   {"t": 18.38, "p": [78,28], "air": 0.2}
+  ],
+  [
+   {"t": 15.5, "p": [-30,16]},
+   {"t": 15.9, "p": [104,118], "air": 0.08},
+   {"t": 16.26, "p": [-64,88], "air": 0.16},
+   {"t": 16.6, "p": [2,8], "air": 0.14},
+   {"t": 16.92, "p": [-20,14], "air": 0.02},
+   {"t": 17.26, "p": [104,118], "air": 0.14},
+   {"t": 17.58, "p": [78,28], "air": 0.1}
+  ],
+  [
+   {"t": 22.4, "p": [-30,16]},
+   {"t": 23.15, "p": [0,6], "air": 1.1}
+  ]
+ ],
+ "caps": [
+  [0,"Rep 1 of 9: Third base ① slow roller to 1st"],
+  [2.05,"Rep 2 of 9: Third base ② slow roller to 1st"],
+  [4.1,"Rep 3 of 9: Shortstop ① slow roller to 1st"],
+  [6.15,"Rep 4 of 9: Shortstop ② slow roller to 1st"],
+  [8.2,"Rep 5 of 9: Second base ① slow roller to 1st"],
+  [10.25,"Rep 6 of 9: Second base ② slow roller to 1st"],
+  [12.9,"Rep 7 of 9: First base ① to the plate, catcher bunts to 1st"],
+  [15.5,"Rep 8 of 9: First base ② to 3rd, new catcher bunts on the 3rd-base side"],
+  [22.4,"Rep 9 of 9: Pop-up to the catcher"]
+ ],
+ "reps": [
+  {"t": 0, "who": "3B", "pos": "3B"},
+  {"t": 2.05, "who": "t2", "pos": "3B"},
+  {"t": 4.1, "who": "SS", "pos": "SS"},
+  {"t": 6.15, "who": "s2", "pos": "SS"},
+  {"t": 8.2, "who": "2B", "pos": "2B"},
+  {"t": 10.25, "who": "b2", "pos": "2B"},
+  {"t": 12.9, "who": "1B", "pos": "1B"},
+  {"t": 15.5, "who": "f2", "pos": "1B"},
+  {"t": 22.4, "who": "C", "pos": "C"}
+ ],
+ "notes": ["Order: 3B①, 3B②, SS①, SS②, 2B①, 2B②, then 1B① with the first-base bunt, 1B② with the third-base bunt, then the pop-up to the plate.","Slow rollers are hit from regular depth, one after another. The first baseman who takes the throw sends it to the catcher beside the feeder.","After the last second baseman, the fungo hitter crosses and hits the first basemen. 1B① throws home, the catcher bunts on the first-base side, and rotates. 1B② throws to third, the new plate catcher bunts on the third-base side, and the ball ends on the first-base side.","The pop-up to the plate catcher ends the drill."],
+ "jobs": {
+  "P": "Not the hitter. The fungo hitter works the rollers from the first-base side, then crosses to the third-base side for the first basemen and the pop-up.",
+  "C": "Turn 9. He catches the pop-up that ends the drill. On 1B① he is at the plate, rolls a bunt on the first-base side, throws to first, and moves to the first-base circle. The side catcher, who had been taking the slow-roller throws, comes to the plate for 1B②.",
+  "1B": "Turns 7 and 8, and he alternates the slow-roller throws before that. Those throws go to the catcher on the first-base side of the feeder, not to the plate. ① then throws a grounder home and takes the bunt at first. ② throws to third and takes the new catcher’s bunt.",
+  "2B": "Turns 5 and 6. ①, then ②, charge a slow roller and throw to first.",
+  "SS": "Turns 3 and 4. ①, then ②, charge a slow roller and throw to first.",
+  "3B": "Turns 1 and 2. ①, then ②, charge a slow roller and throw to first. ① also takes 1B②’s grounder and throws it home.",
+  "LF": "Holds in left.",
+  "CF": "Holds in center.",
+  "RF": "Holds in right."
+ },
+ "assumed": ["The side catcher stands on the first-base side of the feeder. The book names that spot and does not give a step measurement."],
+ "tags": {"3B": "3B①", "1B": "1B①", "SS": "SS①", "2B": "2B①"}
+},
 
 ];
 
@@ -1074,7 +2092,10 @@ function load(i){
     const side=ex.at[0]>36?-1:1;
     const lab=el('text',{x:side*14,y:4,"text-anchor":side<0?'end':'start',"font-size":11,"font-weight":700,fill:'#202020',stroke:'#faf8f3',"stroke-width":3,"paint-order":'stroke',"font-family":'Inter,Arial,Helvetica,sans-serif'},g);
     lab.textContent=ex.label;
-    extraNodes.push(g);
+    const haloOut=el('circle',{r:16,fill:'none',stroke:'#faf8f3',"stroke-width":6,opacity:0},g);
+    const halo=el('circle',{r:16,fill:'none',stroke:'#ed702d',"stroke-width":3,opacity:0},g);
+    g.insertBefore(haloOut, g.firstChild); g.insertBefore(halo, g.firstChild);
+    extraNodes.push({g, id:ex.id, pos:ex.pos||null, halos:[haloOut, halo]});
   });
   ensureBalls(Math.max(0,(S.balls||[]).length-1));
   // jobs
@@ -1099,15 +2120,22 @@ function load(i){
 }
 function focus(p){ focused=(focused===p)?null:p; document.querySelectorAll('.job').forEach(d=>d.classList.toggle('sel',d.dataset.p===focused)); render(); }
 function render(){
+  const S=SITS[cur];
+  let auto=null, autoPos=null;
+  (S.reps||[]).forEach(r=>{ if(t>=r.t){ auto=r.who; autoPos=r.pos||r.who; }});
   POS.forEach(p=>{const q=at(C.tr[p],t);fNodes[p].g.setAttribute('transform',`translate(${X(q)},${Y(q)})`);
-    const on=focused===p?1:0; fNodes[p].halos.forEach(h=>h.setAttribute('opacity',on)); fNodes[p].g.style.opacity=(focused&&focused!==p)?.45:1;});
+    const on=focused?focused===p:auto===p;
+    fNodes[p].halos.forEach(h=>h.setAttribute('opacity',on?1:0));
+    const dim=!focused&&auto&&auto!==p&&!(S.hide&&S.hide.includes(p));
+    fNodes[p].g.style.opacity=dim?0.42:1;});
   Object.keys(rNodes).forEach(id=>{const r=C.rtr[id]; if(!r) return; const q=at(r,t); rNodes[id].setAttribute('transform',`translate(${X(q)},${Y(q)})`);});
   const b=ballAt(C.ball,t); const sc=1+b.h;
   shadow.setAttribute('cx',X(b.p)); shadow.setAttribute('cy',Y(b.p)); shadow.setAttribute('opacity',b.h>0.05?1:0);
   ballN.setAttribute('cx',X(b.p)); ballN.setAttribute('cy',Y(b.p)-b.h*10); ballN.setAttribute('r',4.5*sc);
   const balls=C.balls||[C.ball];
   function trailOf(keys, now){
-    const pts=[]; keys.forEach(k=>{if(k.t<=now)pts.push(k.p);});
+    let from=0; keys.forEach((k,i)=>{ if(k.t<=now && k.cut) from=i; });
+    const pts=[]; for(let i=from;i<keys.length;i++){ if(keys[i].t>now) break; pts.push(keys[i].p); }
     const cur=ballAt(keys, now); if(now>=keys[0].t) pts.push(cur.p);
     return pts.map(p=>X(p)+','+Y(p)).join(' ');
   }
@@ -1125,7 +2153,9 @@ function render(){
     n.c.setAttribute('cx',X(bb.p)); n.c.setAttribute('cy',Y(bb.p)-bb.h*10); n.c.setAttribute('r',4.6*(1+bb.h));
     n.tr.setAttribute('points', live?trailOf(keys,t):'');
   });
-  (C.xtr?Object.keys(C.xtr):[]).forEach((id,i)=>{ if(!extraNodes[i])return; const q=at(C.xtr[id],t); extraNodes[i].setAttribute('transform',`translate(${X(q)},${Y(q)})`); });
+  (C.xtr?Object.keys(C.xtr):[]).forEach((id,i)=>{ const n=extraNodes[i]; if(!n)return; const q=at(C.xtr[id],t); n.g.setAttribute('transform',`translate(${X(q)},${Y(q)})`);
+    const on=!focused&&auto===n.id; n.halos.forEach(h=>h.setAttribute('opacity',on?1:0)); n.g.style.opacity=(!focused&&auto&&auto!==n.id)?0.5:1; });
+  document.querySelectorAll('.job').forEach(d=>d.classList.toggle('seq', !focused && d.dataset.p===autoPos));
   // cut lines (once fielder near spot)
   gLines.innerHTML='';
   C.lines.forEach(L=>{ if(t>L.t-1.0){ const a={x1:X(L.a),y1:Y(L.a),x2:X(L.b),y2:Y(L.b),"stroke-dasharray":'6 4',"stroke-linecap":'butt'}; el('line',Object.assign({stroke:'#faf8f3',"stroke-width":5},a),gLines); el('line',Object.assign({stroke:'#ed702d',"stroke-width":2.6},a),gLines); } });
