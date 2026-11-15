@@ -312,6 +312,115 @@ const SITS = [
  run:{R2:[[-22,108],{to:'B2',wait:0.5}], B:['B1']},
  jobs:{P:'Covers home plate if a runner attempts to score.',C:'Retrieves the ball and throws home if needed.','1B':'Watches the runner at second and signals “two-two” if the runner is advancing.','2B':'Prepares for a throw from the shortstop.',SS:'Breaks toward the mound, checking runners at third and second.','3B':'Watches for a runner breaking home and signals “four-four” if so.',LF:'Backs up throws to third.',CF:'Backs up throws to second.',RF:'Covers first if there’s a rundown between first and second.'},
  assumed:['The animation shows the runner on 2nd faking toward third and getting held, and the catcher throwing to the SS near the mound.']}
+,
+// ================= BUNT DEFENSE =================
+// Corners measured from the bag toward home, a few feet onto the fair grass. 1 unit = 1 ft.
+{id:'s29', group:'Bunt Defense', title:'Standard bunt defense – runner at 1st',
+ runners:['R1'], lead:{R1:[46,84]}, bunt:'to the right side', call:'one-one',
+ hit:{to:[12,36], t:0.65, by:'P'}, throws:[{to:'2B', as:'the second baseman at first'}],
+ start:{'1B':[70,58],'2B':[56,138],'3B':[-45.2,53.7],SS:[-28,132]},
+ f:{P:[{to:[12,36],spd:26,wait:-0.1}], C:[{to:[4,10],wait:0.15}],
+    '1B':[{to:[42,50],spd:24,wait:0.05}],
+    '2B':[{to:[84,84],spd:30,wait:0.4},{to:[68,72],spd:28}],
+    '3B':[{to:[-32,44],spd:18,wait:0.35},{to:[-60,66],spd:26}],
+    SS:[{to:[-12,136],spd:30,wait:0.4}],
+    LF:[{to:[-118,84],spd:27,wait:0.45}], CF:[{to:[4,174],spd:27,wait:0.45}], RF:[{to:[122,98],spd:27,wait:0.45}]},
+ run:{R1:[{to:[20,108],wait:0.55}], B:[{to:[32,32],wait:0.15}]},
+ notes:['Catcher calls: “three-three” = third · “two-two” = second · “one-one” = first · “hold-hold” = no throw, fake to first.','Corners play in on the grass. No one breaks to a base until the ball is actually bunted, unless an early-break play is on.'],
+ jobs:{P:'Holds the runner at first, then throws a high fastball. Breaks to the plate if the batter squares. Front and slight right side. Priority over the first baseman only.',C:'Calls the fastball. On the bunt, covers the front of the plate and calls the base: “three-three,” “two-two,” “one-one,” or “hold-hold.” Priority over everyone except the third baseman.', '1B':'Holds the runner, ready for a pick-off. Breaks to the plate when the pitcher delivers. Right side, priority over no one. If the bunt is on the third-base side, gets back to first and lets the second baseman take the throw.','2B':'Cheats toward first, alert for a push, slash, or swing. On the bunt, breaks to first from the right-field side. Yells “I’ve got it” if the first baseman is coming back too.','3B':'Starts 20 feet in on the grass. On the bunt, comes in under control, watching for a push or slash. Priority over everyone. If someone else fields it, retreats to third.',SS:'Double-play depth, alert for a slash or swing. On the bunt, breaks to second for a possible throw.',LF:'On the bunt, backs up a throw to third from the first-base side.',CF:'On the bunt, backs up the throw to second.',RF:'On the bunt, backs up the throw to first.'},
+ assumed:['Shown: a bunt in front and slightly to the first-base side. The pitcher fields it and the catcher calls “one-one,” the sure out at first.','“two-two” is the lead runner at second, only when that out is there. “hold-hold” means no throw and a fake to first. Early in the game, take the sure out. Late, the catcher may gamble on the lead runner.','If the third baseman fields it, the catcher covers third until the third baseman gets back. If the fielder bobbles a throw to the lead base, the next throw is to first.']},
+
+{id:'s30', group:'Bunt Defense', title:'Runner at 1st – 2B early break',
+ runners:['R1'], lead:{R1:[46,84]}, bunt:'to the right side', call:'one-one',
+ hit:{to:[28,22], t:0.6, by:'2B'}, throws:['1B'],
+ start:{'1B':[70,58],'2B':[14,116],'3B':[-45.2,53.7],SS:[-28,132]},
+ f:{P:[{to:[-6,48],spd:22,wait:-0.05}], C:[{to:[6,10],wait:0.15}],
+    '1B':[{to:[66,64],spd:16,wait:0.15}],
+    '2B':[{to:[28,22],spd:32,wait:-0.55}],
+    '3B':[{to:[-32,44],spd:18,wait:0.3},{to:[-60,66],spd:26}],
+    SS:[{to:[-12,136],spd:30,wait:0.45}],
+    LF:[{to:[-118,84],spd:27,wait:0.5}], CF:[{to:[4,174],spd:27,wait:0.5}], RF:[{to:[122,98],spd:27,wait:0.5}]},
+ run:{R1:[{to:[22,106],wait:1.1}], B:[{to:[58,58],wait:0.35}]},
+ jobs:{P:'Holds the runner, then delivers when he sees the second baseman breaking: a lefty when the second baseman crosses his view of the runner, a righty out of the corner of his eye. Front of the mound. Priority over the second baseman only.',C:'Calls the fastball. On the bunt, covers the front of the plate and calls the play for the third baseman, second baseman, or pitcher. Priority over everyone except the third baseman.', '1B':'Holds the runner, ready for a pick-off. Does not charge. Stays at first for the throw.', '2B':'Starts four steps off the grass. As the pitcher begins the stretch, breaks full speed to the right side in front of the plate and breaks down near the ball. Priority over no one.','3B':'Starts 20 feet in on the grass. Left side. Comes in under control on the bunt. Priority over everyone. If someone else fields it, retreats to third.',SS:'Double-play depth. On the bunt, breaks to second for a possible throw.',LF:'On the bunt, backs up third from the first-base side.',CF:'On the bunt, backs up the throw to second.',RF:'On the bunt, backs up the throw to first.'},
+ assumed:['Shown: the second baseman’s early break, fielding a bunt on the right side and throwing to the first baseman, who stayed home. Catcher calls “one-one.”','He starts in on the grass on the second-base side of the runner. The book has him four steps off the grass; that spot is kept inside the baseline so he does not run through the runner.','A ball in front of the mound is the pitcher’s, and he has priority over the second baseman. If the third baseman fields it, the catcher covers third until he returns.']},
+
+{id:'s31', group:'Bunt Defense', title:'Runner at 1st – 1B early break',
+ runners:['R1'], lead:{R1:[40,96]}, bunt:'to the right side', call:'one-one',
+ hit:{to:[30,24], t:0.6, by:'1B'}, throws:[{to:'2B', as:'the second baseman at first'}],
+ start:{'1B':[66,66],'2B':[54,136],'3B':[-45.2,53.7],SS:[-28,132]},
+ f:{P:[{to:[6,42],spd:24,wait:-0.05}], C:[{to:[4,10],wait:0.15}],
+    '1B':[{to:[30,24],spd:32,wait:-0.6}],
+    '2B':[{to:[86,86],spd:30,wait:0.35},{to:[72,74],spd:28}],
+    '3B':[{to:[-32,44],spd:18,wait:0.3},{to:[-60,66],spd:26}],
+    SS:[{to:[-12,136],spd:30,wait:0.45}],
+    LF:[{to:[-118,84],spd:27,wait:0.5}], CF:[{to:[4,174],spd:27,wait:0.5}], RF:[{to:[122,98],spd:27,wait:0.5}]},
+ run:{R1:[{to:[18,112],wait:0.55}], B:[{to:[60,60],wait:0.25}]},
+ jobs:{P:'Comes set and delivers right away, with only a momentary pause so it is not a balk. High fastball. Front of the mound. Priority over the first baseman only.',C:'Calls the fastball. On the bunt, covers the front of the plate and calls the play. Priority over everyone except the third baseman.', '1B':'As the pitcher reaches the top of the stretch, breaks full speed to the right side in front of the plate and breaks down. Priority over no one.', '2B':'Cheats toward first. On the bunt, breaks to first from the right-field side. The first baseman cannot get back, so the second baseman is the only one covering the bag.','3B':'Starts 20 feet in on the grass. Left side. Comes in under control on the bunt. Priority over everyone. If someone else fields it, retreats to third.',SS:'Double-play depth. On the bunt, breaks to second for a possible throw.',LF:'On the bunt, backs up third from the first-base side.',CF:'On the bunt, backs up the throw to second.',RF:'On the bunt, backs up the throw to first.'},
+ assumed:['Shown: the first baseman fields a right-side bunt and throws to the second baseman covering first. Catcher calls “one-one.”','A ball in front of the mound belongs to the pitcher. He delivers as soon as he comes set, so the first baseman is not hung between the bag and the plate.']},
+
+{id:'s32', group:'Bunt Defense', title:'Pick-off early break – runner at 1st',
+ runners:['R1'], lead:{R1:[36,102]}, pitchout:true,
+ hit:{to:[0,4], t:0.4, by:'C'}, throws:[{to:'2B', as:'the second baseman at first'}],
+ start:{'1B':[66,66],'2B':[64,124],'3B':[-45.2,53.7],SS:[-28,132]},
+ f:{P:[{to:[40,62],spd:26,wait:0.35}], C:[{to:[0,4],wait:-0.2}],
+    '1B':[{to:[38,42],spd:30,wait:-0.6},{to:[96,52],wait:0.15,spd:28}],
+    '2B':[{to:[78,86],spd:30,wait:-0.45},{to:[68,70],spd:28}],
+    '3B':[{to:[-34,46],spd:20,wait:-0.2},{to:[-60,66],wait:0.2,spd:26}],
+    SS:[{to:[-8,134],spd:28,wait:0.7}],
+    LF:[{to:[-40,168],spd:27,wait:0.55}], CF:[{to:[18,170],spd:27,wait:0.45}], RF:[{to:[128,86],spd:28,wait:-0.2}]},
+ run:{R1:[{to:[30,108],wait:0.15}]},
+ jobs:{P:'Comes set and throws a pitchout right away. If the runner is picked off, breaks toward first as the first backup on the rundown until the first baseman relieves him. On a bad pitchout, covers the front of the mound.',C:'Gives the pitchout sign. If there is a play, throws to the second baseman at first. If the runner is hung up, runs at him and gives the ball up once he commits. On a bad pitchout, fields the bunt and calls the play.', '1B':'Breaks for the plate as the pitcher goes to the set. If the catcher throws through to first, retreats and becomes the backup behind the pitcher. Against a left-handed batter, charges on the grass so the throw to first stays inside the line.', '2B':'Cheats another four steps toward first from the early-break spot, walks two more as the pitcher starts the set, then breaks to first from the right-field side for the catcher’s throw.', '3B':'Starts 20 feet in on the grass and breaks as on the early-break play. Retreats to third when the catcher throws to first.',SS:'Double-play depth. Breaks to second when the catcher throws to first.',LF:'On the throw to first, backs up second in case the second baseman’s relay gets away. If the ball is bunted instead, backs up third.',CF:'On the throw to first, breaks in behind second as the rundown backup. If the ball is bunted, backs up second.',RF:'As the pitcher comes set, breaks down the right-field line to back up the throw to first.'},
+ assumed:['Shown: the pitchout is good and the runner is caught off first. The catcher throws to the second baseman covering the bag.','If there is no play, the catcher holds the ball. A poor pitchout that is bunted is the regular early-break coverage: pitcher and first baseman on the ball, third baseman ready to field it.']},
+
+{id:'s33', group:'Bunt Defense', title:'Pick-off from P to 1B – runner at 1st',
+ runners:['R1'], lead:{R1:[40,94]},
+ pick:{to:'1B', t:0.5}, throws:[],
+ start:{'1B':[66,66],'2B':[50,128],'3B':[-45.2,53.7],SS:[-28,132]},
+ f:{'1B':[{to:[50,56],spd:28,wait:-0.45},{to:[66,66],spd:32}]},
+ run:{R1:[{to:[38,96],wait:0.1}]},
+ jobs:{P:'Watches the first baseman into the stretch. When the first baseman’s left foot hits, throws to him at the bag.',C:'Stays home. This is the pick-off, not a pitch to the plate.', '1B':'Sells the early break: as the pitcher reaches the top of the stretch, a hard right-left step toward the plate, then breaks back to the bag as the left foot hits and takes the throw.', '2B':'In the early-break spot, cheated toward first, at the moment the pitcher would have delivered.', '3B':'20 feet in on the grass, the early-break starting spot, at the moment of the pitch.',SS:'Double-play depth, the early-break starting spot.',LF:'Holds the shallower left-field spot. The pick is off before a bunt backup.',CF:'Holds the shallower center-field spot.',RF:'Holds the shallower right-field spot.'},
+ assumed:['Shown: the pick-off throw itself. The first baseman sells the charge and gets back to the bag for the throw.','Everyone else is simply in the early-break bunt spots they would occupy as the pitcher came set. If the first baseman does not get back, this play is not on.']},
+
+{id:'s34', group:'Bunt Defense', title:'Standard bunt defense – runners at 1st & 2nd',
+ runners:['R1','R2'], lead:{R1:[44,88],R2:[-20,112]}, bunt:'to the left side', call:'one-one',
+ hit:{to:[-16,34], t:0.65, by:'P'}, throws:[{to:'2B', as:'the second baseman at first'}],
+ start:{'1B':[45.2,53.7],'2B':[54,136],'3B':[-53.7,59.3],SS:[6,146]},
+ f:{P:[{to:[-16,34],spd:26,wait:0.05}], C:[{to:[-4,10],wait:0.2}],
+    '1B':[{to:[40,56],spd:22,wait:0.15}],
+    '2B':[{to:[84,84],spd:30,wait:0.4},{to:[70,74],spd:28}],
+    '3B':[{to:[-42,50],spd:16,wait:0.1},{to:[-60,66],wait:0.15,spd:26}],
+    SS:[{to:[0,134],spd:20,wait:-0.35},{to:[-10,154],spd:16}],
+    LF:[{to:[-118,84],spd:27,wait:0.5}], CF:[{to:[4,174],spd:27,wait:0.5}], RF:[{to:[122,98],spd:27,wait:0.5}]},
+ run:{R1:[{to:[24,112],wait:0.55}], R2:[{to:[-34,98],wait:0.5}], B:[{to:[60,60],wait:0.25}]},
+ jobs:{P:'Holds the runner at second. Delivers the high fastball when the shortstop jab-steps and slaps the glove. One step forward, then the left side. Priority over the first baseman only. If the third baseman fields it, the pitcher covers third.',C:'Calls the fastball. On the bunt, covers the front of the plate and calls the play. Priority over everyone except the third baseman. After the throw to third or first, covers home.', '1B':'Starts 20 feet in on the grass. When the batter squares, breaks under control to the right side. Priority over no one.', '2B':'Cheats toward first, alert for a push, slash, or swing. On the bunt, breaks to first from the right-field side.', '3B':'10 feet in front of third on the grass, seeing the pitcher and the runner at second. On the pitch, checks the runner, then two steps in. If the pitcher, first baseman, or catcher calls the ball, retreats to third. If it is his ball, he fields it and throws to first. Priority over everyone.',SS:'A yard behind the runner at second. As the pitcher comes set, jabs toward the bag and slaps the glove. That is the pitcher’s sign to deliver. If the runner is too far off, shows an open glove and the pitcher picks. On the pitch, backs up two steps and yells “there he goes” if the runner steals.',LF:'On the bunt, backs up third from the plate and from the first-base side.',CF:'On the bunt, backs up second even though the throw should not go there.',RF:'On the bunt, backs up the throw to first.'},
+ assumed:['Shown: the pitcher fields a bunt on the left side and the catcher calls “one-one” for the sure out at first. The third baseman’s two steps and retreat match a ball he does not take.','Open glove instead of the slap means the pitcher picks at second. “three-three” is the lead runner at third when that out is there. “hold-hold” is no throw and a fake to first.']},
+
+{id:'s35', group:'Bunt Defense', title:'Runners at 1st & 2nd – SS early break',
+ runners:['R1','R2'], lead:{R1:[44,88],R2:[-22,108]}, bunt:'to the left side', call:'one-one',
+ hit:{to:[-22,28], t:0.6, by:'3B'}, throws:[{to:'2B', as:'the second baseman at first'}],
+ start:{'1B':[45.2,53.7],'2B':[54,136],'3B':[-53.7,59.3],SS:[6,146]},
+ f:{P:[{to:[6,40],spd:24,wait:0.05}], C:[{to:[-2,10],wait:0.2}],
+    '1B':[{to:[42,58],spd:22,wait:0.15}],
+    '2B':[{to:[84,86],spd:30,wait:0.4},{to:[70,74],spd:28}],
+    '3B':[{to:[-22,28],spd:28,wait:-0.15}],
+    SS:[{to:[-6,140],spd:22,wait:-0.5},{to:[-88,108],spd:30}],
+    LF:[{to:[-118,84],spd:27,wait:0.5}], CF:[{to:[4,174],spd:27,wait:0.5}], RF:[{to:[122,98],spd:27,wait:0.5}]},
+ run:{R1:[{to:[26,110],wait:0.55}], R2:[{to:[-24,116],wait:0.45}], B:[{to:[60,60],wait:0.25}]},
+ jobs:{P:'Holds the runner at second. After the shortstop’s slap, waits until the shortstop clears the runner by two steps, then throws a high fastball. If the runner goes with the shortstop, steps off. Open glove means pick at second. Front of the mound once he pitches. Priority over the first baseman only.',C:'Same as the standard bunt defense with runners at first and second: calls the fastball, calls the play, priority over everyone except the third baseman, then covers home.', '1B':'Same as the standard play: 20 feet in on the grass, breaks under control to the right side when the batter squares. Priority over no one.', '2B':'Same as the standard play: cheats toward first and, on the bunt, covers first from the right-field side.', '3B':'Same 10-foot grass spot as the standard play. Breaks to the plate once the pitcher delivers. Left side, priority over everyone. If the pitcher steps off, the runner is coming and the third baseman gets back to the bag.',SS:'Same spot behind the runner. Jab and glove slap, then pivots and breaks full speed to third. Yells “step off” if the runner comes with him. Open glove, instead of the slap, tells the pitcher to pick. If the pitch is thrown, covers third.',LF:'Same backup as the standard play: third base.',CF:'Same backup as the standard play: second base.',RF:'Same backup as the standard play: first base.'},
+ assumed:['Shown: the shortstop’s early break to third and the third baseman fielding a left-side bunt, throwing to the second baseman at first. Catcher calls “one-one.”','If the runner at second leaves with the shortstop, the pitcher steps off and the third baseman returns to the bag. An open glove is a pick at second, not a pitch.']},
+
+{id:'s36', group:'Bunt Defense', title:'Pick-off early break – runners at 1st & 2nd',
+ runners:['R1','R2'], lead:{R1:[48,86],R2:[-26,108]},
+ pick:{to:'2B', t:0.85}, throws:[],
+ start:{'1B':[45.2,53.7],'2B':[36,140],'3B':[-53.7,59.3],SS:[6,146]},
+ f:{'1B':[{to:[34,40],spd:26,wait:-0.35},{to:[74,70],wait:0.2,spd:26}],
+    '2B':[{to:[16,130],spd:30,wait:-0.15}],
+    '3B':[{to:[-60,66],spd:26,wait:0.85}],
+    SS:[{to:[-8,138],spd:24,wait:-0.55},{to:[-100,112],spd:32}],
+    LF:[{to:[-124,78],spd:27,wait:0.4}], CF:[{to:[14,172],spd:27,wait:0.35}], RF:[{to:[70,168],spd:27,wait:0.4}]},
+ run:{R2:[{to:[-30,104],wait:0.15}], R1:[{to:[46,90],wait:0.2}]},
+ jobs:{P:'On the shortstop’s jab and slap, turns back to the plate and counts 1001, then throws to the second baseman at second. If the shortstop yells “step off,” steps off and throws to third, or runs the runner back and throws to the base he commits to.',C:'Flashes a sign as if the pitch is going to the plate. No play on this pick. Covers home.', '1B':'Same early break as the bunt play, then retreats to first once the play is at second.', '2B':'Four steps closer to second than on the early-break bunt. When the shortstop slaps the glove, breaks full speed to the bag for the pitcher’s throw.', '3B':'Same early-break spot, 10 feet in on the grass. As soon as the pitcher throws to second, retreats to third for a throw on the runner coming from second.',SS:'Same jab, slap, and break toward third as the early-break play, trying to draw the runner. Does not show an open glove on this play. Yells “step off” if the runner comes with him, then backs up the third baseman.',LF:'Backs up a throw from second to third.',CF:'Backs up second on the pick-off. If a rundown starts, becomes the backup behind the second baseman.',RF:'Backs up second on a throw back from third if the runner is in a rundown.'},
+ assumed:['Shown: the pick-off throw to the second baseman at second. The shortstop’s break draws the runner off the bag, and the third baseman retreats to third.', 'If the runner breaks all the way with the shortstop, the pitcher steps off instead of throwing to second and runs him back to second or forward to third.']}
 ];
 
 </script>
@@ -362,13 +471,14 @@ const endT=tr=>tr.kf[tr.kf.length-1].t;
 
 function compile(S){
   const tr={};
-  POS.forEach(p=>{tr[p]=buildTrack(START[p],S.f[p]||[],REACT[p],SPD[p],false,true);});
+  const origin=Object.assign({},START,S.start||{});
+  POS.forEach(p=>{tr[p]=buildTrack(origin[p],S.f[p]||[],REACT[p],SPD[p],false,true);});
   // runners
   const rtr={};
   (S.runners||[]).forEach(r=>{rtr[r]=null;});
   const runIds=Object.keys(Object.assign({},...((S.runners||[]).map(r=>({[r]:1}))),S.run||{}));
   runIds.forEach(id=>{
-    const st=id==='B'?[2,-4]:R(LEAD[id]);
+    const st=id==='B'?[2,-4]:R((S.lead&&S.lead[id])||LEAD[id]);
     const k=buildTrack(st,(S.run||{})[id]||[],id==='B'?0.15:0.0,RUN_SPD,true);
     if(id==='B') k.kf.forEach(f=>{if(f.t===0){}});
     rtr[id]=k;
@@ -376,9 +486,19 @@ function compile(S){
   // ball
   const ball=[]; const beats=[]; const lines=[];
   const pitchFrom=[0,54];
-  ball.push({t:0,p:pitchFrom}); 
-  let holder=S.hit.by, catchPt=R(S.hit.to), tHold;
-  if(S.pb){
+  ball.push({t:0,p:pitchFrom});
+  let holder, catchPt, tHold;
+  if(S.pick){
+    holder=S.pick.to; const rel=S.pick.t==null?0.55:S.pick.t;
+    catchPt=at(tr[holder],1e9);
+    const fl=Math.max(0.28,dist(pitchFrom,catchPt)/THROW_SPD);
+    ball.push({t:rel,p:pitchFrom}); tHold=rel+fl;
+    ball.push({t:tHold,p:catchPt,air:0.2});
+    beats.push([0,'Set…']);
+    beats.push([rel,'Pick-off throw to '+LONG[holder]+'!']);
+    beats.push([tHold,LONG[holder]+' has the pick-off']);
+  } else if(S.pb){
+    holder=S.hit.by; catchPt=R(S.hit.to);
     ball.push({t:PITCH,p:[0,0]});
     const tPb=PITCH+S.hit.t; ball.push({t:tPb,p:catchPt});
     const ca=endT(tr[holder]); tHold=Math.max(tPb,ca);
@@ -386,14 +506,26 @@ function compile(S){
     beats.push([0,'Pitch…']);beats.push([PITCH+0.1,'Ball gets by the catcher!']);
     beats.push([tHold,LONG[holder]+' retrieves the ball']);
   } else {
+    holder=S.hit.by; catchPt=R(S.hit.to);
     ball.push({t:PITCH,p:[0,2]});
     const fa=tr[holder].kf[Math.min(2,tr[holder].kf.length-1)].t; // arrival at first step
     const arr=Math.max(PITCH+S.hit.t,fa); tHold=arr;
-    ball.push({t:arr,p:catchPt,air:S.hit.pop?2.6:(S.hit.to[0]==='d'?0.5:0.15)});
-    const where={sLF:'left field',sLF2:'left field (through the hole)',sCF:'center field',sCF2:'center field (up the middle)',sRF:'right field',sRF2:'right field (through the hole)',dLF:'the left-field corner',dRF:'the right-field corner',dCF:'the left-center gap',pf1:'foul ground, home–1st',pf3:'foul ground, home–3rd',pfb1:'foul ground behind 1st',pfb3:'foul ground behind 3rd'}[S.hit.to]||'the field';
-    beats.push([0,'Pitch…']);
-    beats.push([PITCH,(S.hit.pop?'Pop-up to ':S.hit.to[0]==='d'?'Extra-base hit to ':'Base hit to ')+where+'!']);
-    beats.push([arr,S.hit.pop?(LONG[holder]+' makes the catch – everyone covered'):(LONG[holder]+' fields it')]);
+    const deep=typeof S.hit.to==='string'&&S.hit.to[0]==='d';
+    ball.push({t:arr,p:catchPt,air:S.bunt?0:(S.hit.pop?2.6:(deep?0.5:0.15))});
+    if(S.bunt){
+      beats.push([0,'High fastball…']);
+      beats.push([PITCH,'Bunt '+(typeof S.bunt==='string'?S.bunt:'on the ground')+'!']);
+      beats.push([arr,LONG[holder]+' fields the bunt']);
+    } else if(S.pitchout){
+      beats.push([0,'Pitchout…']);
+      beats.push([PITCH,'Pitchout to the catcher']);
+      beats.push([arr,LONG[holder]+' has the pitchout']);
+    } else {
+      const where={sLF:'left field',sLF2:'left field (through the hole)',sCF:'center field',sCF2:'center field (up the middle)',sRF:'right field',sRF2:'right field (through the hole)',dLF:'the left-field corner',dRF:'the right-field corner',dCF:'the left-center gap',pf1:'foul ground, home–1st',pf3:'foul ground, home–3rd',pfb1:'foul ground behind 1st',pfb3:'foul ground behind 3rd'}[S.hit.to]||'the field';
+      beats.push([0,'Pitch…']);
+      beats.push([PITCH,(S.hit.pop?'Pop-up to ':deep?'Extra-base hit to ':'Base hit to ')+where+'!']);
+      beats.push([arr,S.hit.pop?(LONG[holder]+' makes the catch – everyone covered'):(LONG[holder]+' fields it')]);
+    }
   }
   // throws
   const firstCatch=catchPt, firstHold=tHold;
@@ -405,16 +537,19 @@ function compile(S){
     ball.push({t:rel,p:catchPt});
     const arr=rel+fl; ball.push({t:arr,p:tgt,air:0.35});
     let txt=LONG[holder]+' throws to '+LONG[rec];
-    if(o.via) txt=LONG[holder]+' throws home, through the cut-off ('+NAME[o.via]+')';
+    if(o.as) txt=LONG[holder]+' throws to '+o.as;
+    else if(o.via) txt=LONG[holder]+' throws home, through the cut-off ('+NAME[o.via]+')';
     else if(S.tandem&&i===0) txt=LONG[holder]+' hits the front relay man ('+NAME[rec]+'); '+NAME[S.tandem[1]]+' is the back man';
     else if(i>0) txt=LONG[holder]+' relays to '+LONG[rec];
     else if(rec==='SS'||rec==='2B'||rec==='1B'||rec==='3B') { if(i<S.throws.length-1) txt=LONG[holder]+' hits the cut-off man ('+NAME[rec]+')'; }
+    if(S.call&&i===0&&!o.via) txt='Catcher calls “'+S.call+'.” '+txt;
     beats.push([rel,txt]);
     if(o.via) lines.push({a:catchPt,b:tgt,t:tHold});
     holder=rec; catchPt=tgt; tHold=arr;
   });
   if((S.throws||[]).length>1) lines.push({a:firstCatch,b:catchPt,t:firstHold});
   if((S.throws||[]).length) beats.push([tHold,'Ball in. '+LONG[holder]+' has it – play over']);
+  else if(S.pick) beats.push([tHold,'Tag applied – play over']);
   let end=tHold;
   POS.forEach(p=>end=Math.max(end,endT(tr[p])));
   Object.values(rtr).forEach(r=>{if(r) end=Math.max(end,endT(r));});

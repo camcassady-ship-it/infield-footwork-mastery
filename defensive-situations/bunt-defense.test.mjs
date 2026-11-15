@@ -1,0 +1,125 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import test from 'node:test';
+
+const html = fs.readFileSync(new URL('./index.html', import.meta.url), 'utf8');
+const sitsSrc = html.slice(html.indexOf('const SITS ='), html.indexOf('\n];', html.indexOf('const SITS =')) + 3);
+const engineSrc = html.slice(html.indexOf('const PT='), html.indexOf('// ---------- SVG field ----------'));
+const api = new Function(`${sitsSrc}\n${engineSrc}\nreturn {SITS, START, compile, at, POS, dist:(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1])};`)();
+const { SITS, START, compile, at, POS } = api;
+
+function samples(S) {
+  const C = compile(S);
+  const frames = [];
+  for (let t = 0; t <= C.end + 0.001; t += 0.12) {
+    const pos = {};
+    for (const p of POS) pos[p] = at(C.tr[p], t);
+    for (const id of Object.keys(C.rtr)) if (C.rtr[id]) pos[id] = at(C.rtr[id], t);
+    frames.push({ t, pos, ball: C.ball });
+  }
+  return { C, frames };
+}
+
+test('the original 28 situations are unchanged and still compile', () => {
+  assert.equal(SITS.length, 36);
+  for (let i = 0; i < 28; i++) assert.equal(SITS[i].id, 's' + (i + 1));
+  assert.equal(SITS[0].group.includes('Bunt'), false);
+  const first = compile(SITS[0]);
+  assert.match(first.beats[0][1], /Pitch/);
+  assert.match(first.beats[1][1], /Base hit/);
+  for (const S of SITS.slice(0, 28)) {
+    const C = compile(S);
+    assert.ok(C.end > 1, S.id);
+    assert.ok(C.ball.length >= 3, S.id);
+    for (const p of POS) assert.equal(C.tr[p].kf[0].p[0], START[p][0], S.id + ' ' + p);
+  }
+});
+
+test('eight bunt plays follow the first 28, in one group, with a job for every position', () => {
+  const bunts = SITS.slice(28);
+  assert.deepEqual(bunts.map(s => s.id), ['s29', 's30', 's31', 's32', 's33', 's34', 's35', 's36']);
+  for (const S of bunts) {
+    assert.equal(S.group, 'Bunt Defense');
+    for (const p of POS) assert.ok(S.jobs[p] && S.jobs[p].length > 20, S.id + ' ' + p);
+    assert.ok((S.notes && S.notes.length) || (S.assumed && S.assumed.length), S.id);
+  }
+});
+
+test('outfielders keep the shallower defaults unless a play moves them', () => {
+  assert.deepEqual(START.LF, [-129.8, 218.8]);
+  assert.deepEqual(START.CF, [0, 256]);
+  assert.deepEqual(START.RF, [129.8, 218.8]);
+  for (const S of SITS.slice(28)) {
+    assert.equal(S.start && S.start.LF, undefined, S.id);
+    assert.equal(S.start && S.start.CF, undefined, S.id);
+    assert.equal(S.start && S.start.RF, undefined, S.id);
+    const C = compile(S);
+    for (const p of ['LF', 'CF', 'RF']) assert.deepEqual(C.tr[p].kf[0].p, START[p], S.id + ' ' + p);
+  }
+});
+
+test('runner-at-first bunts start the third baseman about 20 feet in on the grass', () => {
+  for (const id of ['s29', 's30', 's31', 's32', 's33']) {
+    const S = SITS.find(s => s.id === id);
+    const spot = S.start['3B'];
+    const bag = [-63.6, 63.6];
+    const d = Math.hypot(spot[0] - bag[0], spot[1] - bag[1]);
+    assert.ok(d > 16 && d < 26, id + ' ' + d.toFixed(1));
+    assert.ok(spot[0] > bag[0], id + ' stays on the fair side of the line');
+  }
+});
+
+test('runners at first and second start the corners at the playbook depths', () => {
+  for (const id of ['s34', 's35', 's36']) {
+    const S = SITS.find(s => s.id === id);
+    const first = Math.hypot(S.start['1B'][0] - 63.6, S.start['1B'][1] - 63.6);
+    const third = Math.hypot(S.start['3B'][0] + 63.6, S.start['3B'][1] - 63.6);
+    assert.ok(first > 16 && first < 26, id + ' 1B ' + first.toFixed(1));
+    assert.ok(third > 8 && third < 16, id + ' 3B ' + third.toFixed(1));
+  }
+});
+
+test('pick-off plays throw the ball to the covering fielder', () => {
+  const toFirst = compile(SITS.find(s => s.id === 's33'));
+  const last = toFirst.ball[toFirst.ball.length - 1];
+  assert.ok(Math.hypot(last.p[0] - 66, last.p[1] - 66) < 12, JSON.stringify(last.p));
+  assert.match(toFirst.beats.map(b => b[1]).join(' '), /Pick-off/);
+  const toSecond = compile(SITS.find(s => s.id === 's36'));
+  const end = toSecond.ball[toSecond.ball.length - 1];
+  assert.ok(end.p[1] > 110, JSON.stringify(end.p));
+  assert.ok(Math.abs(end.p[0]) < 20, JSON.stringify(end.p));
+});
+
+test('the pitchout pick throws through the catcher to the second baseman at first', () => {
+  const C = compile(SITS.find(s => s.id === 's32'));
+  const text = C.beats.map(b => b[1]).join(' | ');
+  assert.match(text, /Pitchout/);
+  assert.match(text, /second baseman at first/);
+  const end = C.ball[C.ball.length - 1].p;
+  assert.ok(end[0] > 55 && end[1] > 55 && end[1] < 90, JSON.stringify(end));
+});
+
+test('bunt plays stay on the field and do not stack two fielders', () => {
+  const problems = [];
+  for (const S of SITS.slice(28)) {
+    const { frames } = samples(S);
+    for (const frame of frames) {
+      for (const [name, p] of Object.entries(frame.pos)) {
+        if (!Number.isFinite(p[0]) || !Number.isFinite(p[1])) problems.push(S.id + ' bad ' + name);
+        const r = Math.hypot(p[0], p[1]);
+        if (r > 305 || p[0] < -216 || p[0] > 216 || p[1] < -40 || p[1] > 308) {
+          problems.push(`${S.id} t=${frame.t.toFixed(2)} ${name} off [${p.map(n => n.toFixed(0))}]`);
+        }
+      }
+      const names = Object.keys(frame.pos).filter(n => POS.includes(n));
+      for (let i = 0; i < names.length; i++) {
+        for (let j = i + 1; j < names.length; j++) {
+          const a = frame.pos[names[i]], b = frame.pos[names[j]];
+          const d = Math.hypot(a[0] - b[0], a[1] - b[1]);
+          if (d < 22) problems.push(`${S.id} t=${frame.t.toFixed(2)} ${names[i]}~${names[j]} ${d.toFixed(1)}`);
+        }
+      }
+    }
+  }
+  assert.deepEqual(problems, []);
+});
