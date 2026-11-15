@@ -3,49 +3,59 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Byrd Baseball: Defensive Situations</title>
+<meta name="theme-color" content="#202020">
+<title>Byrd Baseball | Defensive Situations</title>
 <style>
-:root{--navy:#14213d;--gold:#f2b705;--bg:#f4f5f8;--card:#fff;--ink:#1d2433;--muted:#5b6475}
+:root{--ink:#202020;--muted:#666b60;--paper:#faf8f3;--orange:#b34315;--stripe:#ed702d;--brand:#ff9257;--line:#dadbd1;--card:#fff;--sans:Inter,Arial,Helvetica,sans-serif}
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
-header{background:var(--navy);color:#fff;padding:12px 14px 10px;border-bottom:4px solid var(--gold);position:sticky;top:0;z-index:5}
-header h1{margin:0;font-size:19px;letter-spacing:.2px}
-header .sub{font-size:12px;opacity:.8;margin-top:2px}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-text-size-adjust:100%}
+button,a{-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.topbar{background:var(--ink);color:var(--paper);padding:12px 16px 14px;border-bottom:3px solid var(--stripe);position:sticky;top:0;z-index:5}
+.brand{display:flex;align-items:center;gap:10px;color:var(--paper);text-decoration:none;font-size:12px;font-weight:800;line-height:1.2;letter-spacing:1.4px}
+.brandmark{font-size:28px;font-weight:900;letter-spacing:1px;color:var(--brand)}
+.topbar h1{margin:8px 0 0;font-size:20px;font-weight:650;letter-spacing:-.3px;line-height:1.15;color:var(--paper)}
+.topbar .sub{margin:2px 0 0;font-size:14px;line-height:1.35;color:var(--paper)}
 main{max-width:720px;margin:0 auto;padding:10px 10px 40px}
 .picker{display:flex;gap:8px;align-items:stretch}
-select{flex:1;min-width:0;font-size:16px;padding:10px;border-radius:10px;border:2px solid var(--navy);background:#fff;color:var(--ink);min-height:48px}
-button{font:inherit;font-size:15px;white-space:nowrap;font-weight:700;border:none;border-radius:10px;min-height:48px;min-width:48px;padding:0 14px;background:var(--navy);color:#fff;cursor:pointer;touch-action:manipulation}
+select{flex:1;min-width:0;font:inherit;font-size:16px;padding:10px;border-radius:10px;border:2px solid var(--ink);background:#fff;color:var(--ink);min-height:48px}
+button{font:inherit;font-size:15px;white-space:nowrap;font-weight:700;border:none;border-radius:10px;min-height:48px;min-width:48px;padding:0 14px;background:var(--ink);color:#fff;cursor:pointer;touch-action:manipulation}
 button:active{transform:scale(.97)}
-button.alt{background:#fff;color:var(--navy);border:2px solid var(--navy)}
-button.on{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+button.alt{background:#fff;color:var(--ink);border:2px solid var(--ink)}
+button.on{background:var(--orange);color:#fff;border-color:var(--orange)}
 .title{font-size:17px;font-weight:800;margin:12px 2px 4px}
-.grp{font-size:12px;color:var(--muted);margin:0 2px;text-transform:uppercase;letter-spacing:.5px}
+.grp{font-size:12px;font-weight:700;color:var(--orange);margin:0 2px;text-transform:uppercase;letter-spacing:1.4px}
 .fieldwrap{background:#2f7d32;border-radius:14px;overflow:hidden;margin-top:8px;position:relative;box-shadow:0 2px 8px rgba(0,0,0,.15)}
 svg{display:block;width:100%;height:auto}
-.caption{background:var(--navy);color:#fff;font-size:15px;font-weight:700;padding:9px 12px;border-radius:10px;margin-top:8px;min-height:40px;display:flex;align-items:center;border-left:6px solid var(--gold)}
+.caption{background:var(--ink);color:var(--paper);font-size:15px;font-weight:700;padding:9px 12px;border-radius:10px;margin-top:8px;min-height:40px;display:flex;align-items:center;border-left:6px solid var(--stripe)}
 .controls button,.controls2 button{padding:0 6px;font-size:14px}
 .controls{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-top:10px}
 .controls2{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px}
 .scrub{display:flex;align-items:center;gap:10px;margin-top:10px}
-.scrub input{flex:1;height:32px;accent-color:var(--navy)}
+.scrub input{flex:1;height:32px;accent-color:var(--orange)}
 .scrub span{font-variant-numeric:tabular-nums;font-size:13px;color:var(--muted);min-width:70px;text-align:right}
 .card{background:var(--card);border-radius:12px;padding:10px 12px;margin-top:12px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
-.card h2{font-size:15px;margin:2px 0 8px;color:var(--navy)}
-.job{display:flex;gap:10px;align-items:flex-start;padding:9px 6px;border-radius:9px;cursor:pointer;border-bottom:1px solid #eef0f4}
+.card h2{font-size:15px;margin:2px 0 8px;color:var(--ink)}
+.job{display:flex;gap:10px;align-items:flex-start;padding:9px 6px;border-radius:9px;cursor:pointer;border-bottom:1px solid var(--line)}
 .job:last-child{border-bottom:none}
-.job.sel{background:#fff6d6}
+.job.sel{background:#efe8db}
 .tag{flex:0 0 38px;height:30px;border-radius:15px;color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
 .job p{margin:4px 0 0;font-size:14px;line-height:1.35}
 ul.notes{margin:0;padding-left:18px;font-size:14px;line-height:1.4}
 ul.notes li{margin:4px 0}
-.assume{background:#fff8e6;border-left:4px solid var(--gold)}
-.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted);margin-top:8px;align-items:center}
+.assume{background:#efe8db;border-left:4px solid var(--orange);color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--muted);margin-top:8px;align-items:center}
 .legend i{display:inline-block;vertical-align:middle;margin-right:4px}
-footer{font-size:12px;color:var(--muted);text-align:center;margin-top:18px}
+footer{font-size:12px;color:var(--muted);text-align:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+@media(max-width:760px){
+  .brand{gap:6px;font-size:9px;letter-spacing:1px}
+  .brandmark{font-size:23px}
+  .topbar h1{font-size:18px}
+}
 </style>
 </head>
 <body>
-<header><h1>Byrd Baseball: Defensive Situations</h1><div class="sub">Tap a situation, hit Play, and watch every position move.</div></header>
+<header class="topbar"><a class="brand" href="../"><span class="brandmark">BYRD</span><span>BASEBALL</span></a><h1>Defensive Situations</h1><p class="sub">Tap a situation, hit Play, and watch every position move.</p></header>
 <main>
   <div class="picker">
     <button class="alt" id="prev" aria-label="Previous situation">&#9664;</button>
@@ -71,13 +81,13 @@ footer{font-size:12px;color:var(--muted);text-align:center;margin-top:18px}
     <button class="alt" id="clear">Clear focus</button>
   </div>
   <div class="legend">
-    <span><i style="width:14px;height:14px;border-radius:7px;background:#14213d;border:2px solid #fff"></i>Fielder</span>
+    <span><i style="width:14px;height:14px;border-radius:7px;background:#202020;border:2px solid #fff"></i>Fielder</span>
     <span><i style="width:13px;height:13px;background:#d62828;transform:rotate(45deg);border:2px solid #fff"></i>Runner / batter (B)</span>
     <span><i style="width:10px;height:10px;border-radius:5px;background:#fff;border:2px solid #d62828"></i>Ball</span>
-    <span><i style="width:16px;border-top:3px dashed #ffd166"></i>Cut-off line</span>
+    <span><i style="width:16px;border-top:3px dashed #ed702d"></i>Cut-off line</span>
   </div>
   <div class="card" id="notesCard" style="display:none"><h2>Key points</h2><ul class="notes" id="notes"></ul></div>
-  <div class="card"><h2>Every position’s job <span style="font-weight:400;color:#5b6475;font-size:12px">(tap one to follow that player)</span></h2><div id="jobs"></div></div>
+  <div class="card"><h2>Every position’s job <span style="font-weight:400;color:#666b60;font-size:12px">(tap one to follow that player)</span></h2><div id="jobs"></div></div>
   <div class="card assume" id="assumeCard" style="display:none"><h2>Coach’s note</h2><ul class="notes" id="assume"></ul></div>
   <footer>Based on Coach Cassady’s “Defensive Situations and Positional Movement” deck (from Ron Polk’s Baseball Playbook). WBB 2025-26.</footer>
 </main>
@@ -313,7 +323,7 @@ const PT={H:[0,0],B1:[63.6,63.6],B2:[0,127.3],B3:[-63.6,63.6],M:[0,60.5],
  T1:[60,84],T2:[-14,124],T3:[-60,48],L1:[56,71],L2:[-9,119],L3:[-56,55]};
 const START={P:[0,58],C:[0,-7],'1B':[72,90],'2B':[40,150],SS:[-40,150],'3B':[-72,84],LF:[-140,236],CF:[0,276],RF:[140,236]};
 const POS=['P','C','1B','2B','SS','3B','LF','CF','RF'];
-const COLOR={P:'#14213d',C:'#14213d','1B':'#1d4e89','2B':'#1d4e89',SS:'#1d4e89','3B':'#1d4e89',LF:'#5a189a',CF:'#5a189a',RF:'#5a189a'};
+const COLOR={P:'#202020',C:'#202020','1B':'#202020','2B':'#202020',SS:'#202020','3B':'#202020',LF:'#202020',CF:'#202020',RF:'#202020'};
 const SPD={P:22,C:20,'1B':24,'2B':25,SS:25,'3B':24,LF:27,CF:27,RF:27};
 const REACT={P:0.45,C:0.5,'1B':0.3,'2B':0.3,SS:0.3,'3B':0.3,LF:0.25,CF:0.25,RF:0.25};
 const RUN_SPD=26, THROW_SPD=110, PITCH=0.45;
@@ -458,17 +468,18 @@ const shadow=el('ellipse',{rx:4.5,ry:3,fill:'rgba(0,0,0,.35)'},gActors);
 const fNodes={};
 POS.forEach(p=>{
   const g=el('g',{style:'cursor:pointer'},gActors);
-  const halo=el('circle',{r:17,fill:'none',stroke:'#ffd166',"stroke-width":3.5,opacity:0},g);
+  const haloOut=el('circle',{r:18,fill:'none',stroke:'#faf8f3',"stroke-width":7,opacity:0},g);
+  const halo=el('circle',{r:18,fill:'none',stroke:'#ed702d',"stroke-width":3.5,opacity:0},g);
   el('circle',{r:12,fill:COLOR[p],stroke:'#fff',"stroke-width":2},g);
-  const t=el('text',{y:4,"text-anchor":'middle',"font-size":p.length>1?10:11,"font-weight":800,fill:'#fff',"font-family":'Arial,Helvetica,sans-serif'},g);t.textContent=p;
+  const t=el('text',{y:4,"text-anchor":'middle',"font-size":p.length>1?10:11,"font-weight":800,fill:'#fff',"font-family":'Inter,Arial,Helvetica,sans-serif'},g);t.textContent=p;
   g.addEventListener('click',()=>focus(p));
-  fNodes[p]={g,halo};
+  fNodes[p]={g,halos:[haloOut,halo]};
 });
 const rNodes={};
 ['R3','R2','R1','B'].forEach(id=>{
   const g=el('g',{},gActors);
   el('rect',{x:-7,y:-7,width:14,height:14,fill:'#d62828',stroke:'#fff',"stroke-width":2,transform:'rotate(45)'},g);
-  const t=el('text',{y:3.5,"text-anchor":'middle',"font-size":id==='B'?10:8.5,"font-weight":800,fill:'#fff',"font-family":'Arial,Helvetica,sans-serif'},g);t.textContent=id;
+  const t=el('text',{y:3.5,"text-anchor":'middle',"font-size":id==='B'?10:8.5,"font-weight":800,fill:'#fff',"font-family":'Inter,Arial,Helvetica,sans-serif'},g);t.textContent=id;
   rNodes[id]=g;
 });
 const ballN=el('circle',{r:4.5,fill:'#fff',stroke:'#d62828',"stroke-width":1.6},gActors);
@@ -506,7 +517,7 @@ function load(i){
 function focus(p){ focused=(focused===p)?null:p; document.querySelectorAll('.job').forEach(d=>d.classList.toggle('sel',d.dataset.p===focused)); render(); }
 function render(){
   POS.forEach(p=>{const q=at(C.tr[p],t);fNodes[p].g.setAttribute('transform',`translate(${X(q)},${Y(q)})`);
-    fNodes[p].halo.setAttribute('opacity',focused===p?1:0); fNodes[p].g.style.opacity=(focused&&focused!==p)?.45:1;});
+    const on=focused===p?1:0; fNodes[p].halos.forEach(h=>h.setAttribute('opacity',on)); fNodes[p].g.style.opacity=(focused&&focused!==p)?.45:1;});
   Object.keys(rNodes).forEach(id=>{const r=C.rtr[id]; if(!r) return; const q=at(r,t); rNodes[id].setAttribute('transform',`translate(${X(q)},${Y(q)})`);});
   const b=ballAt(C.ball,t); const sc=1+b.h;
   shadow.setAttribute('cx',X(b.p)); shadow.setAttribute('cy',Y(b.p)); shadow.setAttribute('opacity',b.h>0.05?1:0);
@@ -515,7 +526,7 @@ function render(){
   if(t>PITCH-0.01){ const pts=[]; C.ball.forEach(k=>{if(k.t<=t&&k.t>=PITCH)pts.push(k.p);}); pts.push(b.p); trail.setAttribute('points',pts.map(p=>X(p)+','+Y(p)).join(' ')); } else trail.setAttribute('points','');
   // cut lines (once fielder near spot)
   gLines.innerHTML='';
-  C.lines.forEach(L=>{ if(t>L.t-1.0) el('line',{x1:X(L.a),y1:Y(L.a),x2:X(L.b),y2:Y(L.b),stroke:'#ffd166',"stroke-width":2,"stroke-dasharray":'6 4',opacity:.85},gLines); });
+  C.lines.forEach(L=>{ if(t>L.t-1.0){ const a={x1:X(L.a),y1:Y(L.a),x2:X(L.b),y2:Y(L.b),"stroke-dasharray":'6 4',"stroke-linecap":'butt'}; el('line',Object.assign({stroke:'#faf8f3',"stroke-width":5},a),gLines); el('line',Object.assign({stroke:'#ed702d',"stroke-width":2.6},a),gLines); } });
   // caption
   let txt=''; C.beats.forEach(bt=>{if(t>=bt[0]) txt=bt[1];}); cap.textContent=txt||'Press Play';
   cap.style.display=showLabels?'':'none';
