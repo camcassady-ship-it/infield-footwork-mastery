@@ -21,7 +21,7 @@ function samples(S) {
 }
 
 test('the original 28 situations are unchanged and still compile', () => {
-  assert.equal(SITS.length, 36);
+  assert.equal(SITS.length, 57);
   for (let i = 0; i < 28; i++) assert.equal(SITS[i].id, 's' + (i + 1));
   assert.equal(SITS[0].group.includes('Bunt'), false);
   const first = compile(SITS[0]);
@@ -36,7 +36,7 @@ test('the original 28 situations are unchanged and still compile', () => {
 });
 
 test('eight bunt plays follow the first 28, in one group, with a job for every position', () => {
-  const bunts = SITS.slice(28);
+  const bunts = SITS.slice(28, 36);
   assert.deepEqual(bunts.map(s => s.id), ['s29', 's30', 's31', 's32', 's33', 's34', 's35', 's36']);
   for (const S of bunts) {
     assert.equal(S.group, 'Bunt Defense');
@@ -97,6 +97,24 @@ test('the pitchout pick throws through the catcher to the second baseman at firs
   assert.match(text, /second baseman at first/);
   const end = C.ball[C.ball.length - 1].p;
   assert.ok(end[0] > 55 && end[1] > 55 && end[1] < 90, JSON.stringify(end));
+});
+
+test('double-steal and pick-off groups are complete', () => {
+  const ds = SITS.filter(s => s.group === '1st & 3rd / Double Steal Defense');
+  const po = SITS.filter(s => s.group === 'Pick-Off Plays');
+  assert.equal(ds.length, 8);
+  assert.equal(po.length, 13);
+  assert.deepEqual(ds.map(s => s.id), ['s37','s38','s39','s40','s41','s42','s43','s44']);
+  assert.deepEqual(po.map(s => s.id), ['s45','s46','s47','s48','s49','s50','s51','s52','s53','s54','s55','s56','s57']);
+  for (const S of ds.concat(po)) {
+    for (const p of POS) assert.ok(S.jobs[p] && S.jobs[p].length > 12, S.id + ' ' + p);
+    const C = compile(S);
+    assert.ok(C.beats.some(b => /break|Pick|Throw|throw|Pitch|fake|Daylight|Lead|Glove|Head|Sign|step|out|Runner/i.test(b[1])), S.id + ' ' + C.beats.map(b => b[1]).join(' | '));
+  }
+  const daylight = compile(SITS.find(s => s.id === 's50'));
+  assert.match(daylight.beats.map(b => b[1]).join(' '), /Daylight/);
+  const stretch = compile(SITS.find(s => s.id === 's43'));
+  assert.match(stretch.beats.map(b => b[1]).join(' '), /stretch/i);
 });
 
 test('bunt plays stay on the field and do not stack two fielders', () => {
