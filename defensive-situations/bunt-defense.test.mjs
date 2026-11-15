@@ -117,6 +117,52 @@ test('double-steal and pick-off groups are complete', () => {
   assert.match(stretch.beats.map(b => b[1]).join(' '), /stretch/i);
 });
 
+test('double-steal runners start 12 ft off the bag and hold until delivery', () => {
+  const B1 = [63.6, 63.6], B2 = [0, 127.3], B3 = [-63.6, 63.6], H = [0, 0];
+  const next = {R1: B2, R3: H};
+  const base = {R1: B1, R3: B3};
+  function depart(track) {
+    const p0 = track.kf[0].p;
+    for (let i = 1; i < track.kf.length; i++) {
+      const k = track.kf[i];
+      if (Math.hypot(k.p[0] - p0[0], k.p[1] - p0[1]) > 0.4) return track.kf[i - 1].t;
+    }
+    return Infinity;
+  }
+  const plays = SITS.filter(s => s.group === '1st & 3rd / Double Steal Defense');
+  assert.equal(plays.length, 8);
+  for (const S of plays) {
+    const C = compile(S);
+    const delivery = C.ball[1].t;
+    assert.ok(delivery > 0.2, S.id);
+    for (const id of S.runners) {
+      const track = C.rtr[id];
+      const start = track.kf[0].p;
+      const bag = base[id], nxt = next[id];
+      const off = Math.hypot(start[0] - bag[0], start[1] - bag[1]);
+      assert.ok(Math.abs(off - 12) < 0.15, S.id + ' ' + id + ' lead ' + off.toFixed(2));
+      const dx = nxt[0] - bag[0], dy = nxt[1] - bag[1];
+      const sx = start[0] - bag[0], sy = start[1] - bag[1];
+      const cross = Math.abs(dx * sy - dy * sx) / Math.hypot(dx, dy);
+      assert.ok(cross < 0.2, S.id + ' ' + id + ' off the baseline ' + cross.toFixed(2));
+      assert.ok(dx * sx + dy * sy > 0, S.id + ' ' + id + ' faces the next base');
+      const leave = depart(track);
+      const stretch = S.id === 's43' && id === 'R1';
+      if (stretch) {
+        assert.ok(leave > 0.05 && leave < delivery, S.id + ' stretch ' + leave + ' before ' + delivery);
+      } else {
+        assert.ok(leave >= delivery - 0.021, S.id + ' ' + id + ' left at ' + leave + ' before delivery ' + delivery);
+      }
+      const until = stretch ? leave : delivery;
+      for (let t = 0; t < until - 0.02; t += 0.05) {
+        const p = at(track, t);
+        const moved = Math.hypot(p[0] - start[0], p[1] - start[1]);
+        assert.ok(moved < 0.2, S.id + ' ' + id + ' moved ' + moved.toFixed(2) + ' at t=' + t.toFixed(2));
+      }
+    }
+  }
+});
+
 test('drills add extras, multi-ball paths, and a job for every position', () => {
   const drills = SITS.filter(s => s.group === 'Drills');
   assert.equal(drills.length, 10);
