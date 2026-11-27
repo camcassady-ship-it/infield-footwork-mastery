@@ -231,6 +231,20 @@ test('each drill plays every fielder’s rep, in the book order', () => {
   assert.match(home[4], /Right field/);
 });
 
+test('plays after 29 stay in the catalog and the menu stops at 29', () => {
+  assert.equal(SITS.length, 67);
+  assert.equal(SITS[28].id, 's29');
+  assert.equal(SITS[28].title, 'Standard bunt defense – runner at 1st');
+  assert.match(html, /const MAX_VISIBLE_PLAY = 29;/);
+  const menu = html.slice(html.indexOf('function isListed'), html.indexOf('function load(i)'));
+  assert.match(menu, /i\+1\)<=MAX_VISIBLE_PLAY/);
+  assert.match(menu, /if\(!isListed\(i\)\) return;/);
+  const hidden = SITS.filter((_, i) => i + 1 > 29);
+  assert.equal(hidden.length, 38);
+  assert.equal(hidden[0].id, 's30');
+  assert.equal(hidden[hidden.length - 1].id, 's67');
+});
+
 test('bunt plays stay on the field and do not stack two fielders', () => {
   const problems = [];
   for (const S of SITS.slice(28)) {
