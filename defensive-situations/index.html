@@ -2066,13 +2066,26 @@ function ensureBalls(n){
 }
 
 // ---------- state ----------
+// The situation menu numbers plays 1…N in SITS order ("29." is SITS[28]).
+// Plays numbered above MAX_VISIBLE_PLAY stay in SITS but are left off the menu,
+// next/previous, and #s= links. Set this to Infinity to show every play again.
+const MAX_VISIBLE_PLAY = 29;
 const sel=document.getElementById('sit'), cap=document.getElementById('cap'), scrub=document.getElementById('scrub'), clock=document.getElementById('clock');
 let cur=0, C=null, t=0, playing=false, speed=1, last=null, showRoutes=false, showLabels=true, focused=null, trailPts=[];
 let groups={};
-SITS.forEach((s,i)=>{ if(!groups[s.group]){const og=document.createElement('optgroup');og.label=s.group;sel.appendChild(og);groups[s.group]=og;} const o=document.createElement('option');o.value=i;o.textContent=(i+1)+'. '+s.title;groups[s.group].appendChild(o);});
+function isListed(i){ return Number.isInteger(i) && i>=0 && i<SITS.length && (i+1)<=MAX_VISIBLE_PLAY; }
+function listedIndices(){ const ids=[]; for(let i=0;i<SITS.length;i++) if(isListed(i)) ids.push(i); return ids; }
+SITS.forEach((s,i)=>{
+  if(!isListed(i)) return;
+  if(!groups[s.group]){const og=document.createElement('optgroup');og.label=s.group;sel.appendChild(og);groups[s.group]=og;}
+  const o=document.createElement('option');o.value=i;o.textContent=(i+1)+'. '+s.title;groups[s.group].appendChild(o);
+});
 
 function load(i){
-  cur=(i+SITS.length)%SITS.length; sel.value=cur; const S=SITS[cur];
+  const ids=listedIndices();
+  if(!ids.length) return;
+  if(!isListed(i)) i=ids[0];
+  cur=i; sel.value=cur; const S=SITS[cur];
   C=compile(S); t=0; playing=false; trailPts=[]; focused=null;
   document.getElementById('ttl').textContent=S.title; document.getElementById('grp').textContent=S.group;
   POS.forEach(p=>{
@@ -2179,16 +2192,27 @@ document.getElementById('labels').onclick=e=>{ showLabels=!showLabels; e.target.
 document.getElementById('labels').textContent='Hide captions';
 document.getElementById('labels').onclick=e=>{ showLabels=!showLabels; e.target.textContent=showLabels?'Hide captions':'Show captions'; render(); };
 document.getElementById('clear').onclick=()=>{ focused=null; document.querySelectorAll('.job').forEach(d=>d.classList.remove('sel')); render(); };
-document.getElementById('prev').onclick=()=>load(cur-1);
-document.getElementById('next').onclick=()=>load(cur+1);
+function step(delta){
+  const ids=listedIndices();
+  const pos=ids.indexOf(cur);
+  load(ids[(pos+delta+ids.length)%ids.length]);
+}
+document.getElementById('prev').onclick=()=>step(-1);
+document.getElementById('next').onclick=()=>step(1);
 sel.onchange=()=>load(+sel.value);
 scrub.oninput=()=>{ playing=false; setPlayBtn(); t=scrub.value/1000*C.end; render(); };
-// deep link: #s=5&t=3.2
+// deep link: #s=5&t=3.2  (play numbers match the menu). A hidden or unknown play opens the list.
 const h=new URLSearchParams(location.hash.slice(1));
-load(h.has('s')?(+h.get('s')-1):0);
-if(h.has('t')){ t=Math.min(C.end,+h.get('t')); render(); }
-if(h.has('focus')) focus(h.get('focus'));
-if(h.has('routes')) document.getElementById('routes').click();
+const requested=h.has('s')?(+h.get('s')-1):0;
+if(h.has('s') && !isListed(requested)){
+  history.replaceState(null,'',location.pathname+location.search);
+  load(0);
+} else {
+  load(isListed(requested)?requested:0);
+  if(h.has('t')){ t=Math.min(C.end,+h.get('t')); render(); }
+  if(h.has('focus')) focus(h.get('focus'));
+  if(h.has('routes')) document.getElementById('routes').click();
+}
 requestAnimationFrame(frame);
 window.__SITS=SITS; window.__compile=compile;
 })();
